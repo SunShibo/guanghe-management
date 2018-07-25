@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guanghe.management.dao.InfoDao">
+    <select id="queryCompanyIntroductionInfo"  resultType="com.guanghe.management.entity.bo.CompanyIntroductionBo">
+        select video,company_introduction from gh_guanghe_on_company_introduction limit 1
+    </select>
+
+    <select id="queryNewsInformationInfo"  resultType="com.guanghe.management.entity.bo.NewsInformationBO">
+    SELECT  * from gh_news_update_news_information order BY  create_time DESC limit 4
+    </select>
+
+    <select id="queryImageInfo"  resultType="com.guanghe.management.entity.bo.ImageBo">
+        SELECT * FROM gh_image
+    </select>
+
+    <select id="queryPrivateConsultantInfo"  resultType="com.guanghe.management.entity.bo.PrivateConsultantBo">
+        SELECT * FROM gh_private_consultant
+    </select>
+
+    <select id="queryWealthManagementInfo"  resultType="com.guanghe.management.entity.bo.WealthManagementBo">
+       SELECT * FROM gh_wealth_management
+    </select>
+
+    <select id="queryBusinessSchoolInfo"  resultType="com.guanghe.management.entity.bo.BusinessSchoolBo">
+         SELECT * FROM gh_business_school
+    </select>
+
+    <select id="queryPrivateClub"  resultType="com.guanghe.management.entity.bo.PrivateClubBo">
+        SELECT * FROM gh_private_club
+     </select>
+</mapper>

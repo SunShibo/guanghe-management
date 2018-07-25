@@ -1,0 +1,39 @@
+package com.guanghe.management.service;
+
+import com.guanghe.management.dao.BigEventDao;
+import com.guanghe.management.entity.bo.BigEventBo;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+
+/**
+ * Created by yxw on 2018/7/18.
+ */
+@Service("BigEventService")
+@Transactional
+public class BigEventService {
+    @Resource
+    private BigEventDao bigEventDao;
+    public BigEventBo queryBigEvent(Integer id){
+        return  bigEventDao.queryBigEvent(id);
+
+    }
+    public  void updateBigEvent (BigEventBo bigEvent){
+        bigEventDao.updateBigEvent(bigEvent);
+    }
+    public  void deleteBigEvent(Integer id){
+        bigEventDao.deleteBigEvent(id);
+    }
+    public  void addBigEvent(BigEventBo bigEvent){
+             bigEventDao.addBigEvent(bigEvent);
+    }
+    public BigEventBo queryBigEventDetail(){
+        return  bigEventDao.queryBigEventDetail();
+    }
+}
+
+
+
+
+

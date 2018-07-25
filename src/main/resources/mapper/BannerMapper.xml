@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guanghe.management.dao.BannerDao">
+    <select id="queryBannerInfo"  resultType="com.guanghe.management.entity.bo.BannerBo">
+        select * from gh_banner
+    </select>
+</mapper>

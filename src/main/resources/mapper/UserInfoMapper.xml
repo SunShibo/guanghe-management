@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guanghe.management.dao.UserDAO">
+
+    <!-- 根据手机号查找用户 -->
+    <select id="queryUserInfoByMobile" parameterType="com.guanghe.management.entity.bo.UserBO" resultType="com.guanghe.management.entity.bo.UserBO">
+        SELECT * FROM gh_user WHERE phone_number = #{phoneNumber}
+    </select>
+
+    <!-- 根据手机号查找用户数量 -->
+    <select id="selectCountByMobileCode" parameterType="com.guanghe.management.entity.bo.UserBO" resultType="int">
+        SELECT count(id) FROM gh_user WHERE phone_number = #{phoneNumber}
+    </select>
+
+    <!-- 用户注册 -->
+    <insert id="register" parameterType="com.guanghe.management.entity.bo.UserBO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO gh_user SET phone_number = #{phoneNumber}, password = #{password}, create_time = NOW()
+    </insert>
+
+    <!-- 根据手机号码修改用户密码 -->
+    <update id="updatePasswordByMobileCode" parameterType="com.guanghe.management.entity.bo.UserBO">
+        UPDATE gh_user SET password = #{password}, modify_time = NOW() WHERE id = #{id} AND phone_number = #{phoneNumber}
+    </update>
+
+</mapper>
