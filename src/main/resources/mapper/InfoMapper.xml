@@ -14,16 +14,8 @@
         SELECT * FROM gh_image
     </select>
 
-    <select id="queryPrivateConsultantInfo"  resultType="com.guanghe.management.entity.bo.PrivateConsultantBo">
-        SELECT * FROM gh_private_consultant
-    </select>
-
-    <select id="queryWealthManagementInfo"  resultType="com.guanghe.management.entity.bo.WealthManagementBo">
-       SELECT * FROM gh_wealth_management
-    </select>
-
-    <select id="queryBusinessSchoolInfo"  resultType="com.guanghe.management.entity.bo.BusinessSchoolBo">
-         SELECT * FROM gh_business_school
+    <select id="queryModuleInfo"  resultType="com.guanghe.management.entity.bo.ModuleBo">
+        SELECT * FROM gh_module
     </select>
 
     <select id="queryPrivateClub"  resultType="com.guanghe.management.entity.bo.PrivateClubBo">

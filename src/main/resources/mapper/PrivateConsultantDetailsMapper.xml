@@ -32,13 +32,14 @@
     <insert id="addPrivateConsultant" parameterType="com.guanghe.management.entity.bo.PrivateConsultantDetailsBO"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO gh_private_consultant_details
-          (name,img_url,create_user,create_time)
-          VALUES (#{name},#{imgUrl},#{createUser},NOW())
+          (name,gender,position,synopsis,img_url,create_user,create_time)
+          VALUES (#{name},#{gender},#{position},#{synopsis},#{imgUrl},#{createUser},NOW())
 
     </insert>
 
     <update id="updatePrivateConsultantbyId" parameterType="com.guanghe.management.entity.bo.PrivateConsultantDetailsBO">
-        UPDATE gh_private_consultant_details  SET name = #{name} ,img_url = #{imgUrl} ,
-        create_user = #{createUser},update_time = NOW() WHERE id = #{id}
+        UPDATE gh_private_consultant_details  SET name = #{name} ,gender = #{gender},position = #{position},
+        synopsis = #{synopsis},img_url = #{imgUrl} , create_user = #{createUser},update_time = NOW()
+        WHERE id = #{id}
     </update>
 </mapper>

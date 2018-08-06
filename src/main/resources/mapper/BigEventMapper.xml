@@ -5,18 +5,18 @@
     <!-- 添加-->
     <insert id="addBigEvent" parameterType="com.guanghe.management.entity.bo.BigEventBo"
             useGeneratedKeys="true" keyProperty="id">
-        insert into gh_guanghe_on_big_event SET  title = #{title},source = #{source},create_time = NOW(),
-        big_event = #{bigEvent},create_user = #{createUser},image=#{image}
+        insert into gh_guanghe_on_big_event SET  title = #{title},content = #{content},create_time = NOW(),
+         year = #{year},create_user = #{createUser},image=#{image}
     </insert>
     <update id="updateBigEvent" parameterType="com.guanghe.management.entity.bo.BigEventBo">
-        update gh_guanghe_on_big_event set title = #{title}, big_event = #{bigEvent}, image = #{image},
+        update gh_guanghe_on_big_event set title = #{title}, content = #{content}, image = #{image},
         update_time = now(), update_user = #{updateUser} ,source = #{source}where id = #{id}
     </update>
     <select id="queryBigEvent" parameterType="int" resultType="com.guanghe.management.entity.bo.BigEventBo">
         select * from gh_guanghe_on_big_event where id = #{id}
     </select>
     <select id="queryBigEventDetail" parameterType="int" resultType="com.guanghe.management.entity.bo.BigEventBo">
-        select * from gh_guanghe_on_big_event limit 1
+        select * from gh_guanghe_on_big_event ORDER BY  year  DESC
     </select>
 
     <delete id="deleteBigEvent" parameterType="int">

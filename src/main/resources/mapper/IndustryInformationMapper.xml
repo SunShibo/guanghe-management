@@ -31,14 +31,14 @@
 
     <insert id="addIndustryInformationBO" parameterType="com.guanghe.management.entity.bo.IndustryInformationBO">
         INSERT INTO gh_news_update_industry_information SET title = #{title},
-        head_title = #{headTitle},source = #{source},create_time = NOW(),
+        english_title = #{englishTitle},img_url = #{imgUrl},source = #{source},create_time = NOW(),
         content = #{content},create_news_user = #{createNewsUser}
 
     </insert>
 
     <update id="updateIndustryInformationBO" parameterType="com.guanghe.management.entity.bo.IndustryInformationBO">
         UPDATE gh_news_update_industry_information  SET title = #{title},
-        head_title = #{headTitle},source = #{source},update_time = NOW(),
+        english_title = #{englishTitle},img_url = #{imgUrl},source = #{source},update_time = NOW(),
         content = #{content},create_news_user = #{createNewsUser} WHERE id = #{id}
     </update>
 </mapper>

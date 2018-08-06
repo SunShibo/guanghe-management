@@ -30,15 +30,15 @@
     </delete>
 
     <insert id="addNewsInformationBO" parameterType="com.guanghe.management.entity.bo.NewsInformationBO">
-        INSERT INTO gh_news_update_news_information SET title = #{title},
-        head_title = #{headTitle},source = #{source},create_time = NOW(),
+        INSERT INTO gh_news_update_news_information SET title = #{title},english_title = #{englishTitle}
+        img_url = #{imgUrl},source = #{source},create_time = NOW(),
         content = #{content},create_news_user = #{createNewsUser}
 
     </insert>
 
     <update id="updateNewsInformationBO" parameterType="com.guanghe.management.entity.bo.NewsInformationBO">
-        UPDATE gh_news_update_news_information  SET title = #{title},
-        head_title = #{headTitle},source = #{source},update_time = NOW(),
+        UPDATE gh_news_update_news_information  SET title = #{title},english_title = #{englishTitle}
+        img_url = #{imgUrl},source = #{source},update_time = NOW(),
         content = #{content},create_news_user = #{createNewsUser} WHERE id = #{id}
     </update>
 </mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.guanghe.management.dao.PrivateInvestmentRiskManagementDao">
+
+    <sql id="limit">
+        limit #{pageOffset}, #{pageSize}
+    </sql>
+
+    <select id="queryRiskManagementCount" resultType="int" parameterType="int">
+        SELECT COUNT(id) FROM gh_private_investment_risk_management WHERE 1=1
+        AND private_investment_id =#{privateInvestmentId}
+    </select>
+
+    <select id="queryRiskManagementList" parameterType="map" resultType="com.guanghe.management.entity.bo.PrivateInvestmentRiskManagementBO">
+        SELECT * FROM gh_private_investment_risk_management WHERE 1=1
+        AND private_investment_id =#{privateInvestmentId}
+        ORDER BY create_time DESC
+        <!--<include refid="limit"/>-->
+    </select>
+
+    <select id="queryRiskManagementById" parameterType="int" resultType="com.guanghe.management.entity.bo.PrivateInvestmentRiskManagementBO">
+        SELECT * FROM gh_private_investment_risk_management WHERE id = #{id}
+    </select>
+
+    <delete id="deleteRiskManagement" parameterType="int">
+        DELETE FROM gh_private_investment_risk_management WHERE id = #{id}
+    </delete>
+
+    <insert id="addRiskManagementBO" parameterType="com.guanghe.management.entity.bo.PrivateInvestmentRiskManagementBO">
+        INSERT INTO gh_private_investment_risk_management SET private_investment_id = #{privateInvestmentId},
+          level = #{level} ,synopsis = #{synopsis},create_time = NOW()
+    </insert>
+
+    <update id="updateRiskManagementBO" parameterType="com.guanghe.management.entity.bo.PrivateInvestmentRiskManagementBO">
+        UPDATE gh_private_investment_risk_management  SET private_investment_id = #{privateInvestmentId},level = #{level},
+         synopsis = #{synopsis} WHERE id = #{id}
+    </update>
+</mapper>
