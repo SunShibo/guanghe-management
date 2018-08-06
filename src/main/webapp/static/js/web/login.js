@@ -15,16 +15,16 @@ function login(){
     }
     $.ajax({
         type : "post",
-        url : "/user/login",
-        data : {"account" : account, "password" : password},
+        url : "/AdminController/login",
+        data : {"account" :account, "password":password},
         dataType : "json",
         success: function(result, status) {
-            if(result.code != "1"){
+            /*if(result.code != "1"){
                 alert(result.msg);
                 return ;
-            }else {
-                window.location.href = "/message/list";
-            }
+            }else {*/
+                window.location.href = "/AdminController/page";
+            /*}*/
         }
     })
 }
