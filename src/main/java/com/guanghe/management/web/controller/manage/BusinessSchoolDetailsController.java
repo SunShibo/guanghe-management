@@ -9,6 +9,7 @@ import com.guanghe.management.web.controller.base.BaseCotroller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,6 +21,12 @@ import javax.servlet.http.HttpServletResponse;
 public class BusinessSchoolDetailsController extends BaseCotroller {
     @Autowired
     private BusinessSchoolDetailsService businessSchoolDetailsService;
+    @RequestMapping("/list")
+    public ModelAndView queryBusinessSchoolDetailsList(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/business_school_details");
+        return view;
+    }
     @RequestMapping("/delete")
     public void deleteBigEvent(HttpServletResponse response, Integer id){
         if (id == null || id == 0 ) {

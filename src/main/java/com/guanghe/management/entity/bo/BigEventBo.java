@@ -8,24 +8,14 @@ import java.util.Date;
  */
 public class BigEventBo {
     private  Integer id;//ID
-    private String bigEvent;//大事件
     private Date  createTime;//创建时间
     private  Date updateTime;//修改时间
-    private  String source;//来源
+    private  String content;//来源
     private  String image;//图片
     private  String title;//标题
     private  String createUser;//创建用户
     private  String updateUser;//修改用户
-    private  String bannerImage;
-
-    public String getBannerImage() {
-        return bannerImage;
-    }
-
-    public void setBannerImage(String bannerImage) {
-        this.bannerImage = bannerImage;
-    }
-
+    private  String year;
     public Integer getId() {
         return id;
     }
@@ -33,15 +23,6 @@ public class BigEventBo {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    public String getBigEvent() {
-        return bigEvent;
-    }
-
-    public void setBigEvent(String bigEvent) {
-        this.bigEvent = bigEvent;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -66,12 +47,20 @@ public class BigEventBo {
         this.image = image;
     }
 
-    public String getSource() {
-        return source;
+    public String getContent() {
+        return content;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public String getTitle() {

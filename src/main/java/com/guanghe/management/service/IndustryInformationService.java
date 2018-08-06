@@ -19,6 +19,11 @@ public class IndustryInformationService {
     @Resource
     private IndustryInformationDao industryInformationDao;
 
+    public int queryIndustryInformationCount( ){
+
+        return industryInformationDao.queryIndustryInformationCount();
+    }
+
     public List<IndustryInformationBO> queryIndustryInformationList( Map<String,Object> map){
         if(map == null){
             return null;

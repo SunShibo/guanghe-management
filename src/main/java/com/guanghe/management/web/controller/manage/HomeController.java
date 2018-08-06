@@ -4,15 +4,16 @@ import com.guanghe.management.entity.bo.*;
 import com.guanghe.management.entity.dto.ResultDTOBuilder;
 import com.guanghe.management.service.BannerService;
 import com.guanghe.management.service.InfoService;
+import com.guanghe.management.util.DateUtils;
 import com.guanghe.management.util.JsonUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +26,12 @@ public class HomeController extends BaseCotroller {
     private InfoService infoService;
     @Resource
     private BannerService bannerService;
+    @RequestMapping("/list")
+    public ModelAndView queryCoachList(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/index");
+        return view;
+    }
     @RequestMapping("/info")
     public void info(HttpServletResponse response){
         List<BannerBo> bannerBo= bannerService.queryBannerInfo();
@@ -47,37 +54,24 @@ public class HomeController extends BaseCotroller {
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
         }
-        PrivateConsultantBo privateConsultantBo=infoService.queryPrivateConsultantInfo();
-        if (privateConsultantBo==null){
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
-            safeTextPrint(response, json);
-        }
-        WealthManagementBo wealthManagementBo =infoService.queryWealthManagementInfo();
-        if (wealthManagementBo==null){
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
-            safeTextPrint(response, json);
-        }
-        BusinessSchoolBo businessSchoolBo=infoService.queryBusinessSchoolInfo();
-        if(businessSchoolBo==null){
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
-            safeTextPrint(response, json);
-        }
-         List<Object> list =new ArrayList<Object>();
-        list.add(privateConsultantBo);
-        list.add(wealthManagementBo);
-        list.add(businessSchoolBo);
+        List<ModuleBo> moduleBo = infoService.queryModuleInfo();
+
+
+
         List<PrivateClubBo> privateClubBo =infoService.queryPrivateClub();
         if (privateClubBo==null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
         }
+
+
         // simple code
         JSONObject result = new JSONObject();
         result.put("banner", bannerBo);
         result.put("companyIntroduction",companyIntroductionBo);
-        result.put("news",newsInformationBO);
+        result.put("news", JsonUtils.getJsonString4JavaListDate(newsInformationBO, DateUtils.LONG_DATE_PATTERN));
         result.put("image",imageBo);
-        result.put("detail",list);
+        result.put("detail",moduleBo);
         result.put("club" ,privateClubBo);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(result));
         safeTextPrint(response, json);

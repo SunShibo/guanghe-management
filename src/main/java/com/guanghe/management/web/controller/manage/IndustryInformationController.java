@@ -9,6 +9,7 @@ import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,21 @@ public class IndustryInformationController extends BaseCotroller {
     @Resource
     private IndustryInformationService industryInformationService;
 
+    @RequestMapping("/page")
+    public ModelAndView page(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/industry/industry_information");
+        return view;
+    }
+
+    @RequestMapping("/findOne")
+    public ModelAndView findOne(Integer id){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/industry/industry_information_detail");
+        view.addObject("id", id);
+        return view;
+    }
+
     /**
      * 查询行业资讯列表
      * @param pageNo,pageSize
@@ -40,7 +56,11 @@ public class IndustryInformationController extends BaseCotroller {
             map.put("pageSize", queryInfo.getPageSize());
         }
 
-        String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(industryInformationService.queryIndustryInformationList(map)));
+
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("data",industryInformationService.queryIndustryInformationList(map));
+        resultMap.put("count",industryInformationService.queryIndustryInformationCount());
+        String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(resultMap));
         safeTextPrint(response, json);
     }
 
@@ -101,7 +121,8 @@ public class IndustryInformationController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }
-        if(StringUtils.isEmpty(news.getTitle()) || StringUtils.isEmpty(news.getHeadTitle())
+        if(StringUtils.isEmpty(news.getTitle()) || StringUtils.isEmpty(news.getEnglishTitle())
+                || StringUtils.isEmpty(news.getImgUrl())
                 || StringUtils.isEmpty(news.getSource()) || StringUtils.isEmpty(news.getContent())
                 || StringUtils.isEmpty(news.getCreateNewsUser())){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
@@ -127,7 +148,8 @@ public class IndustryInformationController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }
-        if(StringUtils.isEmpty(news.getTitle()) || StringUtils.isEmpty(news.getHeadTitle())
+        if(StringUtils.isEmpty(news.getTitle()) || StringUtils.isEmpty(news.getEnglishTitle())
+                || StringUtils.isEmpty(news.getImgUrl())
                 || StringUtils.isEmpty(news.getSource()) || StringUtils.isEmpty(news.getContent())
                 || StringUtils.isEmpty(news.getCreateNewsUser()) || news.getId() == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
@@ -140,7 +162,8 @@ public class IndustryInformationController extends BaseCotroller {
             return;
         }
         newsDetail.setTitle(news.getTitle());
-        newsDetail.setHeadTitle(news.getHeadTitle());
+        newsDetail.setEnglishTitle(news.getEnglishTitle());
+        newsDetail.setImgUrl(news.getImgUrl());
         newsDetail.setSource(news.getSource());
         newsDetail.setContent(news.getContent());
         newsDetail.setCreateNewsUser(news.getCreateNewsUser());

@@ -25,15 +25,8 @@ public class InfoService {
     public  List<ImageBo> queryImageInfo(){
         return  infoDao.queryImageInfo();
     }
-    public PrivateConsultantBo queryPrivateConsultantInfo(){
-        return infoDao.queryPrivateConsultantInfo();
-
-    }
-    public WealthManagementBo queryWealthManagementInfo(){
-        return infoDao.queryWealthManagementInfo();
-    }
-    public BusinessSchoolBo queryBusinessSchoolInfo(){
-        return  infoDao.queryBusinessSchoolInfo();
+    public List<ModuleBo> queryModuleInfo(){
+        return  infoDao.queryModuleInfo();
     }
     public  List<PrivateClubBo> queryPrivateClub(){
      return  infoDao.queryPrivateClub();

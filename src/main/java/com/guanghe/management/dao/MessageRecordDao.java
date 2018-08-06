@@ -1,5 +1,6 @@
 package com.guanghe.management.dao;
 
+
 import com.guanghe.management.entity.bo.MessageRecordBO;
 
 /**

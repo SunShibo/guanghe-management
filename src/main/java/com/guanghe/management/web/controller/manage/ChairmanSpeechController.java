@@ -23,9 +23,9 @@ public class ChairmanSpeechController extends BaseCotroller {
     private ChairmanSpeechService chairmanSpeechService;
 
     @RequestMapping("/list")
-    public ModelAndView queryCoachList(){
+    public ModelAndView queryChairmanSpeechList(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/chairmanSpeech");
+        view.setViewName("/guangheOn/chairmanSpeech");
         return view;
     }
     @RequestMapping("/delete")

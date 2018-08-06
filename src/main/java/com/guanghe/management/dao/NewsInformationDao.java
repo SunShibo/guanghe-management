@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public interface NewsInformationDao {
 
-    public int queryNewsInformationCount(Map<String, Object> map);
+    public int queryNewsInformationCount();
 
     public List<NewsInformationBO> queryNewsInformationList(Map<String, Object> map);
 

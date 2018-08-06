@@ -10,7 +10,6 @@ import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -20,16 +19,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/AdminController")
-public class AdminController  extends BaseCotroller {
+public class AdminController  extends BaseCotroller{
     @Resource
     private AdminService adminService;
 
-    @RequestMapping("/page")
-    public ModelAndView page(){
-        ModelAndView view = new ModelAndView();
-        view.setViewName("/index");
-        return view;
-    }
     @RequestMapping("/login")
     public void login(HttpServletResponse response, String account, String password){
         if(StringUtils.isEmpty(account) || StringUtils.isEmpty(password)){

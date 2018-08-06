@@ -1,5 +1,6 @@
 package com.guanghe.management.dao;
 
+
 import com.guanghe.management.entity.bo.IndustryInformationBO;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Map;
  */
 public interface IndustryInformationDao {
 
-    public int queryIndustryInformationCount(Map<String, Object> map);
+    public int queryIndustryInformationCount();
 
     public List<IndustryInformationBO> queryIndustryInformationList(Map<String, Object> map);
 

@@ -50,7 +50,7 @@
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">广和新闻</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="#">新闻动态</a></li>
+                        <li><a href="/">新闻动态</a></li>
                         <li><a href="#">行业资讯</a></li>
                     </ul>
                 </li>

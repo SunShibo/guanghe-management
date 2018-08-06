@@ -9,6 +9,7 @@ import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,14 @@ public class WealthManagementDetailsController extends BaseCotroller {
     @Resource
     private WealthManagementDetailsService wealthManagementDetailsService;
 
+
+    @RequestMapping("/page")
+    public ModelAndView page(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/wealth/wealth_management");
+        return view;
+    }
+
     /**
      * 新增财富管理
      * @param wealthManagement
@@ -32,7 +41,7 @@ public class WealthManagementDetailsController extends BaseCotroller {
     @RequestMapping("/add")
     public void L(HttpServletResponse response, WealthManagementDetailsBO wealthManagement){
         if(wealthManagement == null){
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001","参数异常！"));
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001", "参数异常！"));
             safeTextPrint(response, json);
             return;
         }

@@ -9,6 +9,7 @@ import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,13 @@ public class PrivateConsultantDetailsController extends BaseCotroller {
     @Resource
     private PrivateConsultantDetailsService privateConsultantDetailsService;
 
+    @RequestMapping("/page")
+    public ModelAndView page(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/consultant/private_consultant");
+        return view;
+    }
+
     /**
      * 新增私享顾问
      * @param privateConsultant
@@ -37,7 +45,8 @@ public class PrivateConsultantDetailsController extends BaseCotroller {
             return;
         }
         if(StringUtils.isEmpty(privateConsultant.getName()) || StringUtils.isEmpty(privateConsultant.getImgUrl())
-             || StringUtils.isEmpty(privateConsultant.getCreateUser())    ){
+         || StringUtils.isEmpty(privateConsultant.getCreateUser()) || StringUtils.isEmpty(privateConsultant.getGender())
+         || StringUtils.isEmpty(privateConsultant.getPosition()) || StringUtils.isEmpty(privateConsultant.getSynopsis())   ){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001","参数异常！"));
             safeTextPrint(response, json);
             return;
@@ -74,9 +83,9 @@ public class PrivateConsultantDetailsController extends BaseCotroller {
     @RequestMapping("/update")
     public void updatePrivateConsultantbyId(HttpServletResponse response, PrivateConsultantDetailsBO privateConsultant){
         if( privateConsultant.getId() == null || privateConsultant.getId() == 0 ||
-                StringUtils.isEmpty(privateConsultant.getName()) ||
-                StringUtils.isEmpty(privateConsultant.getImgUrl()) ||
-                StringUtils.isEmpty(privateConsultant.getCreateUser())){
+        StringUtils.isEmpty(privateConsultant.getName()) ||  StringUtils.isEmpty(privateConsultant.getImgUrl())
+        || StringUtils.isEmpty(privateConsultant.getCreateUser())|| StringUtils.isEmpty(privateConsultant.getGender())
+                || StringUtils.isEmpty(privateConsultant.getPosition()) || StringUtils.isEmpty(privateConsultant.getSynopsis())){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001","参数异常！"));
             safeTextPrint(response, json);
             return;

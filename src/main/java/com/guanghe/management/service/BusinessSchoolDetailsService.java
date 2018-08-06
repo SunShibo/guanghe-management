@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 public class BusinessSchoolDetailsService {
     @Resource
     private BusinessSchoolDetailsDao businessSchoolDetailsDao;
-    public  BusinessSchoolDetailsBo queryHomePageDetail(Integer id){
+    public BusinessSchoolDetailsBo queryHomePageDetail(Integer id){
         return  businessSchoolDetailsDao.queryHomePageDetail(id);
     }
     public  void updateHomePageDetail(BusinessSchoolDetailsBo businessSchoolDetailsBo){

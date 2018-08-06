@@ -3,7 +3,7 @@ package com.guanghe.management.entity.bo;
 /**
  * Created by yxw on 2018/7/20.
  */
-public class BusinessSchoolBo {
+public class ModuleBo {
     private  Integer id;
     private  String title;
     private  String engTitle;

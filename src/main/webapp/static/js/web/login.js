@@ -18,13 +18,14 @@ function login(){
         url : "/AdminController/login",
         data : {"account" :account, "password":password},
         dataType : "json",
-        success: function(result, status) {
-            /*if(result.code != "1"){
-                alert(result.msg);
+        success: function(result) {
+            console.log(result.success == false)
+            if(result.success == false){
+                alert(result.errMsg);
                 return ;
-            }else {*/
+            }else {
                 window.location.href = "/AdminController/page";
-            /*}*/
+            }
         }
     })
 }

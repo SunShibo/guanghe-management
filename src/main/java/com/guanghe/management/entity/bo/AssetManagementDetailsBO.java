@@ -8,7 +8,7 @@ import java.util.Date;
  * Created by shishiming on 2018/7/23.
  */
 
-public class AssetManagementDetailsBO extends BaseModel {
+public class AssetManagementDetailsBO extends BaseModel{
     private Integer id;              //主键
     private String title;            //标题
     private String subTitle;         //副标题

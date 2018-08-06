@@ -9,6 +9,7 @@ import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,13 @@ public class AssetManagementDetailsController extends BaseCotroller {
 
     @Resource
     private AssetManagementDetailsService assetManagementDetailsService;
+
+    @RequestMapping("/page")
+    public ModelAndView page(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/asset/asset_management");
+        return view;
+    }
 
     /**
      * 新增资产管理

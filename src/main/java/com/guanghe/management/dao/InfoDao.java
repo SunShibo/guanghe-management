@@ -1,5 +1,6 @@
 package com.guanghe.management.dao;
 
+
 import com.guanghe.management.entity.bo.*;
 
 import java.util.List;
@@ -11,9 +12,7 @@ public interface InfoDao {
     public List<CompanyIntroductionBo> queryCompanyIntroductionInfo();
     public List<NewsInformationBO> queryNewsInformationInfo();
     public  List<ImageBo> queryImageInfo();
-    public PrivateConsultantBo queryPrivateConsultantInfo();
-    public WealthManagementBo queryWealthManagementInfo();
-    public BusinessSchoolBo queryBusinessSchoolInfo();
+    public List<ModuleBo> queryModuleInfo();
     public  List<PrivateClubBo> queryPrivateClub();
 
 }

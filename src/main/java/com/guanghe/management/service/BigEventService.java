@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by yxw on 2018/7/18.
@@ -28,7 +29,7 @@ public class BigEventService {
     public  void addBigEvent(BigEventBo bigEvent){
              bigEventDao.addBigEvent(bigEvent);
     }
-    public BigEventBo queryBigEventDetail(){
+    public List<BigEventBo> queryBigEventDetail(){
         return  bigEventDao.queryBigEventDetail();
     }
 }
