@@ -23,8 +23,8 @@ public class PrivateInvestmentBO extends BaseModel {
     private String comparisonDatum; //比较基准
     private String performanceReward; //业绩报酬
     private Date createTime; //创建时间
-    private Date startTime; //开始时间
-    private Date endTime; //开始时间
+    private String startTime; //开始时间
+    private String endTime; //开始时间
     private Integer amountOfInvestment; //起投金额
     private Integer increasingAmount; //递增金额
     private Integer productScaleStart; //产品规模开始
@@ -157,19 +157,19 @@ public class PrivateInvestmentBO extends BaseModel {
         this.createTime = createTime;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 

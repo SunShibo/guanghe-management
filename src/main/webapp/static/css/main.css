@@ -9,6 +9,9 @@ img { border:none;}
 a{ text-decoration:none; outline:none;}
 input,button,textarea{ outline:none;}
 
+.indexRight1{ margin-left: 12%; padding:35px;}
+.indexRight1 .title{ height:40px; line-height:40px; background:#eaecf2; color:#333; font-size:14px; padding-left:26px;}
+
 
 .index{ width:100%;display: flex;height: 100%;}
 .indexLeft{ width:20%; overflow:hidden; height:100%;display: -webkit-box; -webkit-box-orient: vertical; box-sizing: border-box; background:#31353e;}
@@ -36,9 +39,6 @@ input,button,textarea{ outline:none;}
 .top ul li{ float:left; margin-top:19px; margin-right:38px;}
 .top ul li a{ color:#fff; font-size:14px; display:block; line-height:24px;}
 .top ul li a img{ float:left; margin-right:3px; margin-top:2px;}
-
-.indexRight1{ padding:20px;}
-.indexRight1 .title{ height:40px; line-height:40px; background:#eaecf2; color:#333; font-size:14px; padding-left:26px;}
 
 
 .screen{ padding:20px; padding-top:0;position: relative;}

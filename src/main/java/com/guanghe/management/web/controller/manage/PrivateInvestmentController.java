@@ -9,6 +9,8 @@ import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -30,10 +32,16 @@ public class PrivateInvestmentController extends BaseCotroller {
     @RequestMapping("/page")
     public ModelAndView page(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/privateInvestment/private_investment_list");
+        view.setViewName("/privateInvestment/privateInvestment_list");
         return view;
     }
 
+    @RequestMapping("/toAdd")
+    public ModelAndView toAdd(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/privateInvestment/privateInvestment_add");
+        return view;
+    }
 
     @RequestMapping("/details")
     public ModelAndView details(){
@@ -47,7 +55,7 @@ public class PrivateInvestmentController extends BaseCotroller {
      */
     @RequestMapping("/list")
     public void queryPrivateInvestmentList(HttpServletResponse response,Integer pageNo, Integer pageSize,Integer investmentPoinId,
-       Integer productTermId,Integer riskLevelId,Integer incomeTypeId,String sortType){
+       Integer productTermId,Integer riskLevelId,Integer incomeTypeId,String sortType,String privateInvestmentName){
 
         QueryInfo queryInfo = getQueryInfo(pageNo, pageSize);
 
@@ -62,6 +70,7 @@ public class PrivateInvestmentController extends BaseCotroller {
         map.put("riskLevelId",riskLevelId);
         map.put("incomeTypeId",incomeTypeId);
         map.put("sortType",sortType);
+        map.put("privateInvestmentName",privateInvestmentName);
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("data",privateInvestmentService.queryPrivateInvestmentList(map));
@@ -124,21 +133,24 @@ public class PrivateInvestmentController extends BaseCotroller {
      * 新增
      * @param bo
      */
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add")
+    @ResponseBody
     public void addPrivateInvestment(HttpServletResponse response, PrivateInvestmentBO bo){
         if(bo == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;
         }
-        if( StringUtils.isEmpty(bo.getFundName()) || StringUtils.isEmpty(bo.getFundType()) || StringUtils.isEmpty(bo.getOperations())
-            || StringUtils.isEmpty(bo.getFundManager()) || StringUtils.isEmpty(bo.getFundCustodian()) || StringUtils.isEmpty(bo.getProductScale())
-            || StringUtils.isEmpty(bo.getSubscribeStartingPoint()) || StringUtils.isEmpty(bo.getProductTerm()) || StringUtils.isEmpty(bo.getFundInvestment())
-            || bo.getCapitalCost() == null || StringUtils.isEmpty(bo.getComparisonDatum()) || StringUtils.isEmpty(bo.getPerformanceReward())
-//            || bo.getStartTime() == null || bo.getEndTime() == null
-            || bo.getAmountOfInvestment() == null || bo.getIncreasingAmount() == null
-            || bo.getProductScaleStart() == null || bo.getProductScaleEnd() == null || bo.getInvestmentPoinId() == null || bo.getProductTermId() == null
-            || bo.getRiskLevelId() == null || bo.getIncomeTypeId() == null   ){
+        if( StringUtils.isEmpty(bo.getFundName()) || StringUtils.isEmpty(bo.getFundType())
+                || StringUtils.isEmpty(bo.getOperations()) || StringUtils.isEmpty(bo.getFundManager())
+                || StringUtils.isEmpty(bo.getFundCustodian()) || StringUtils.isEmpty(bo.getProductScale())
+                || StringUtils.isEmpty(bo.getSubscribeStartingPoint()) || StringUtils.isEmpty(bo.getProductTerm())
+                || StringUtils.isEmpty(bo.getFundInvestment())
+                || StringUtils.isEmpty(bo.getComparisonDatum()) || StringUtils.isEmpty(bo.getPerformanceReward())
+                || bo.getStartTime() == null || bo.getEndTime() == null
+                || bo.getAmountOfInvestment() == null || bo.getIncreasingAmount() == null
+                || bo.getProductScaleStart() == null || bo.getProductScaleEnd() == null
+                || StringUtils.isEmpty(bo.getCapitalCost())){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;
@@ -167,7 +179,7 @@ public class PrivateInvestmentController extends BaseCotroller {
         if(StringUtils.isEmpty(bo.getFundName()) || StringUtils.isEmpty(bo.getFundType()) || StringUtils.isEmpty(bo.getOperations())
         || StringUtils.isEmpty(bo.getFundManager()) || StringUtils.isEmpty(bo.getFundCustodian()) || StringUtils.isEmpty(bo.getProductScale())
         || StringUtils.isEmpty(bo.getSubscribeStartingPoint()) || StringUtils.isEmpty(bo.getProductTerm()) || StringUtils.isEmpty(bo.getFundInvestment())
-        || bo.getCapitalCost() == null || StringUtils.isEmpty(bo.getComparisonDatum()) || StringUtils.isEmpty(bo.getPerformanceReward())
+        || StringUtils.isEmpty(bo.getCapitalCost()) || StringUtils.isEmpty(bo.getComparisonDatum()) || StringUtils.isEmpty(bo.getPerformanceReward())
         || bo.getStartTime() == null || bo.getEndTime() == null || bo.getAmountOfInvestment() == null || bo.getIncreasingAmount() == null
         || bo.getProductScaleStart() == null || bo.getProductScaleEnd() == null || bo.getInvestmentPoinId() == null || bo.getProductTermId() == null
         || bo.getRiskLevelId() == null || bo.getIncomeTypeId() == null || bo.getId() == null ){

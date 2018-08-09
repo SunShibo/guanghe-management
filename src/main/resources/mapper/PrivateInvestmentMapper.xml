@@ -22,6 +22,9 @@
             <if test="incomeTypeId != null">
                 AND income_type_id = #{incomeTypeId}
             </if>
+            <if test="privateInvestmentName != null">
+                AND fund_name LIKE CONCAT('%','${privateInvestmentName}','%')
+            </if>
     </select>
 
     <select id="queryPrivateInvestmentList" parameterType="map" resultType="com.guanghe.management.entity.bo.PrivateInvestmentBO">
@@ -37,6 +40,9 @@
         </if>
         <if test="incomeTypeId != null">
             AND income_type_id = #{incomeTypeId}
+        </if>
+        <if test="privateInvestmentName != null">
+            AND fund_name LIKE CONCAT('%','${privateInvestmentName}','%')
         </if>
 
         <if test="sortType == 'createTime'">
