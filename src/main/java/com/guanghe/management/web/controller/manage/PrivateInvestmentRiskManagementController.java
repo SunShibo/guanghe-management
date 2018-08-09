@@ -8,6 +8,7 @@ import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,13 @@ public class PrivateInvestmentRiskManagementController extends BaseCotroller {
 
     @Resource
     private PrivateInvestmentRiskManagementService privateInvestmentRiskManagementService;
+
+    @RequestMapping("/page")
+    public ModelAndView page(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/privateInvestment/riskManagement_list");
+        return view;
+    }
 
 
     /**
@@ -125,7 +133,7 @@ public class PrivateInvestmentRiskManagementController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }
-        if(bo.getId() == null || bo.getPrivateInvestmentId() == null || StringUtils.isEmpty(bo.getLevel())
+        if(bo.getId() == null || StringUtils.isEmpty(bo.getLevel())
                 || StringUtils.isEmpty(bo.getSynopsis()) ){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
@@ -138,7 +146,6 @@ public class PrivateInvestmentRiskManagementController extends BaseCotroller {
         }
 
         newBo.setLevel(bo.getLevel());
-        newBo.setPrivateInvestmentId(bo.getPrivateInvestmentId());
         newBo.setSynopsis(bo.getSynopsis());
 
         privateInvestmentRiskManagementService.updatePrivateInvestmentRiskManagementBO(newBo);

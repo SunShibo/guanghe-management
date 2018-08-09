@@ -8,6 +8,7 @@ import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,13 @@ public class PrivateInvestmentCollectProductController extends BaseCotroller {
     @Resource
     private PrivateInvestmentCollectProductService privateInvestmentCollectProductService;
 
+
+    @RequestMapping("/page")
+    public ModelAndView page(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/privateInvestment/collectProduct_list");
+        return view;
+    }
 
     /**
      * 查询列表
@@ -125,7 +133,7 @@ public class PrivateInvestmentCollectProductController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }
-        if(bo.getId() == null || bo.getPrivateInvestmentId() == null || StringUtils.isEmpty(bo.getName()) ){
+        if(bo.getId() == null || StringUtils.isEmpty(bo.getName()) ){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;

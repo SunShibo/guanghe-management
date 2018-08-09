@@ -2,6 +2,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8" />
     <title>添加私募产品</title>
@@ -55,8 +56,16 @@
             <div class="col-xs-1 column text-right">
                 基金类型:
             </div>
-            <div class="col-xs-7 column">
+            <div class="col-xs-3 column">
                 <input id="fundType" />
+            </div>
+            <div class="col-xs-1 column text-right">
+                投资起点:
+            </div>
+            <div class="col-xs-3 column">
+                <select id="investmentPoinId">
+                    <option value="">-请选择-</option>
+                </select>
             </div>
         </div>
 
@@ -70,8 +79,17 @@
             <div class="col-xs-1 column text-right">
                 基金管理人:
             </div>
-            <div class="col-xs-7 column">
+            <div class="col-xs-3 column">
                 <input id="fundManager" />
+            </div>
+
+            <div class="col-xs-1 column text-right">
+                产品期限:
+            </div>
+            <div class="col-xs-3 column">
+                <select id="productTermId">
+                    <option value="">-请选择-</option>
+                </select>
             </div>
         </div>
 
@@ -86,8 +104,17 @@
             <div class="col-xs-1 column text-right">
                 产品规模:
             </div>
-            <div class="col-xs-7 column">
+            <div class="col-xs-3 column">
                 <input id="productScale" />
+            </div>
+
+            <div class="col-xs-1 column text-right">
+                风险级别:
+            </div>
+            <div class="col-xs-3 column">
+                <select id="riskLevelId">
+                    <option value="">-请选择-</option>
+                </select>
             </div>
         </div>
 
@@ -102,8 +129,16 @@
             <div class="col-xs-1 column text-right">
                 产品期限:
             </div>
-            <div class="col-xs-7 column">
+            <div class="col-xs-3 column">
                 <input id="productTerm" />
+            </div>
+            <div class="col-xs-1 column text-right">
+                收益类型:
+            </div>
+            <div class="col-xs-3 column">
+                <select id="incomeTypeId">
+                    <option value="">-请选择-</option>
+                </select>
             </div>
         </div>
 
@@ -202,19 +237,11 @@
         <%--</div>--%>
     </div>
 </body>
+
+
 <script>
 
     function addPrivateInvestment(){
-
-        var capitalCost = $("#capitalCost").val();
-        if(capitalCost == ""){
-            alert("资金费用不能为空！")
-            return;
-        }
-        if(capitalCost.length > 100){
-            alert("资金费用输入过长！")
-            return;
-        }
 
 
         var fundName = $("#fundName").val();
@@ -328,6 +355,16 @@
             return;
         }
 
+        var capitalCost = $("#capitalCost").val();
+        if(capitalCost == ""){
+            alert("资金费用不能为空！")
+            return;
+        }
+        if(capitalCost.length > 100){
+            alert("资金费用输入过长！")
+            return;
+        }
+
         var amountOfInvestment = $("#amountOfInvestment").val();
         if(amountOfInvestment == ""){
             alert("起投金额不能为空！");
@@ -398,6 +435,34 @@
             return;
         }
 
+        var investmentPoinIds = $("#investmentPoinId option:selected");
+        var investmentPoinId = investmentPoinIds.val();
+        alert(investmentPoinId);
+        if(investmentPoinId == ""){
+            alert("请选择投资起点！");
+            return;
+        }
+
+        var productTermIds = $("#productTermId option:selected");
+        var productTermId = productTermIds.val();
+        if(productTermId == ""){
+            alert("请选择产品期限！");
+            return;
+        }
+
+        var riskLevelIds = $("#riskLevelId option:selected");
+        var riskLevelId = riskLevelIds.val();
+        if(riskLevelId == ""){
+            alert("请选择风险级别！");
+            return;
+        }
+
+        var incomeTypeIds = $("#incomeTypeId option:selected");
+        var incomeTypeId = incomeTypeIds.val();
+        if(incomeTypeId == ""){
+            alert("请选择收益类型！");
+            return;
+        }
 
         $.ajax({
             type : "post",
@@ -408,13 +473,100 @@
                 "fundInvestment":fundInvestment,"comparisonDatum":comparisonDatum,
                 "performanceReward":performanceReward,"amountOfInvestment":amountOfInvestment,
                 "increasingAmount":increasingAmount,"productScaleStart":productScaleStart,
-                "productScaleEnd":productScaleEnd,"startTime":startTime,"endTime":endTime,"capitalCost" : capitalCost},
+                "productScaleEnd":productScaleEnd,"startTime":startTime,"endTime":endTime,"capitalCost" : capitalCost,
+                "incomeTypeId":incomeTypeId,"riskLevelId":riskLevelId,"productTermId":productTermId,"investmentPoinId":investmentPoinId},
             dataType : "json",
             async : false,
             success : function (data){
-                console.log(data);
+                if(data.success == false){
+                    alert(data.errMsg);
+                    return;
+                }else{
+                    alert("添加成功！");
+                    window.location.href="/privateInvestment/page";
+                }
             }
         });
     }
 
+
+    $(function(){
+        getInvestmentPoin();
+        getProductTerm();
+        getRiskLevel();
+        getIncomeType();
+    });
+
+    function getInvestmentPoin(){
+        $.ajax({
+            type : "post",
+            url : "/investmentPoin/list",
+            data : {},
+            dataType : "json",
+            async : false,
+            success : function (data){
+                var html = '';
+                for(var i=0;i<data.data.count;i++){
+                    html += '<option value="'+ data.data.data[i].id +'">'+ data.data.data[i].name +'</option>';
+                }
+
+                $("#investmentPoinId").append(html);
+            }
+        });
+    }
+
+    function getProductTerm(){
+        $.ajax({
+            type : "post",
+            url : "/productTerm/list",
+            data : {},
+            dataType : "json",
+            async : false,
+            success : function (data){
+                var html = '';
+                for(var i=0;i<data.data.count;i++){
+                    html += '<option value="'+ data.data.data[i].id +'">'+ data.data.data[i].name +'</option>';
+                }
+
+                $("#productTermId").append(html);
+            }
+        });
+    }
+
+    function getRiskLevel(){
+        $.ajax({
+            type : "post",
+            url : "/riskLevel/list",
+            data : {},
+            dataType : "json",
+            async : false,
+            success : function (data){
+                var html = '';
+                for(var i=0;i<data.data.count;i++){
+                    html += '<option value="'+ data.data.data[i].id +'">'+ data.data.data[i].name +'</option>';
+                }
+
+                $("#riskLevelId").append(html);
+            }
+        });
+    }
+
+    function getIncomeType(){
+        $.ajax({
+            type : "post",
+            url : "/incomeType/list",
+            data : {},
+            dataType : "json",
+            async : false,
+            success : function (data){
+                var html = '';
+                for(var i=0;i<data.data.count;i++){
+                    html += '<option value="'+ data.data.data[i].id +'">'+ data.data.data[i].name +'</option>';
+                }
+
+                $("#incomeTypeId").append(html);
+            }
+        });
+    }
 </script>
+</html>

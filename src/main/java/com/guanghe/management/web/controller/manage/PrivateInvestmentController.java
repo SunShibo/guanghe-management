@@ -43,10 +43,17 @@ public class PrivateInvestmentController extends BaseCotroller {
         return view;
     }
 
+    @RequestMapping("/toUpdate")
+    public ModelAndView toUpdate(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/privateInvestment/privateInvestment_edit");
+        return view;
+    }
+
     @RequestMapping("/details")
     public ModelAndView details(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/privateInvestment/private_investment_details");
+        view.setViewName("/privateInvestment/privateInvestment_details");
         return view;
     }
 
@@ -69,7 +76,7 @@ public class PrivateInvestmentController extends BaseCotroller {
         map.put("productTermId",productTermId);
         map.put("riskLevelId",riskLevelId);
         map.put("incomeTypeId",incomeTypeId);
-        map.put("sortType",sortType);
+        map.put("sortType","createTime");
         map.put("privateInvestmentName",privateInvestmentName);
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -150,7 +157,9 @@ public class PrivateInvestmentController extends BaseCotroller {
                 || bo.getStartTime() == null || bo.getEndTime() == null
                 || bo.getAmountOfInvestment() == null || bo.getIncreasingAmount() == null
                 || bo.getProductScaleStart() == null || bo.getProductScaleEnd() == null
-                || StringUtils.isEmpty(bo.getCapitalCost())){
+                || StringUtils.isEmpty(bo.getCapitalCost())
+                || bo.getInvestmentPoinId() == null || bo.getProductTermId() == null
+                || bo.getRiskLevelId() == null || bo.getIncomeTypeId() == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;

@@ -34,6 +34,6 @@
     </insert>
 
     <update id="updateCollectProductBO" parameterType="com.guanghe.management.entity.bo.PrivateInvestmentCollectProductBO">
-        UPDATE gh_private_investment_collect_product  SET private_investment_id = #{privateInvestmentId},name = #{name} WHERE id = #{id}
+        UPDATE gh_private_investment_collect_product  SET name = #{name} WHERE id = #{id}
     </update>
 </mapper>

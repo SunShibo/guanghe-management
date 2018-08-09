@@ -34,7 +34,7 @@
     </insert>
 
     <update id="updateRiskManagementBO" parameterType="com.guanghe.management.entity.bo.PrivateInvestmentRiskManagementBO">
-        UPDATE gh_private_investment_risk_management  SET private_investment_id = #{privateInvestmentId},level = #{level},
+        UPDATE gh_private_investment_risk_management  SET level = #{level},
          synopsis = #{synopsis} WHERE id = #{id}
     </update>
 </mapper>

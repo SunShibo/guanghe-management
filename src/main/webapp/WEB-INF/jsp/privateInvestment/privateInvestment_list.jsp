@@ -11,12 +11,13 @@
     <link href="/static/css/page.css" rel="stylesheet"/>
     <style>
         .btn {
-            margin-left: 20px;
+
             /*height: 35px;*/
         }
         .btn-xs {
             width: 60px;
         }
+
 
         tr td {
             text-align: center;
@@ -27,8 +28,8 @@
             text-align: center;
         }
         #contentData tr td {
-            height: 50px;
-            line-height: 50px;
+            height: 45px;
+            line-height: 45px;
         }
     </style>
 
@@ -43,8 +44,8 @@
         <div class="screen clear">
             <div class="form">
                 <input type="text" placeholder="请输入产品名称" id="privateInvestmentName">
-                <button type="button" class="btn btn-primary" onclick="getdata(1,10);">搜索</button>
-                <button type="button" class="btn btn-primary" onclick="addPrivateInvestment();">新增</button>
+                <button type="button" style=" margin-left: 20px;" class="btn btn-primary" onclick="getdata(1,10);">搜索</button>
+                <button type="button" style=" margin-left: 20px;" class="btn btn-primary" onclick="addPrivateInvestment();">新增</button>
             </div>
 
         </div>
@@ -53,11 +54,11 @@
                 <%--<caption>边框表格布局</caption>--%>
                 <thead>
                 <tr>
-                    <th style="width: 35%;">产品名称</th>
-                    <th style="width: 15%;">比较基准</th>
-                    <th style="width: 15%;">产品期限</th>
+                    <th style="width: 30%;">产品名称</th>
+                    <th style="width: 10%;">比较基准</th>
+                    <th style="width: 10%;">产品期限</th>
                     <th style="width: 15%;">投资起点</th>
-                    <th style="width: 15%;">操作</th>
+                    <th style="width: 35%;">操作</th>
                 </tr>
                 </thead>
                 <tbody id="contentData">
@@ -134,6 +135,10 @@
                                 '<td>' + amountOfInvestment + '</td>' +
                                 '<td>' +
                                 '<button type="button" class="btn btn-info" onclick="updatePrivateInvestment(' + "'" + rs.data.data[i].id + "'" + ')">编辑</button>' +
+                                '<button type="button" class="btn btn-info" onclick="updateRiskManagement(' + "'" + rs.data.data[i].id + "'" + ')">风险控制</button>' +
+                                '<button type="button" class="btn btn-info" onclick="updateTransactionRecord(' + "'" + rs.data.data[i].id + "'" + ')">历史情况</button>' +
+                                '<button type="button" class="btn btn-info" onclick="updateProductAdvantage(' + "'" + rs.data.data[i].id + "'" + ')">产品优势</button>' +
+                                '<button type="button" class="btn btn-info" onclick="updateCollectProduct(' + "'" + rs.data.data[i].id + "'" + ')">采集产品</button>' +
                                 '<button type="button" class="btn btn-danger" onclick="deletePrivateInvestment(' + "'" + rs.data.data[i].id + "'" + ')">删除</button>' +
                                 '</td>' +
                                 '</tr>';
@@ -153,11 +158,41 @@
 
 
     function updatePrivateInvestment(id){
-        alert(id);
+        window.location.href = '/privateInvestment/toUpdate?id=' + id;
     }
 
     function deletePrivateInvestment(id){
-        alert(id);
+        $.ajax({
+            type : "post",
+            url : "/privateInvestment/delete",
+            data : {"id":id},
+            dataType : "json",
+            async : false,
+            success : function (data){
+                if(data.success == false){
+                    alert(data.errMsg);
+                    return;
+                }else{
+                    alert("删除成功！");
+                    window.location.href="/privateInvestment/page";
+                }
+            }
+        });
     }
 
+    function updateRiskManagement(privateInvestmentId){
+        window.location.href="/riskManagement/page?privateInvestmentId=" + privateInvestmentId;
+    }
+
+    function updateProductAdvantage(privateInvestmentId){
+        window.location.href="/productAdvantage/page?privateInvestmentId=" + privateInvestmentId;
+    }
+
+    function updateTransactionRecord(privateInvestmentId){
+        window.location.href="/transactionRecord/page?privateInvestmentId=" + privateInvestmentId;
+    }
+
+    function updateCollectProduct(privateInvestmentId){
+        window.location.href="/collectProduct/page?privateInvestmentId=" + privateInvestmentId;
+    }
 </script>
