@@ -29,7 +29,7 @@ public class HomeController extends BaseCotroller {
     @RequestMapping("/list")
     public ModelAndView queryCoachList(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/index");
+        view.setViewName("/homeInfo/homeInfo");
         return view;
     }
     @RequestMapping("/info")

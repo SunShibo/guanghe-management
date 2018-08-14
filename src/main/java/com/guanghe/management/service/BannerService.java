@@ -1,5 +1,6 @@
 package com.guanghe.management.service;
 
+
 import com.guanghe.management.dao.BannerDao;
 import com.guanghe.management.entity.bo.BannerBo;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,24 @@ import java.util.List;
 @Service("BannerService")
 @Transactional
 public class BannerService {
-    @Resource
-    private BannerDao bannerDao;
-    public List<BannerBo> queryBannerInfo(){
-      return bannerDao.queryBannerInfo();
+        @Resource
+        private BannerDao  bannerDao;
+        public List<BannerBo> queryBannerInfo(){
+            return bannerDao.queryBannerInfo();
+        }
+        public void updateBanner(BannerBo bannerBo){
+            bannerDao.updateBanner(bannerBo);
+        }
+        public  void addBanner(BannerBo bannerBo){
+            bannerDao.addBanner(bannerBo);
+        }
+        public void deleteBanner(Integer id){
+            bannerDao.deleteBanner(id);
+        }
+        public  BannerBo  queryBanner(Integer Id){
+            return  bannerDao.queryBanner(Id);
+        }
+
+
+
     }
-}

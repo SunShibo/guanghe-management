@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/plugins/dist/sidebar-menu.css">
     <style type="text/css">
+        .home_span{
+            font-size: 17px;
+        }
         .main-sidebar{
             position: absolute;
             top: 0;
@@ -21,7 +24,6 @@
             background-color: #222d32;
         }
     </style>
-
 </head>
 <body>
 <aside class="main-sidebar">
@@ -29,14 +31,14 @@
         <ul class="sidebar-menu">
             <li class="header">后台管理系统</li>
             <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-files-o"></i> <span>首页</span>
+                <a href="/home/list">
+                    <i class="fa fa-files-o"></i> <span class="home_span">首页</span>
                 </a>
             </li>
             <li class="treeview">
-                <a href="#">
+                <a >
                     <i class="fa fa-files-o"></i>
-                    <span>走进广和</span>
+                    <span class="home_span">走进广和</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
@@ -50,7 +52,7 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
-                    <span>广和新闻</span>
+                    <span class="home_span">广和新闻</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
@@ -61,7 +63,7 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
-                    <span>财富管理</span>
+                    <span class="home_span">财富管理</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
@@ -75,7 +77,7 @@
             <li class="treeview">
             <a href="#">
                 <i class="fa fa-files-o"></i>
-                <span>资产管理</span>
+                <span class="home_span">资产管理</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu" style="display: none;">
@@ -88,7 +90,7 @@
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-files-o"></i>
-                <span>广和商学院</span>
+                <span class="home_span">广和商学院</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu" style="display: none;">
@@ -100,7 +102,7 @@
 
         <li class="treeview">
             <a href="#">
-                <i class="fa fa-files-o"></i> <span>会员尊享</span>
+                <i class="fa fa-files-o"></i> <span class="home_span">会员尊享</span>
             </a>
         </li>
         </ul>

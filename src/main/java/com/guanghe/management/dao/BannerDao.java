@@ -10,4 +10,8 @@ import java.util.List;
  */
 public interface BannerDao {
     public List<BannerBo> queryBannerInfo();
+    public void updateBanner(BannerBo bannerBo);
+    public  void addBanner(BannerBo bannerBo);
+    public void deleteBanner(Integer Id);
+    public  BannerBo  queryBanner(Integer Id);
 }
