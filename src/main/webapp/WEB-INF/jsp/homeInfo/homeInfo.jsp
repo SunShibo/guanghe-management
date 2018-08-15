@@ -65,7 +65,7 @@
               <a style="font-size: 20px">广和商学院/私享顾问/财富管理</a>
             </td>
             <td style="height: 70px;">
-              <a style="font-size: 20px"class="btn btn-info">编辑</a>
+              <a style="font-size: 20px"class="btn btn-info" href="/Module/page">编辑</a>
             </td>
           </tr>
           <tr>
