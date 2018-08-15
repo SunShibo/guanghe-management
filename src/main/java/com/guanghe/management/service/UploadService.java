@@ -31,7 +31,7 @@ public class UploadService {
             String originalFilename = file.getOriginalFilename();
             //获得文件后缀名称
             String imageRoot = SystemConfig.getString("img_file_root");
-            String yyyyMMdd = DateUtils.formatDate(DateUtils.DATE_PATTERN_PLAIN, new Date());
+            String yyyyMMdd = DateUtils.formatDate(DateUtils.LONG_DATE_PATTERN_PLAIN, new Date());
             String imageUrl = imageRoot  + "/"+yyyyMMdd +  originalFilename;
             OssUploadFileUtil.uploadMultipartFile(file,
                     SystemConfig.getString("image_bucketName"), imageUrl);
