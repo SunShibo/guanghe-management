@@ -73,7 +73,7 @@
               <a style="font-size: 20px">俱乐部</a>
             </td>
             <td style="height: 70px;">
-              <a style="font-size: 20px"class="btn btn-info">编辑</a>
+              <a style="font-size: 20px"class="btn btn-info" href="/PrivateClub/page">编辑</a>
             </td>
           </tr>
           <tr>

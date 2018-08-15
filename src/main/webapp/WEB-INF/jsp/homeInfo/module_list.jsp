@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8" />
-  <title>私募投资列表</title>
+  <title>广和商学院/私享顾问/财富管理/列表</title>
   <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon"/>
   <link type="text/css" href="/static/css/main.css" rel="stylesheet"/>
   <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +47,7 @@
 
 <jsp:include page="../index.jsp"></jsp:include>
 <div class="indexRight1">
-  <div class="title">首页 >广和商学院/私享顾问/财富管理/列表</div>
+  <div class="title">首页 >广和商学院/私享顾问/财富管理</div>
   <div>
     <table class="table table-bordered">
       <thead>

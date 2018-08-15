@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8" />
-  <title>banner列表</title>
+  <title>私享俱乐部列表</title>
   <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon"/>
   <link type="text/css" href="/static/css/main.css" rel="stylesheet"/>
   <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -47,14 +47,15 @@
 
 <jsp:include page="../index.jsp"></jsp:include>
 <div class="indexRight1">
-  <div class="title">首页 > banner图列表</div>
+  <div class="title">首页 >私享俱乐部</div>
   <div>
     <table class="table table-bordered">
       <thead>
       <tr>
-        <th style="width: 35%;">名称</th>
+        <th style="width: 15%;">名称</th>
         <th style="width: 30%;">缩略图</th>
-        <th style="width: 35%;">操作</th>
+        <th style="width: 40% ">内容</th>
+        <th style="width: 15%;">操作</th>
       </tr>
       </thead>
       <tbody id="contentData">
@@ -69,25 +70,35 @@
 </body>
 <script src="/static/js/web/page.js"></script>
 <script>
-    $.getJSON("/Banner/list", function (rs) {
+  $.getJSON("/PrivateClub/list", function (rs) {
 
-          var html = '';
-          for (var i = 0; i < rs.data.news.length; i++) {
-            html += '<tr>' +
-                    '<td style="line-height: 105px;font-size: 20px"> 图片' + [i+1] + '</td>' +
-                    '<td><img style="width: 200px;height: 100px" src=" '+rs.data.Url + rs.data.news[i]['image']+ '"/></td>' +
-                    '<td style="line-height: 105px">' +
-                    '<button type="button" class="btn btn-info" onclick="updateBanner(' + "'" + rs.data.news[i].id + "'" + ')">修改</button>' +
-                    '<button type="button" class="btn btn-danger" onclick="deleteBanner(' + "'" + rs.data.news[i].id + "'" + ')">删除</button>' +
-                    '</td>' +
-                    '</tr>';
-          }
-          $("#contentData").html(html);
+    var html = '';
+    for (var i = 0; i < rs.data.news.length; i++) {
+      html += '<tr>' +
+              '<td style="line-height: 135px;font-size: 20px">模块' + [i + 1] + '</td>';
+      if (rs.data.news[i].image == '') {
+        html +='<td></td>'
+      } else {
+
+        html +='<td><img style="width: 150px;height: 150px" src=" ' + rs.data.Url + rs.data.news[i]['image'] + '"/></td>';
+    }
+                      if(rs.data.news[i].content.length>100){
+                        html += '<td style="font-size:15px;text-align: left">' + rs.data.news[i]['content'].substr(0,100)+"..."+'</td>'
+                      }else{
+                        html += '<td style="font-size:15px;text-align: left">' + rs.data.news[i]['content']+'</td>'
+                      }
+      html +='<td style="line-height: 105px">' +
+              '<button type="button" class="btn btn-info" onclick="clubUpdate(' + "'" + rs.data.news[i].id + "'" + ')">修改</button>' +
+              '</td>' +
+              '</tr>';
+    }
+    $("#contentData").html(html);
 
   })
 
-  function updateBanner(id){
-    window.location.href = '/Banner/toUpdate?id=' + id;
+  function clubUpdate(id){
+    window.location.href = '/PrivateClub/toupdate?id=' + id;
+
   }
 
   function deleteBanner(id){

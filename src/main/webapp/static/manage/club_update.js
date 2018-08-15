@@ -3,8 +3,12 @@ $(function (){
     $("div[id^='menu_']").removeClass("on");
     $("div[id='menu_coach']").addClass("on");
 
-    $("#B_submit").click(updateModule);
+    $("#B_submit").click(updateclub);
     uploadImageUrl();
+    var  id = GetQueryString('id');
+    if(id==1){
+        $("#tdd").css('display','none')
+    }
 })
 function GetQueryString(name) {
     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
@@ -12,17 +16,7 @@ function GetQueryString(name) {
     if(r!=null)return  unescape(r[2]);
     return null;
 }
-function updateModule(){
-    var title = $("input[name='moduleTitle']").val();
-    if(title == ""){
-        alert("标题名称不能为空");
-        return ;
-    }
-    var engtitle = $("input[name='moduleEngTitle']").val();
-    if(engtitle == ""){
-        alert("英文标题名称不能为空");
-        return ;
-    }
+function updateclub(){
     var content = $("textarea[name='moduleContent']").val();
     if(content == ""){
         alert("内容不能为空");
@@ -37,7 +31,7 @@ function updateModule(){
     $.ajax({
         type : "post",
         url : "update",
-        data :{"image" : imageUrl,"id":id,"title":title,"engTitle":engtitle,"content":content,},
+        data :{"image" : imageUrl,"id":id,"content":content,},
         dataType : "json",
         success: function(result, status) {
             if(result.success== false){
