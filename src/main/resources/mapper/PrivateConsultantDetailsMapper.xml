@@ -17,6 +17,9 @@
         <if test="type != null">
             AND type = #{type}
         </if>
+        <if test="name != '' ">
+            AND name LIKE CONCAT('%','${name}','%')
+        </if>
         ORDER BY create_time DESC
         <include refid="limit"/>
     </select>
@@ -32,8 +35,8 @@
     <insert id="addPrivateConsultant" parameterType="com.guanghe.management.entity.bo.PrivateConsultantDetailsBO"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO gh_private_consultant_details
-          (name,gender,position,synopsis,img_url,create_user,create_time)
-          VALUES (#{name},#{gender},#{position},#{synopsis},#{imgUrl},#{createUser},NOW())
+          (name,gender,position,synopsis,img_url,create_time)
+          VALUES (#{name},#{gender},#{position},#{synopsis},#{imgUrl},NOW())
 
     </insert>
 

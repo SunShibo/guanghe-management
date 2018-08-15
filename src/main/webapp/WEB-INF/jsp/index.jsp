@@ -26,7 +26,7 @@
     </style>
 </head>
 <body>
-<aside class="main-sidebar">
+<aside class="main-sidebar" >
     <section  class="sidebar">
         <ul class="sidebar-menu">
             <li class="header">后台管理系统</li>
@@ -68,7 +68,7 @@
                 </a>
                 <ul class="treeview-menu" style="display: none;">
                     <li><a href="/privateInvestment/page"><i class="fa fa-circle-o"></i>私慕投资</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>私享顾问</a></li>
+                    <li><a href="/privateConsultant/page"><i class="fa fa-circle-o"></i>私享顾问</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i>产品优势1</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i>产品优势2</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i>产品优势3</a></li>

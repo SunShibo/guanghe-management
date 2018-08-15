@@ -2,13 +2,18 @@ package com.guanghe.management.web.controller.manage;
 
 import com.guanghe.management.entity.bo.PrivateConsultantDetailsBO;
 import com.guanghe.management.entity.dto.ResultDTOBuilder;
+import com.guanghe.management.pop.SystemConfig;
 import com.guanghe.management.query.QueryInfo;
 import com.guanghe.management.service.PrivateConsultantDetailsService;
+import com.guanghe.management.service.UploadService;
 import com.guanghe.management.util.JsonUtils;
 import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -24,12 +29,30 @@ import java.util.Map;
 public class PrivateConsultantDetailsController extends BaseCotroller {
 
     @Resource
+    private UploadService uploadService;
+
+    @Resource
     private PrivateConsultantDetailsService privateConsultantDetailsService;
 
     @RequestMapping("/page")
     public ModelAndView page(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/consultant/private_consultant");
+        view.setViewName("/privateConsultant/privateConsultant_list");
+        return view;
+    }
+
+    @RequestMapping("/toAdd")
+    public ModelAndView toAdd(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/privateConsultant/privateConsultant_add");
+        return view;
+    }
+
+    @RequestMapping("/toUpdate")
+    public ModelAndView toUpdate(){
+        ModelAndView view = new ModelAndView();
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+        view.setViewName("/privateConsultant/privateConsultant_update");
         return view;
     }
 
@@ -45,7 +68,7 @@ public class PrivateConsultantDetailsController extends BaseCotroller {
             return;
         }
         if(StringUtils.isEmpty(privateConsultant.getName()) || StringUtils.isEmpty(privateConsultant.getImgUrl())
-         || StringUtils.isEmpty(privateConsultant.getCreateUser()) || StringUtils.isEmpty(privateConsultant.getGender())
+         || StringUtils.isEmpty(privateConsultant.getGender())
          || StringUtils.isEmpty(privateConsultant.getPosition()) || StringUtils.isEmpty(privateConsultant.getSynopsis())   ){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001","参数异常！"));
             safeTextPrint(response, json);
@@ -84,7 +107,7 @@ public class PrivateConsultantDetailsController extends BaseCotroller {
     public void updatePrivateConsultantbyId(HttpServletResponse response, PrivateConsultantDetailsBO privateConsultant){
         if( privateConsultant.getId() == null || privateConsultant.getId() == 0 ||
         StringUtils.isEmpty(privateConsultant.getName()) ||  StringUtils.isEmpty(privateConsultant.getImgUrl())
-        || StringUtils.isEmpty(privateConsultant.getCreateUser())|| StringUtils.isEmpty(privateConsultant.getGender())
+        || StringUtils.isEmpty(privateConsultant.getGender())
                 || StringUtils.isEmpty(privateConsultant.getPosition()) || StringUtils.isEmpty(privateConsultant.getSynopsis())){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001","参数异常！"));
             safeTextPrint(response, json);
@@ -108,7 +131,7 @@ public class PrivateConsultantDetailsController extends BaseCotroller {
      * @param pageNo,pageSize
      */
     @RequestMapping("/list")
-    public void queryPrivateConsultantDetailsList(HttpServletResponse response,Integer pageNo, Integer pageSize){
+    public void queryPrivateConsultantDetailsList(HttpServletResponse response,Integer pageNo, Integer pageSize,String name){
 
         QueryInfo queryInfo = getQueryInfo(pageNo, pageSize);
 
@@ -117,6 +140,7 @@ public class PrivateConsultantDetailsController extends BaseCotroller {
             map.put("pageOffset", queryInfo.getPageOffset());
             map.put("pageSize", queryInfo.getPageSize());
         }
+        map.put("name", name);
 
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(privateConsultantDetailsService.queryPrivateConsultantDetailsList(map)));
         safeTextPrint(response, json);
@@ -146,5 +170,20 @@ public class PrivateConsultantDetailsController extends BaseCotroller {
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(wealth));
         safeTextPrint(response, json);
 
+    }
+
+    @RequestMapping(value = "/uploadImage", produces = {"application/json;charset=UTF-8"})
+    @RequiresPermissions(value = "material:upload")
+    public void uploadMaterialLibrary(@RequestParam("myFile") MultipartFile file,
+                                      HttpServletResponse response) throws Exception {
+        String result = uploadService.uploadMaterialLibrary(file);
+        if (result==null){
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
+            safeTextPrint(response, json);
+            return;
+        }else {
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(result));
+            safeTextPrint(response, json);
+        }
     }
 }

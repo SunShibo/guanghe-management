@@ -437,7 +437,6 @@
 
         var investmentPoinIds = $("#investmentPoinId option:selected");
         var investmentPoinId = investmentPoinIds.val();
-        alert(investmentPoinId);
         if(investmentPoinId == ""){
             alert("请选择投资起点！");
             return;

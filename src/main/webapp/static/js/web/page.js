@@ -77,7 +77,7 @@ var  page = {
     "initPageEvent":function(listCount){
         $("#"+page.pageId +">li[class='pageItem']").on("click",function(){
             page.setPageListCount(listCount,$(this).attr("page-data"),page.fun);
-            getdata($(this).attr("page-data"),8);
+            getdata($(this).attr("page-data"),10);
         });
     },
     "getPageListModel":function(pageCount,currentPage){
