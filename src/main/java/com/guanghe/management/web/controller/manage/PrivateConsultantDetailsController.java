@@ -7,6 +7,7 @@ import com.guanghe.management.query.QueryInfo;
 import com.guanghe.management.service.PrivateConsultantDetailsService;
 import com.guanghe.management.service.UploadService;
 import com.guanghe.management.util.JsonUtils;
+import com.guanghe.management.util.OssUploadFileUtil;
 import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -87,10 +88,14 @@ public class PrivateConsultantDetailsController extends BaseCotroller {
      */
     @RequestMapping("/delete")
     public void deletePrivateConsultantbyId(HttpServletResponse response, int id){
+
         if( id == 0){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001","参数异常！"));
             safeTextPrint(response, json);
             return;
+        }else {
+            PrivateConsultantDetailsBO bo = privateConsultantDetailsService.queryPrivateConsultantDetailsById(id);
+            OssUploadFileUtil.deleteFileInfo(SystemConfig.getString("image_bucketName"), bo.getImgUrl());
         }
 
         privateConsultantDetailsService.deletePrivateConsultantbyId(id);
