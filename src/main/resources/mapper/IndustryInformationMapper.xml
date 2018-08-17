@@ -9,13 +9,16 @@
     </sql>
 
     <select id="queryIndustryInformationCount" resultType="int">
-        SELECT COUNT(id) FROM gh_news_update_industry_information
+        SELECT COUNT(id) FROM gh_news_update_industry_information WHERE 1=1
+        <if test="title != null">
+            AND title LIKE CONCAT('%','${title}','%')
+        </if>
     </select>
 
     <select id="queryIndustryInformationList" parameterType="map" resultType="com.guanghe.management.entity.bo.IndustryInformationBO">
         SELECT * FROM gh_news_update_industry_information WHERE 1 = 1
-        <if test="type != null">
-            AND type = #{type}
+        <if test="title != null">
+            AND title LIKE CONCAT('%','${title}','%')
         </if>
         ORDER BY create_time DESC
         <include refid="limit"/>
@@ -30,15 +33,22 @@
     </delete>
 
     <insert id="addIndustryInformationBO" parameterType="com.guanghe.management.entity.bo.IndustryInformationBO">
-        INSERT INTO gh_news_update_industry_information SET title = #{title},
-        english_title = #{englishTitle},img_url = #{imgUrl},source = #{source},create_time = NOW(),
-        content = #{content},create_news_user = #{createNewsUser}
+         INSERT INTO gh_news_update_industry_information ( title, english_title, img_url, source, create_time, synopsis, content) VALUES
+       ( #{title}, #{englishTitle}, #{imgUrl}, #{source}, NOW(), #{synopsis},  #{content});
 
     </insert>
 
     <update id="updateIndustryInformationBO" parameterType="com.guanghe.management.entity.bo.IndustryInformationBO">
-        UPDATE gh_news_update_industry_information  SET title = #{title},
-        english_title = #{englishTitle},img_url = #{imgUrl},source = #{source},update_time = NOW(),
-        content = #{content},create_news_user = #{createNewsUser} WHERE id = #{id}
+        UPDATE gh_news_update_industry_information
+        SET
+        title = #{title},
+        english_title = #{englishTitle},
+        img_url = #{imgUrl},
+        source = #{source},
+        update_time = NOW(),
+        synopsis = #{synopsis},
+        content = #{content}
+        WHERE
+        id = #{id};
     </update>
 </mapper>

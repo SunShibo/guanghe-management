@@ -148,6 +148,7 @@
           $("#position").val(data.data.position);
           $("#synopsis").val(data.data.synopsis);
           $("#uploadImage").attr("src",'${Url}'+data.data.imgUrl);
+          $("input[name='imageUrl']").val(data.data.imgUrl);
           uploadImageUrl();
         }
       }

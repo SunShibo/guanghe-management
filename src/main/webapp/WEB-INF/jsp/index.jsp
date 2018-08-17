@@ -56,8 +56,8 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>新闻动态</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>行业资讯</a></li>
+                    <li><a href="/newsInformation/page"><i class="fa fa-circle-o"></i>新闻动态</a></li>
+                    <li><a href="/industryInformation/page"><i class="fa fa-circle-o"></i>行业资讯</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -113,6 +113,14 @@
 <script src="/static/plugins/dist/sidebar-menu.js"></script>
 <script>
     $.sidebarMenu($('.sidebar-menu'))
+    function getParam(paramName) {
+        paramValue = "", isFound = !1;
+        if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+            arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+            while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+        }
+        return paramValue == "" && (paramValue = null), paramValue
+    }
 </script>
 
 

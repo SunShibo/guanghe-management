@@ -9,13 +9,16 @@
     </sql>
 
     <select id="queryNewsInformationCount" resultType="int">
-        SELECT COUNT(id) FROM gh_news_update_news_information
+        SELECT COUNT(id) FROM gh_news_update_news_information WHERE 1=1
+        <if test="title != null">
+            AND title LIKE CONCAT('%','${title}','%')
+        </if>
     </select>
 
     <select id="queryNewsInformationList" parameterType="map" resultType="com.guanghe.management.entity.bo.NewsInformationBO">
         SELECT * FROM gh_news_update_news_information WHERE 1 = 1
-        <if test="type != null">
-            AND type = #{type}
+        <if test="title != null">
+            AND title LIKE CONCAT('%','${title}','%')
         </if>
         ORDER BY create_time DESC
         <include refid="limit"/>
@@ -30,15 +33,24 @@
     </delete>
 
     <insert id="addNewsInformationBO" parameterType="com.guanghe.management.entity.bo.NewsInformationBO">
-        INSERT INTO gh_news_update_news_information SET title = #{title},english_title = #{englishTitle}
-        img_url = #{imgUrl},source = #{source},create_time = NOW(),
-        content = #{content},create_news_user = #{createNewsUser}
+       INSERT INTO gh_news_update_news_information ( title, english_title, img_url, source, create_time, synopsis, content) VALUES
+       ( #{title}, #{englishTitle}, #{imgUrl}, #{source}, NOW(), #{synopsis},  #{content});
+
 
     </insert>
 
     <update id="updateNewsInformationBO" parameterType="com.guanghe.management.entity.bo.NewsInformationBO">
-        UPDATE gh_news_update_news_information  SET title = #{title},english_title = #{englishTitle}
-        img_url = #{imgUrl},source = #{source},update_time = NOW(),
-        content = #{content},create_news_user = #{createNewsUser} WHERE id = #{id}
-    </update>
+        UPDATE gh_news_update_news_information
+        SET
+        title = #{title},
+        english_title = #{englishTitle},
+        img_url = #{imgUrl},
+        source = #{source},
+        update_time = NOW(),
+        synopsis = #{synopsis},
+        content = #{content}
+        WHERE
+        id = #{id};
+
+        </update>
 </mapper>

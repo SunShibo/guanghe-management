@@ -2,9 +2,11 @@ package com.guanghe.management.web.controller.manage;
 
 import com.guanghe.management.entity.bo.IndustryInformationBO;
 import com.guanghe.management.entity.dto.ResultDTOBuilder;
+import com.guanghe.management.pop.SystemConfig;
 import com.guanghe.management.query.QueryInfo;
 import com.guanghe.management.service.IndustryInformationService;
 import com.guanghe.management.util.JsonUtils;
+import com.guanghe.management.util.OssUploadFileUtil;
 import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import org.springframework.stereotype.Controller;
@@ -29,15 +31,23 @@ public class IndustryInformationController extends BaseCotroller {
     @RequestMapping("/page")
     public ModelAndView page(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/industry/industry_information");
+        view.setViewName("/industryInformation/industryInformation_list");
         return view;
     }
 
     @RequestMapping("/findOne")
-    public ModelAndView findOne(Integer id){
+    public ModelAndView findOne(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/industry/industry_information_detail");
-        view.addObject("id", id);
+        view.setViewName("/industryInformation/industryInformation_update");
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+        return view;
+    }
+
+    @RequestMapping("/toAdd")
+    public ModelAndView redirectAddPage(){
+        ModelAndView view = new ModelAndView();
+        sput("base_image", SystemConfig.getString("image_bucketName"));
+        view.setViewName("/industryInformation/industryInformation_add");
         return view;
     }
 
@@ -46,7 +56,7 @@ public class IndustryInformationController extends BaseCotroller {
      * @param pageNo,pageSize
      */
     @RequestMapping("/list")
-    public void queryIndustryInformationList(HttpServletResponse response,Integer pageNo, Integer pageSize){
+    public void queryIndustryInformationList(HttpServletResponse response,Integer pageNo, Integer pageSize,String title){
 
         QueryInfo queryInfo = getQueryInfo(pageNo, pageSize);
 
@@ -55,7 +65,7 @@ public class IndustryInformationController extends BaseCotroller {
             map.put("pageOffset", queryInfo.getPageOffset());
             map.put("pageSize", queryInfo.getPageSize());
         }
-
+        map.put("title",title);
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("data",industryInformationService.queryIndustryInformationList(map));
@@ -103,6 +113,8 @@ public class IndustryInformationController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }
+
+        OssUploadFileUtil.deleteFileInfo(SystemConfig.getString("image_bucketName"), news.getImgUrl());
         industryInformationService.deleteIndustryInformation(newsId);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
         safeTextPrint(response, json);
@@ -124,7 +136,7 @@ public class IndustryInformationController extends BaseCotroller {
         if(StringUtils.isEmpty(news.getTitle()) || StringUtils.isEmpty(news.getEnglishTitle())
                 || StringUtils.isEmpty(news.getImgUrl())
                 || StringUtils.isEmpty(news.getSource()) || StringUtils.isEmpty(news.getContent())
-                || StringUtils.isEmpty(news.getCreateNewsUser())){
+                || StringUtils.isEmpty(news.getSynopsis())){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;
@@ -151,7 +163,7 @@ public class IndustryInformationController extends BaseCotroller {
         if(StringUtils.isEmpty(news.getTitle()) || StringUtils.isEmpty(news.getEnglishTitle())
                 || StringUtils.isEmpty(news.getImgUrl())
                 || StringUtils.isEmpty(news.getSource()) || StringUtils.isEmpty(news.getContent())
-                || StringUtils.isEmpty(news.getCreateNewsUser()) || news.getId() == null){
+                || StringUtils.isEmpty(news.getSynopsis()) || news.getId() == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;
@@ -166,7 +178,7 @@ public class IndustryInformationController extends BaseCotroller {
         newsDetail.setImgUrl(news.getImgUrl());
         newsDetail.setSource(news.getSource());
         newsDetail.setContent(news.getContent());
-        newsDetail.setCreateNewsUser(news.getCreateNewsUser());
+        newsDetail.setCreateNewsUser(news.getSynopsis());
 
         industryInformationService.updateIndustryInformationBO(newsDetail);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
