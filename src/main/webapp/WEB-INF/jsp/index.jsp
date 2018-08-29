@@ -67,25 +67,25 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
+                    <li><a href="/wealthManagement/page"><i class="fa fa-circle-o"></i>财富管理</a></li>
                     <li><a href="/privateInvestment/page"><i class="fa fa-circle-o"></i>私慕投资</a></li>
                     <li><a href="/privateConsultant/page"><i class="fa fa-circle-o"></i>私享顾问</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>产品优势1</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i>产品优势2</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i>产品优势3</a></li>
                 </ul>
             </li>
             <li class="treeview">
-            <a href="#">
+            <a href="/assetManagement/page">
                 <i class="fa fa-files-o"></i>
                 <span class="home_span">资产管理</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
-            <ul class="treeview-menu" style="display: none;">
-                <li><a href="#"><i class="fa fa-circle-o"></i>证券基金</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>定增基金</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>股权基金</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>产品基金</a></li>
-            </ul>
+            <%--<ul class="treeview-menu" style="display: none;">--%>
+                <%--<li><a href="#"><i class="fa fa-circle-o"></i>证券基金</a></li>--%>
+                <%--<li><a href="#"><i class="fa fa-circle-o"></i>定增基金</a></li>--%>
+                <%--<li><a href="#"><i class="fa fa-circle-o"></i>股权基金</a></li>--%>
+                <%--<li><a href="#"><i class="fa fa-circle-o"></i>产品基金</a></li>--%>
+            <%--</ul>--%>
         </li>
         <li class="treeview">
             <a href="#">
