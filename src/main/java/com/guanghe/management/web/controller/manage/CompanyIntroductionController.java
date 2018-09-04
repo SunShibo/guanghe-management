@@ -1,3 +1,4 @@
+/*
 package com.guanghe.management.web.controller.manage;
 
 import com.guanghe.management.entity.bo.CompanyIntroductionBo;
@@ -13,18 +14,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 
+*/
 /**
  * Created by yxw on 2018/7/18.
- */
+ *//*
+
 @Controller
 @RequestMapping("/CompanyIntroduction")
 public class CompanyIntroductionController extends BaseCotroller {
     @Autowired
     private CompanyItroductionService companyItroductionService;
-    @RequestMapping("/list")
+    @RequestMapping("/update")
     public ModelAndView queryCompanyIntroductionList(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/guangheOn/company_introduction");
+        view.setViewName("/guangheon/company_introduction_list");
         return view;
     }
     @RequestMapping("/delete")
@@ -97,7 +100,7 @@ public class CompanyIntroductionController extends BaseCotroller {
             }else{
                 String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(news));
                 safeTextPrint(response, json);
-
             }
         }
 }
+*/

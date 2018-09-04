@@ -34,6 +34,7 @@ public class SysConstants {
      */
     public static final String CURRENT_USER_ID = "userID";
 
+    public static final String Browse_History = "browseHistory";
     /**
      * 登录用户
      */
