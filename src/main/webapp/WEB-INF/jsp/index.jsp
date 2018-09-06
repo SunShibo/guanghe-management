@@ -105,6 +105,19 @@
                 <i class="fa fa-files-o"></i> <span class="home_span">会员尊享</span>
             </a>
         </li>
+
+
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span class="home_span">商品分类&品牌</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+                <li><a href="/GoodsType/onePage"><i class="fa fa-circle-o"></i>分类</a></li>
+                <li><a href="/Brand/page"><i class="fa fa-circle-o"></i>品牌</a></li>
+            </ul>
+        </li>
         </ul>
     </section>
 </aside>

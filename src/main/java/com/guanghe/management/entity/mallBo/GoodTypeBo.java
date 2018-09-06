@@ -15,6 +15,15 @@ public class GoodTypeBo{
     private  String updateUser;
     private Date createTime;
     private  Date updateTime;
+    private String imgUrl;//一级分类图标
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public Integer getId() {
         return id;

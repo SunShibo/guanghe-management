@@ -19,4 +19,12 @@ public interface BrandDao {
     public  List<BrandBo> queryBrandOnclick(Map<String, Object> map);
     public  BrandBo queryBrandByGoodsId(Integer id);
     public  List<BrandBo> queryBranddetail(Map<String, Object> map);
+
+    int getBrandListCount(Map<String, Object> map);
+
+    List<Map<String,Object>> getBrandList(Map<String, Object> map);
+    
+    void updateById(Map<String, Object> map);
+
+    void insertBrand(Map<String, Object> map);
 }
