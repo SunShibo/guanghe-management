@@ -13,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yxw on 2018/8/7.
@@ -29,6 +31,20 @@ public class MallBannerController extends BaseCotroller {
         ModelAndView view = new ModelAndView();
         view.setViewName("/malHome/banner_list");
         view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+        return view;
+    }
+
+    @RequestMapping("/toUpdate")
+    public ModelAndView redirectUpdatePage(Integer bannerId){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/malHome/banner_update");
+        return view;
+    }
+
+    @RequestMapping("/toAdd")
+    public ModelAndView toAdd(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/malHome/banner_add");
         return view;
     }
 
@@ -111,7 +127,11 @@ public class MallBannerController extends BaseCotroller {
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
             safeTextPrint(response, json);
         }else{
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(news));
+            Map<String,Object> map = new HashMap<String, Object>();
+            map.put("data",news);
+            map.put("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(map));
             safeTextPrint(response, json);
 
         }
