@@ -78,7 +78,7 @@
             <a href="/assetManagement/page">
                 <i class="fa fa-files-o"></i>
                 <span class="home_span">资产管理</span>
-                <i class="fa fa-angle-left pull-right"></i>
+                <%--<i class="fa fa-angle-left pull-right"></i>--%>
             </a>
             <%--<ul class="treeview-menu" style="display: none;">--%>
                 <%--<li><a href="#"><i class="fa fa-circle-o"></i>证券基金</a></li>--%>
@@ -116,6 +116,19 @@
             <ul class="treeview-menu" style="display: none;">
                 <li><a href="/GoodsType/onePage"><i class="fa fa-circle-o"></i>分类</a></li>
                 <li><a href="/Brand/page"><i class="fa fa-circle-o"></i>品牌</a></li>
+            </ul>
+        </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span class="home_span">商城首页</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu" style="display: none;">
+                <li><a href="/MallBanner/page"><i class="fa fa-circle-o"></i>Banner轮播图</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i>竖图</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i>横图</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i>首页推荐商品</a></li>
             </ul>
         </li>
         </ul>
