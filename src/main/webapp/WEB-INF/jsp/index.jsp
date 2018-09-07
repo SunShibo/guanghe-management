@@ -128,7 +128,7 @@
                 <li><a href="/MallBanner/page"><i class="fa fa-circle-o"></i>Banner轮播图</a></li>
                 <li><a href="/RecommendImage/page"><i class="fa fa-circle-o"></i>竖图</a></li>
                 <li><a href="/MallImage/page"><i class="fa fa-circle-o"></i>横图</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>首页推荐商品</a></li>
+                <li><a href="/homeGoods/page"><i class="fa fa-circle-o"></i>首页推荐商品</a></li>
             </ul>
         </li>
         </ul>
