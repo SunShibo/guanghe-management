@@ -57,13 +57,29 @@
     uploadImageUrl();
 
     var id= getParam("id");
-    var url_img= getParam("imgUrl");
-    alert(url_img);
     var Url= getParam("Url");
-    if(url_img!=null){
-      $("#uploadImage").attr("src", Url+url_img);
-      $("input[name='imageUrl']").val(url_img);
-    }
+
+    $.ajax({
+      type: "post",
+      url: "details",
+      data: {"id":id},
+      dataType: "json",
+      success : function (data){
+        if(data.success == false){
+          alert(data.errMsg);
+          return;
+        } else {
+          console.log(data);
+          if(data.data.img_url == undefined){
+            return;
+          }
+          // 添加成功，跳转到列表页面
+          $("#uploadImage").attr("src", Url+data.data.img_url);
+          $("input[name='imageUrl']").val(data.data.img_url);
+        }
+      }
+    });
+
   })
 
 
