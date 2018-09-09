@@ -12,9 +12,9 @@ public class GoodsImg {
     private  String imgUrl;
     private  String createUser;
     private  String updateUser;
-    private Date createTime;
+    private  Date createTime;
     private  Date updateTime;
-    private   Integer status;
+    private  Integer status;
 
 
     public Integer getId() {

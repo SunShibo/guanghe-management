@@ -48,7 +48,6 @@ public class IntegralTransactionController extends BaseCotroller{
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("data",integralTransactionService.queryIntegralTransactionList(map));
-
         resultMap.put("count", integralTransactionService.queryIntegralTransactionCount(map));
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(resultMap));
 

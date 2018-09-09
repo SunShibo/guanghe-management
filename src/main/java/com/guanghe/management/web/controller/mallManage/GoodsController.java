@@ -2,20 +2,23 @@ package com.guanghe.management.web.controller.mallManage;
 
 
 import com.guanghe.management.entity.dto.ResultDTOBuilder;
-import com.guanghe.management.entity.mallBo.BrandBo;
-import com.guanghe.management.entity.mallBo.GoodsListBo;
-import com.guanghe.management.entity.mallBo.GoodsResponseBo;
+import com.guanghe.management.entity.mallBo.*;
 import com.guanghe.management.pop.SystemConfig;
 import com.guanghe.management.query.QueryInfo;
+import com.guanghe.management.service.UploadService;
 import com.guanghe.management.service.mallService.BrandService;
 import com.guanghe.management.service.mallService.GoodsService;
 import com.guanghe.management.service.mallService.GoodsTypeService;
 import com.guanghe.management.util.DateUtils;
 import com.guanghe.management.util.JsonUtils;
+import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import net.sf.json.JSONObject;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -36,10 +39,26 @@ public class GoodsController extends BaseCotroller {
     private BrandService brandService;
     @Resource
     private GoodsTypeService goodsTypeService;
+    @Resource
+    private UploadService uploadService;
     @RequestMapping("/page")
     public ModelAndView queryCoreTeamList(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/mall/mall_detaillist");
+        view.setViewName("/mall/mall_goods");
+        return view;
+    }
+    @RequestMapping("/update")
+    public ModelAndView queryupdate(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/mall/add_mall_goods");
+        return view;
+    }
+    @RequestMapping("/toUpdate")
+    public ModelAndView toUpdate(Integer id){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/mall/goods_update");
+        view.addObject("goods", goodsService.queryGoodsById(id));
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
         return view;
     }
     @RequestMapping("/detailList")//列表页
@@ -85,11 +104,70 @@ public class GoodsController extends BaseCotroller {
             safeTextPrint(response, json);
         }
     }
+    @RequestMapping(value = "/uploadImage", produces = {"application/json;charset=UTF-8"})
+    @RequiresPermissions(value = "material:upload")
+    public void uploadMaterialLibrary(@RequestParam("myFile") MultipartFile file,
+                                      HttpServletResponse response) throws Exception {
+        String result = uploadService.uploadMaterialLibrary(file);
+        if (result==null){
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
+            safeTextPrint(response, json);
+            return;
+        }else {
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(result));
+            safeTextPrint(response, json);
+        }
+    }
+    @RequestMapping("/updategoodsInfo1")//添加商品
+    public void updategoodsInfo1(HttpServletResponse response,String imageUrl,Integer id,String weight,String name){
+        GoodsBo goodsBo =goodsService.queryGoodsById(id);
+        goodsBo.setWeight(weight);
+        goodsBo.setName(name);
+        goodsBo.setIntroduceImgUrl(imageUrl);
+        goodsService.updateGoods(goodsBo);
+        String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
+        safeTextPrint(response, json);
+    }
     @RequestMapping("/Add")//添加商品
-    public  void  Add(HttpServletResponse response,Integer id){
-        
+    public void Add(HttpServletResponse response,String goodsInfo){
+        goodsService.addGoods(goodsInfo);
+        String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
+        safeTextPrint(response, json);
+    }
+    @RequestMapping("/list")
+    public void list(HttpServletResponse response,Integer pageNo, Integer pageSize,String name){
+        QueryInfo queryInfo = getQueryInfo(pageNo, pageSize);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        if(queryInfo != null){
+            map.put("pageOffset", queryInfo.getPageOffset());
+            map.put("pageSize", queryInfo.getPageSize());
+        }
+            map.put("name",name);
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("data",goodsService.queryGoods(map));
+        resultMap.put("count", goodsService.updateGoodsCount(map));
+        String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(resultMap));
+
+        safeTextPrint(response, json);
+    }
+    @RequestMapping("/queryGoodsUpdateInfo")//添加商品
+    public void updateGoods(HttpServletResponse response,Integer id){
+        GoodsBo goodsBo =goodsService.queryGoodsById(id);
+        List<GoodTypeBo> second =goodsTypeService.queryGoodTypeByPid(goodsBo.getLeaveId()); //查询当前二级
+        List<GoodTypeBo> first = goodsTypeService.queryTypeById();//查询所有一级
+        HashMap<String,Object> Map = new HashMap<String,Object>();
+        Map.put("id",goodsBo.getGoodsTypeId());
+        Map.put("pid",goodsBo.getLeaveId());
+        List<BrandBo> brand = brandService.queryBrandOnclick(Map);
+        JSONObject result = new JSONObject();
+        result.put("second",second );
+        result.put("first", first);
+        result.put("brand",brand);
+        result.put("goodsBo", goodsBo);
+        String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(result));
+        safeTextPrint(response, json);
     }
 
+    }
 
-
-}

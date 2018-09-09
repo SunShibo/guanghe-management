@@ -30,7 +30,7 @@
             </td>
           </tr>
           <tr>
-            <td>图&nbsp;&nbsp;&nbsp;&nbsp;片：</td>
+            <td>内&nbsp;&nbsp;&nbsp;&nbsp;容：</td>
             <td>
               <textarea rows="10" type="text" name="moduleContent" value="${module.content}">${module.content}</textarea>
               <input name="introduce" type="hidden"/>

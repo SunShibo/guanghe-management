@@ -1,6 +1,6 @@
 package com.guanghe.management.entity.mallBo;
 
-import com.guanghe.api.common.base.BaseModel;
+import com.guanghe.management.common.base.BaseModel;
 
 import java.util.Date;
 

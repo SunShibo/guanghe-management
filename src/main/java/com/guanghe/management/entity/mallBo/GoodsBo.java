@@ -9,14 +9,11 @@ import java.util.Date;
 public class GoodsBo {
     private  Integer id;
     private  String name;
-    private  Integer goodsNo;
     private  String weight;
     private  String introduceImgUrl;
-    private  Integer state;//下架/无货
     private  Integer brandId;
     private  Integer goodsTypeId;
     private  String createUser;
-    private  String updateUser;
     private Date createTime;
     private  Date updateTime;
     private  Integer followCount;
@@ -73,14 +70,6 @@ public class GoodsBo {
     }
 
 
-    public Integer getGoodsNo() {
-        return goodsNo;
-    }
-
-    public void setGoodsNo(Integer goodsNo) {
-        this.goodsNo = goodsNo;
-    }
-
     public String getWeight() {
         return weight;
     }
@@ -95,14 +84,6 @@ public class GoodsBo {
 
     public void setIntroduceImgUrl(String introduceImgUrl) {
         this.introduceImgUrl = introduceImgUrl;
-    }
-
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
     }
 
     public Integer getBrandId() {
@@ -127,14 +108,6 @@ public class GoodsBo {
 
     public void setCreateUser(String createUser) {
         this.createUser = createUser;
-    }
-
-    public String getUpdateUser() {
-        return updateUser;
-    }
-
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser;
     }
 
     public Date getCreateTime() {

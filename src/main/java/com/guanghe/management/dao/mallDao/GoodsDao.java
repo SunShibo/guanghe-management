@@ -18,10 +18,12 @@ public interface GoodsDao {
     public void updateGoods(GoodsBo goodsBo);
     public void addGoods(GoodsBo goodsBo);
     public void deleteGoods(Integer Id);
-    public  GoodsBo  queryGoods(Integer id);
+    public  List<GoodsBo>  queryGoods(Map<String,Object>map);
     public List<GoodsListBo> queryGoodsInfoSort(Map<String, Object> map);//排序
     public List<GoodsBo> queryHomeGoodsList();
     public  List<GoodsDetailBo> queryGoodsdetail(Integer id);
     public  List<GoodsListBo> queryGoodsbrandsDetailList(Integer id);
+    public  int updateGoodsCount(Map<String,Object>map);
+    public  GoodsBo queryGoodsById(Integer id);
 }
 
