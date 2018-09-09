@@ -3,6 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guanghe.management.dao.mallDao.BrandDao">
 
+    <sql id="limit">
+        limit #{pageOffset}, #{pageSize}
+    </sql>
+
+
     <insert id="addBrand" parameterType="com.guanghe.management.entity.mallBo.BrandBo"
             useGeneratedKeys="true" keyProperty="id">
         insert into mall_brand SET  goods_type_id = #{goodsTypeId},,create_time = NOW()
@@ -41,4 +46,50 @@
          GROUP BY m.id
     </select>
 
+<<<<<<< HEAD
+=======
+    <select id="getBrandListCount" resultType="int" parameterType="map">
+        SELECT count(id) FROM mall_brand WHERE 1=1
+        <if test="title != null">
+            AND name LIKE CONCAT('%','${title}','%')
+        </if>
+    </select>
+
+    <select id="getBrandList" resultType="map" parameterType="map">
+        SELECT
+        mb.id,
+        mb. NAME,
+        mb.produced,
+        mgt1.id as oneId,
+        mgt1.`name`,
+        mgt2.id as twoId,
+        mgt2.`name`
+        FROM
+        mall_brand mb
+        LEFT JOIN
+        mall_goods_type mgt1 ON mb.leave_id = mgt1.id
+        LEFT JOIN
+        mall_goods_type mgt2 ON mb.goods_type_id = mgt2.id
+
+        WHERE
+        1 = 1
+
+        <if test="title != null">
+            AND mb.name LIKE CONCAT('%','${title}','%')
+        </if>
+        ORDER BY mb.create_time
+        <include refid="limit"/>
+    </select>
+
+    <update id="updateById" parameterType="map">
+        UPDATE mall_brand SET name = #{name},produced = #{produced},update_time = NOW(),goods_type_id = #{goodsTypeId},
+        leave_id = #{levelId} WHERE id = #{id}
+    </update>
+
+    <insert id="insertBrand" parameterType="map">
+        INSERT INTO mall_brand SET name = #{name},produced = #{produced},create_time = NOW(),goods_type_id = #{goodsTypeId},
+        leave_id = #{levelId}
+    </insert>
+
+>>>>>>> origin/master
 </mapper>

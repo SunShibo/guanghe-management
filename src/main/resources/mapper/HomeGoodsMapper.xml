@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.guanghe.management.dao.mallDao.HomeGoodsDao">
+
+    <sql id="limit">
+        limit #{pageOffset}, #{pageSize}
+    </sql>
+
+    <select id="getHomeGoodsList" resultType="map" parameterType="map">
+        SELECT
+            g.id,g.`name`,g.homeState,mhgi.img_url
+        FROM
+            mall_goods g
+        LEFT JOIN mall_home_goods_img mhgi ON g.id=mhgi.goods_id
+        WHERE 1=1
+        <if test="title != ''">
+            AND g.`name` LIKE CONCAT('%','${title}','%')
+        </if>
+        ORDER BY g.create_time,g.homeState
+        <include refid="limit"/>
+    </select>
+
+    <select id="getHomeGoodsCount" resultType="int" parameterType="map">
+        SELECT
+        count(id)
+        FROM
+        mall_goods
+        WHERE 1=1
+        <if test="title != ''">
+            AND `name` LIKE CONCAT('%','${title}','%')
+        </if>
+    </select>
+
+    <update id="updateState" parameterType="map">
+        UPDATE mall_goods SET homeState = #{homeState} WHERE id=#{id}
+    </update>
+
+    <select id="details" parameterType="int" resultType="map">
+         SELECT
+            g.id,g.`name`,g.homeState,mhgi.img_url
+        FROM
+            mall_goods g
+        LEFT JOIN mall_home_goods_img mhgi ON g.id=mhgi.goods_id
+        WHERE g.id = #{id}
+    </select>
+
+    <select id="getImgUrlCount" parameterType="int" resultType="int">
+        SELECT count(id) FROM mall_home_goods_img WHERE goods_id = #{id}
+    </select>
+
+    <insert id="createImgUrl" parameterType="int">
+        INSERT INTO mall_home_goods_img SET goods_id = #{id}
+    </insert>
+
+    <update id="updateImgUrl" parameterType="map">
+        UPDATE mall_home_goods_img SET img_url = #{image} WHERE goods_id = #{id}
+    </update>
+</mapper>

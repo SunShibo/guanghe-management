@@ -44,4 +44,20 @@ public class BrandService {
     public  List<BrandBo> queryBranddetail(Map<String,Object> map){
         return  brandDao.queryBranddetail(map);
     }
+    
+    public List<Map<String, Object>> getBrandList(Map<String, Object> map) {
+        return brandDao.getBrandList(map);
+    }
+
+    public int getBrandListCount(Map<String, Object> map) {
+        return brandDao.getBrandListCount(map);
+    }
+
+    public void updateById(Map<String, Object> map) {
+        brandDao.updateById(map);
+    }
+
+    public void insertBrand(Map<String, Object> map) {
+        brandDao.insertBrand(map);
+    }
 }

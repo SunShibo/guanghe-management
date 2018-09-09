@@ -11,7 +11,16 @@ public class RecommendImageBo {
     private  String  createUser;//创建用户
     private  String  updateUser;//修改用户
     private  Date    updateTime;//修改时间
-    private  Integer goodsTypeId;
+    private  Integer goodsTypeId;//2ji
+    private  Integer levelId;//1ji
+
+    public Integer getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
+    }
 
     public Integer getId() {
         return id;

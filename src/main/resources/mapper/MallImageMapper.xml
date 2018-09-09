@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guanghe.management.dao.mallDao.MallImageDao">
+    <insert id="addMallImage" parameterType="com.guanghe.management.entity.mallBo.MallImageBo"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into mall_image SET  image = #{image},createTime = NOW()
+        ,createUser = #{createUser}
+    </insert>
+    <update id="updateMallImage" parameterType="com.guanghe.management.entity.mallBo.MallImageBo">
+        UPDATE mall_image SET image = #{image},goods_type_id=#{goodsTypeId},
+        update_time = NOW(),level_id = #{levelId} where id = #{id}
+    </update>
+    <select id="queryMallImage" parameterType="int" resultType="com.guanghe.management.entity.mallBo.MallImageBo">
+        select * from mall_image WHERE id=#{id}
+    </select>
+    <select id="queryMallImageInfo"  resultType="com.guanghe.management.entity.mallBo.MallImageBo">
+        select * from mall_image
+    </select>
+    <delete id="deleteMallImage" parameterType="int">
+        delete from mall_image where id = #{id}
+    </delete>
+</mapper>

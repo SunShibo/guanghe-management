@@ -2,16 +2,20 @@ package com.guanghe.management.web.controller.mallManage;
 
 import com.guanghe.management.entity.dto.ResultDTOBuilder;
 import com.guanghe.management.entity.mallBo.MallBannerBo;
+import com.guanghe.management.pop.SystemConfig;
 import com.guanghe.management.service.mallService.MallBannerServise;
 import com.guanghe.management.util.JsonUtils;
 import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yxw on 2018/8/7.
@@ -21,6 +25,29 @@ import java.util.List;
 public class MallBannerController extends BaseCotroller {
     @Resource
     private MallBannerServise mallBannerServise;
+
+    @RequestMapping("/page")
+    public ModelAndView page(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/malHome/banner_list");
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+        return view;
+    }
+
+    @RequestMapping("/toUpdate")
+    public ModelAndView redirectUpdatePage(Integer bannerId){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/malHome/banner_update");
+        return view;
+    }
+
+    @RequestMapping("/toAdd")
+    public ModelAndView toAdd(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/malHome/banner_add");
+        return view;
+    }
+
     @RequestMapping("/delete")
     public void deleteMallImage(HttpServletResponse response, Integer id){
         if (id == null || id == 0 ) {
@@ -100,7 +127,11 @@ public class MallBannerController extends BaseCotroller {
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
             safeTextPrint(response, json);
         }else{
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(news));
+            Map<String,Object> map = new HashMap<String, Object>();
+            map.put("data",news);
+            map.put("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(map));
             safeTextPrint(response, json);
 
         }
