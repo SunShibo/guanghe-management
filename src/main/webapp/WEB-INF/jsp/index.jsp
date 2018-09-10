@@ -30,81 +30,81 @@
     <section  class="sidebar">
         <ul class="sidebar-menu">
             <li class="header">后台管理系统</li>
-            <li class="treeview">
-                <a href="/home/list">
-                    <i class="fa fa-files-o"></i> <span class="home_span">首页</span>
-                </a>
-            </li>
-            <li class="treeview">
-                <a >
-                    <i class="fa fa-files-o"></i>
-                    <span class="home_span">走进广和</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>企业荣誉</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>核心团队</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>企业文化</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>董事长致辞</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>公司介绍</a></li>
-                </ul>
-            </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-files-o"></i>
-                    <span class="home_span">广和新闻</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li><a href="/newsInformation/page"><i class="fa fa-circle-o"></i>新闻动态</a></li>
-                    <li><a href="/industryInformation/page"><i class="fa fa-circle-o"></i>行业资讯</a></li>
-                </ul>
-            </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-files-o"></i>
-                    <span class="home_span">财富管理</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu" style="display: none;">
-                    <li><a href="/wealthManagement/page"><i class="fa fa-circle-o"></i>财富管理</a></li>
-                    <li><a href="/privateInvestment/page"><i class="fa fa-circle-o"></i>私慕投资</a></li>
-                    <li><a href="/privateConsultant/page"><i class="fa fa-circle-o"></i>私享顾问</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>产品优势2</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>产品优势3</a></li>
-                </ul>
-            </li>
-            <li class="treeview">
-            <a href="/assetManagement/page">
-                <i class="fa fa-files-o"></i>
-                <span class="home_span">资产管理</span>
+            <%--<li class="treeview">--%>
+                <%--<a href="/home/list">--%>
+                    <%--<i class="fa fa-files-o"></i> <span class="home_span">首页</span>--%>
+                <%--</a>--%>
+            <%--</li>--%>
+            <%--<li class="treeview">--%>
+                <%--<a >--%>
+                    <%--<i class="fa fa-files-o"></i>--%>
+                    <%--<span class="home_span">走进广和</span>--%>
+                    <%--<i class="fa fa-angle-left pull-right"></i>--%>
+                <%--</a>--%>
+                <%--<ul class="treeview-menu" style="display: none;">--%>
+                    <%--<li><a href="#"><i class="fa fa-circle-o"></i>企业荣誉</a></li>--%>
+                    <%--<li><a href="#"><i class="fa fa-circle-o"></i>核心团队</a></li>--%>
+                    <%--<li><a href="#"><i class="fa fa-circle-o"></i>企业文化</a></li>--%>
+                    <%--<li><a href="#"><i class="fa fa-circle-o"></i>董事长致辞</a></li>--%>
+                    <%--<li><a href="#"><i class="fa fa-circle-o"></i>公司介绍</a></li>--%>
+                <%--</ul>--%>
+            <%--</li>--%>
+            <%--<li class="treeview">--%>
+                <%--<a href="#">--%>
+                    <%--<i class="fa fa-files-o"></i>--%>
+                    <%--<span class="home_span">广和新闻</span>--%>
+                    <%--<i class="fa fa-angle-left pull-right"></i>--%>
+                <%--</a>--%>
+                <%--<ul class="treeview-menu" style="display: none;">--%>
+                    <%--<li><a href="/newsInformation/page"><i class="fa fa-circle-o"></i>新闻动态</a></li>--%>
+                    <%--<li><a href="/industryInformation/page"><i class="fa fa-circle-o"></i>行业资讯</a></li>--%>
+                <%--</ul>--%>
+            <%--</li>--%>
+            <%--<li class="treeview">--%>
+                <%--<a href="#">--%>
+                    <%--<i class="fa fa-files-o"></i>--%>
+                    <%--<span class="home_span">财富管理</span>--%>
+                    <%--<i class="fa fa-angle-left pull-right"></i>--%>
+                <%--</a>--%>
+                <%--<ul class="treeview-menu" style="display: none;">--%>
+                    <%--<li><a href="/wealthManagement/page"><i class="fa fa-circle-o"></i>财富管理</a></li>--%>
+                    <%--<li><a href="/privateInvestment/page"><i class="fa fa-circle-o"></i>私慕投资</a></li>--%>
+                    <%--<li><a href="/privateConsultant/page"><i class="fa fa-circle-o"></i>私享顾问</a></li>--%>
+                    <%--<li><a href="#"><i class="fa fa-circle-o"></i>产品优势2</a></li>--%>
+                    <%--<li><a href="#"><i class="fa fa-circle-o"></i>产品优势3</a></li>--%>
+                <%--</ul>--%>
+            <%--</li>--%>
+            <%--<li class="treeview">--%>
+            <%--<a href="/assetManagement/page">--%>
+                <%--<i class="fa fa-files-o"></i>--%>
+                <%--<span class="home_span">资产管理</span>--%>
                 <%--<i class="fa fa-angle-left pull-right"></i>--%>
-            </a>
+            <%--</a>--%>
             <%--<ul class="treeview-menu" style="display: none;">--%>
                 <%--<li><a href="#"><i class="fa fa-circle-o"></i>证券基金</a></li>--%>
                 <%--<li><a href="#"><i class="fa fa-circle-o"></i>定增基金</a></li>--%>
                 <%--<li><a href="#"><i class="fa fa-circle-o"></i>股权基金</a></li>--%>
                 <%--<li><a href="#"><i class="fa fa-circle-o"></i>产品基金</a></li>--%>
             <%--</ul>--%>
-        </li>
-        <li class="treeview">
-            <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span class="home_span">广和商学院</span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="treeview-menu" style="display: none;">
-                <li><a href="#"><i class="fa fa-circle-o"></i>理财知识培养</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>政策解读</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>专家解读</a></li>
-            </ul>
-        </li>
+        <%--</li>--%>
+        <%--<li class="treeview">--%>
+            <%--<a href="#">--%>
+                <%--<i class="fa fa-files-o"></i>--%>
+                <%--<span class="home_span">广和商学院</span>--%>
+                <%--<i class="fa fa-angle-left pull-right"></i>--%>
+            <%--</a>--%>
+            <%--<ul class="treeview-menu" style="display: none;">--%>
+                <%--<li><a href="#"><i class="fa fa-circle-o"></i>理财知识培养</a></li>--%>
+                <%--<li><a href="#"><i class="fa fa-circle-o"></i>政策解读</a></li>--%>
+                <%--<li><a href="#"><i class="fa fa-circle-o"></i>专家解读</a></li>--%>
+            <%--</ul>--%>
+        <%--</li>--%>
 
-        <li class="treeview">
-            <a href="#">
-                <i class="fa fa-files-o"></i> <span class="home_span">会员尊享</span>
-            </a>
-        </li>
+        <%--<li class="treeview">--%>
+            <%--<a href="#">--%>
+                <%--<i class="fa fa-files-o"></i> <span class="home_span">会员尊享</span>--%>
+            <%--</a>--%>
+        <%--</li>--%>
 
 
         <li class="treeview">

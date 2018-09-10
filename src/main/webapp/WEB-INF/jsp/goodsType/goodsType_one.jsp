@@ -184,7 +184,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel3">修改二级分类</h4>
+                    <h4 class="modal-title" id="myModalLabel3">新增二级分类</h4>
                 </div>
                 <div class="modal-body" style="margin-left:10px;">
                     <p>一级分类：
