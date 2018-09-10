@@ -46,8 +46,7 @@
          GROUP BY m.id
     </select>
 
-<<<<<<< HEAD
-=======
+
     <select id="getBrandListCount" resultType="int" parameterType="map">
         SELECT count(id) FROM mall_brand WHERE 1=1
         <if test="title != null">
@@ -91,5 +90,5 @@
         leave_id = #{levelId}
     </insert>
 
->>>>>>> origin/master
+
 </mapper>
