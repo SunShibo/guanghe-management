@@ -5,26 +5,27 @@
 
     <insert id="addSpeciFication" parameterType="com.guanghe.management.entity.mallBo.GoodsSpeciFication"
             useGeneratedKeys="true" keyProperty="id">
-        insert into mall_goods_img SET  goods_id = #{goodsId},,create_time = NOW()
-        ,create_user = #{createUser},img_url=#{imgUrl}
+        insert into mall_price_and_specification SET  goods_id = #{goodsId},,create_time = NOW()
+        ,create_user = #{createUser},img_url=#{imgUrl},sale_count=#{saleCount}
     </insert>
-    <update id="updaateGoodsSpeciFication" parameterType="com.guanghe.management.entity.mallBo.GoodsSpeciFication">
-        update mall_goods_img set img_url = #{imgUrl}
-        ,update_time = now() where id = #{id}
+    <update id="updateGoodsSpeciFication" parameterType="com.guanghe.management.entity.mallBo.GoodsSpeciFication">
+        update mall_price_and_specification set price = #{price},specification=#{specification},goods_id=#{goodsId},preferential_start_time=#{preferentialStartTime}
+        ,preferential_end_time=#{preferentialEndTime},stock=#{stock},preferential_price=#{preferentialPrice} where sku = #{sku}
     </update>
     <select id="queryGoodsSpeciFication" parameterType="int" resultType="com.guanghe.management.entity.mallBo.GoodsSpeciFication">
-        select * from mall_goods_img where goods_id = #{id}
+        select * from mall_price_and_specification where goods_id = #{id}
     </select>
     <select id="queryGoodsSpeciFicationById" parameterType="int" resultType="com.guanghe.management.entity.mallBo.GoodsSpeciFication">
-        select * from mall_goods_img WHERE sku=#{id}
+        select * from mall_price_and_specification WHERE sku=#{id}
     </select>
-
-
     <insert id="addGoodsSpeciFication" parameterType="map">
-        insert into mall_price_and_specification (price, state,goods_id,specification,preferential_start_time,preferential_end_time,stock,preferential_price) values
+        insert into mall_price_and_specification (price, state,goods_id,specification,preferential_start_time,preferential_end_time,stock,preferential_price,sale_count) values
         <foreach collection="speciFication" item="item" index="index" separator="," >
-            (#{item.price},#{item.state},#{item.goodsId},#{item.specification},#{item.preferentialStartTime},#{item.preferentialEndTime},#{item.stock},#{item.preferentialPrice})
+            (#{item.price},#{item.state},#{item.goodsId},#{item.specification},#{item.preferentialStartTime},#{item.preferentialEndTime},#{item.stock},#{item.preferentialPrice},#{item.saleCount})
         </foreach>
     </insert>
+    <delete id="deleteGoodsSpeciFication" parameterType="int">
+        DELETE FROM mall_price_and_specification WHERE sku = #{id}
+    </delete>
 
 </mapper>

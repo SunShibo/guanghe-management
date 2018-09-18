@@ -2,11 +2,14 @@ package com.guanghe.management.service.mallService;
 
 
 import com.guanghe.management.dao.mallDao.AccountDao;
+import com.guanghe.management.entity.bo.AccountManagementBo;
 import com.guanghe.management.entity.mallBo.AccountBo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yxw on 2018/8/2.
@@ -39,5 +42,12 @@ public class AccountService {
 
     public  void deleteAccount(Integer id){
         accountDao.deleteAccount(id);
+    }
+
+    public List<AccountManagementBo> queryList(Map<String,Object> map){
+        return  accountDao.queryList(map);
+    }
+    public int queryCount(Map<String,Object>map){
+        return accountDao.queryCount(map);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yxw on 2018/9/5.
@@ -25,7 +26,13 @@ public class GoodsSpecificationService {
     public GoodsSpeciFication queryGoodsSpeciFicationById(Integer id){
         return goodsSpeciFicationDao.queryGoodsSpeciFicationById(id);
     }
-    public  GoodsSpeciFication updaateGoodsSpeciFication(GoodsSpeciFication goodsSpeciFication){
-        return goodsSpeciFicationDao.updaateGoodsSpeciFication(goodsSpeciFication);
+    public  void updateGoodsSpeciFication(GoodsSpeciFication goodsSpeciFication){
+         goodsSpeciFicationDao.updateGoodsSpeciFication(goodsSpeciFication);
+    }
+    public  GoodsSpeciFication addSpeciFication(GoodsSpeciFication goodsSpeciFication){
+        return  goodsSpeciFicationDao.addSpeciFication(goodsSpeciFication);
+    }
+    public void addGoodsSpeciFication(Map<String,Object> map){
+        goodsSpeciFicationDao.addGoodsSpeciFication(map);
     }
 }

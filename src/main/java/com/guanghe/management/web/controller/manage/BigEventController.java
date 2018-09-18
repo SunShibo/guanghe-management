@@ -2,10 +2,12 @@ package com.guanghe.management.web.controller.manage;
 
 import com.guanghe.management.entity.bo.BigEventBo;
 import com.guanghe.management.entity.dto.ResultDTOBuilder;
+import com.guanghe.management.pop.SystemConfig;
 import com.guanghe.management.service.BigEventService;
 import com.guanghe.management.util.JsonUtils;
 import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +24,20 @@ import java.util.List;
 public class BigEventController extends BaseCotroller {
     @Autowired
     private BigEventService bigEventService;
-    @RequestMapping("/list")
+    @RequestMapping("/page")
     public ModelAndView queryBigEventList(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/guangheOn/big_event");
+        view.setViewName("/guangheon/BigEvent");
         return view;
+    }
+    @RequestMapping("toupdate")
+    public  ModelAndView toupdate(Integer id){
+        ModelAndView view =new ModelAndView();
+        view.setViewName("/guangheon/BigEventUpdate");
+        view.addObject("module", bigEventService.queryBigEvent(id));
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+
+        return  view;
     }
     @RequestMapping("/delete")
     public void deleteBigEvent(HttpServletResponse response, Integer id){
@@ -73,7 +84,7 @@ public class BigEventController extends BaseCotroller {
             safeTextPrint(response, json);
         }else if(StringUtils.isEmpty(news.getTitle())
                 || StringUtils.isEmpty(news.getContent())
-                || StringUtils.isEmpty(news.getCreateUser()) || news.getId() == null){
+               || news.getId() == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
         }else if(newsDetail == null){
@@ -84,7 +95,6 @@ public class BigEventController extends BaseCotroller {
             newsDetail.setTitle(news.getTitle());
             newsDetail.setYear(news.getYear());
             newsDetail.setImage(news.getImage());
-            newsDetail.setCreateUser(news.getCreateUser());
             bigEventService.updateBigEvent(newsDetail);
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
             safeTextPrint(response, json);
@@ -101,7 +111,10 @@ public class BigEventController extends BaseCotroller {
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
             safeTextPrint(response, json);
         }else{
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(news));
+            JSONObject result = new JSONObject();
+            result.put("data", news);
+            result.put("Url","https://" + SystemConfig.getString("image_bucketName")+".oss-cn-beijing.aliyuncs.com/");
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(result));
             safeTextPrint(response, json);
 
         }

@@ -9,10 +9,12 @@ import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,10 +27,26 @@ public class OrderController extends BaseCotroller{
     @Resource
     private OrderService orderService;
 
+
+    @RequestMapping("/list")
+    public ModelAndView queryOrderMasterList(String orderInfo,
+                                             Integer status, Integer pageNo, Integer pageSize){
+        pager = orderService.queryOrderMasterList(orderInfo, status,
+                getQueryInfo(pageNo, pageSize));
+
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/mall/orderDetail");
+        view.addObject("lstOrder", pager.getDatas());
+        view.addObject("pager", pager);
+        view.addObject("pageNo", pageNo);
+        view.addObject("orderInfo", orderInfo);
+        view.addObject("status", status);
+        return view;
+    }
     /**
      * 查询列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list1")
     public void queryOrderList(HttpServletResponse response,Integer userId,Integer state,Integer pageNo, Integer pageSize){
 
         if(userId == null || userId == 0){
@@ -44,11 +62,11 @@ public class OrderController extends BaseCotroller{
             map.put("pageOffset", queryInfo.getPageOffset());
             map.put("pageSize", queryInfo.getPageSize());
         }
-        map.put("userId",userId);
-        map.put("state",state);
+        map.put("userId", userId);
+        map.put("state", state);
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
-        resultMap.put("data",orderService.queryOrderList(map));
+        resultMap.put("data", orderService.queryOrderList(map));
 
         resultMap.put("count", orderService.queryOrderCount(map));
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(resultMap));
@@ -115,12 +133,6 @@ public class OrderController extends BaseCotroller{
      */
     @RequestMapping("/add")
     public void addOrder(HttpServletResponse response, OrderBo bo){
-        if(bo == null || bo.getUserId() == null || bo.getGoodsId() == null || StringUtils.isEmpty(bo.getAddress())
-                || StringUtils.isEmpty(bo.getAddress()) || bo.getNum() == null || bo.getPrice() == null  ){
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
-            safeTextPrint(response, json);
-            return;
-        }
 
         orderService.addOrder(bo);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
@@ -142,25 +154,37 @@ public class OrderController extends BaseCotroller{
             safeTextPrint(response, json);
             return;
         }
-        if(bo.getUserId() == null || bo.getGoodsId() == null || StringUtils.isEmpty(bo.getAddress())
-                || StringUtils.isEmpty(bo.getAddress()) || bo.getNum() == null || bo.getPrice() == null  ){
+
+        }
+    @RequestMapping("/updatestatus")
+    public void updateOrderstatus(HttpServletResponse response, Long orderId,Integer status){
+
+
+        if(orderId == null||status==null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;
         }
 
-        OrderBo newBo = orderService.queryOrderById(bo.getId());
-        if(newBo == null){
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
+            List<OrderBo> orderBos =orderService.queryOrderByorderId(orderId);
+        if (orderBos==null){
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;
         }
+        HashMap<String,Object> map = new HashMap<String,Object>();
+        map.put("orderId",orderId);
+        map.put("status",status);
 
-
-        orderService.updateOrderbyId(bo);
+        orderService.updateOrder(map);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
         safeTextPrint(response, json);
+
     }
+
+
+
+
 
     /**
      * 修改订单状态

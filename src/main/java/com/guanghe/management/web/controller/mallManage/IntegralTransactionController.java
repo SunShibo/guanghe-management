@@ -28,7 +28,7 @@ public class IntegralTransactionController extends BaseCotroller{
      * 查询列表
      */
     @RequestMapping("/list")
-    public void queryIntegralTransactionList(HttpServletResponse response,Integer userId,Integer state,Integer pageNo, Integer pageSize){
+    public void queryIntegralTransactionList(HttpServletResponse response,Integer userId,Integer pageNo, Integer pageSize){
 
         if(userId == null || userId == 0){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
@@ -44,7 +44,6 @@ public class IntegralTransactionController extends BaseCotroller{
             map.put("pageSize", queryInfo.getPageSize());
         }
         map.put("userId",userId);
-        map.put("state",state);
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("data",integralTransactionService.queryIntegralTransactionList(map));
@@ -114,7 +113,7 @@ public class IntegralTransactionController extends BaseCotroller{
     @RequestMapping("/add")
     public void addIntegralTransaction(HttpServletResponse response, IntegralTransactionBo bo){
         if(bo == null || bo.getUserId() == null || bo.getOrderId() == null || bo.getState() == null
-                || bo.getIntegral() == null || bo.getDeal() == null ){
+                || bo.getDeal() == null ){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;
@@ -141,7 +140,7 @@ public class IntegralTransactionController extends BaseCotroller{
             return;
         }
         if(bo.getId() == null || bo.getUserId() == null || bo.getOrderId() == null || bo.getState() == null
-                || bo.getIntegral() == null || bo.getDeal() == null  ){
+               || bo.getDeal() == null  ){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;

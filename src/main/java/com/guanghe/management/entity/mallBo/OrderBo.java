@@ -11,12 +11,17 @@ import java.util.Date;
 public class OrderBo extends BaseModel{
     private  Integer id;
     private  Integer userId;
-    private  Integer goodsId;
     private  Date createTime;
     private  Date updateTime;
+    private  Integer state;
+    private  Integer addressId;//地址id
+    private Integer num;//数量
     private  Integer price;
-    private  Integer num;
-    private  String address;
+    private  Integer sku;//sku
+    private  Integer count;//总价
+    private  String remake;//备注
+    private  Long orderId;
+    private  Integer dealstatus;
 
     public Integer getNum() {
         return num;
@@ -42,12 +47,20 @@ public class OrderBo extends BaseModel{
         this.userId = userId;
     }
 
-    public Integer getGoodsId() {
-        return goodsId;
+    public Integer getState() {
+        return state;
     }
 
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
     }
 
     public Integer getPrice() {
@@ -58,14 +71,45 @@ public class OrderBo extends BaseModel{
         this.price = price;
     }
 
-    public String getAddress() {
-        return address;
+    public Integer getSku() {
+        return sku;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setSku(Integer sku) {
+        this.sku = sku;
     }
 
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public String getRemake() {
+        return remake;
+    }
+
+    public void setRemake(String remake) {
+        this.remake = remake;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public Integer getDealstatus() {
+        return dealstatus;
+    }
+
+    public void setDealstatus(Integer dealstatus) {
+        this.dealstatus = dealstatus;
+    }
 
     public Date getCreateTime() {
         return createTime;

@@ -13,6 +13,6 @@ public interface GoodsSpeciFicationDao {
     public void deleteGoodsSpeciFication(Integer Id);
     public List<GoodsSpeciFication> queryGoodsSpeciFication(Integer id);
     public GoodsSpeciFication queryGoodsSpeciFicationById(Integer id);
-    public  GoodsSpeciFication updaateGoodsSpeciFication(GoodsSpeciFication goodsSpeciFication);
+    public  void updateGoodsSpeciFication(GoodsSpeciFication goodsSpeciFication);
     public  GoodsSpeciFication addSpeciFication(GoodsSpeciFication goodsSpeciFication);
 }

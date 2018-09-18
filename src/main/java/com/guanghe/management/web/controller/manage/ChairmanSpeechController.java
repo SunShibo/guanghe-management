@@ -2,6 +2,7 @@ package com.guanghe.management.web.controller.manage;
 
 import com.guanghe.management.entity.bo.ChairmanSpeechBo;
 import com.guanghe.management.entity.dto.ResultDTOBuilder;
+import com.guanghe.management.pop.SystemConfig;
 import com.guanghe.management.service.ChairmanSpeechService;
 import com.guanghe.management.util.JsonUtils;
 import com.guanghe.management.util.StringUtils;
@@ -22,10 +23,18 @@ public class ChairmanSpeechController extends BaseCotroller {
     @Autowired
     private ChairmanSpeechService chairmanSpeechService;
 
-    @RequestMapping("/list")
-    public ModelAndView queryChairmanSpeechList(){
+    @RequestMapping("/page")
+    public ModelAndView page(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/guangheOn/chairmanSpeech");
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+        view.setViewName("/guangheon/ChairmanSpeech_pc");
+        return view;
+    }
+    @RequestMapping("/wappage")
+    public ModelAndView page1(){
+        ModelAndView view = new ModelAndView();
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+        view.setViewName("/guangheon/ChairmanSpeech_wap");
         return view;
     }
     @RequestMapping("/delete")
@@ -63,26 +72,30 @@ public class ChairmanSpeechController extends BaseCotroller {
     }
 
     @RequestMapping("/update")
-    public void updateActivityMessage(HttpServletResponse response, ChairmanSpeechBo news) {
-        ChairmanSpeechBo newsDetail = chairmanSpeechService.queryChairmanSpeechDetailById(news.getId());
+    public void updateActivityMessage(HttpServletResponse response, String imageUrl) {
+        ChairmanSpeechBo newsDetail = chairmanSpeechService.queryChairmanSpeechDetail();
 
-        if (news == null) {
+        if (imageUrl == null) {
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
-        } else if (StringUtils.isEmpty(news.getTitle())
-                || StringUtils.isEmpty(news.getSource()) || StringUtils.isEmpty(news.getChairmanTpeech())
-                || StringUtils.isEmpty(news.getCreateUser()) || news.getId() == null) {
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
-            safeTextPrint(response, json);
-        } else if (newsDetail == null) {
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
-            safeTextPrint(response, json);
+
         } else {
-            newsDetail.setTitle(news.getTitle());
-            newsDetail.setChairmanTpeech(news.getChairmanTpeech());
-            newsDetail.setSource(news.getSource());
-            newsDetail.setImage(news.getImage());
-            newsDetail.setCreateUser(news.getCreateUser());
+            newsDetail.setImage(imageUrl);
+            chairmanSpeechService.updateChairmanSpeech(newsDetail);
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
+            safeTextPrint(response, json);
+        }
+    }
+    @RequestMapping("/update1")
+    public void updateActivityMessage1(HttpServletResponse response, String wapImage) {
+        ChairmanSpeechBo newsDetail = chairmanSpeechService.queryChairmanSpeechDetail();
+
+        if (wapImage == null) {
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
+            safeTextPrint(response, json);
+
+        } else {
+            newsDetail.setWapImage(wapImage);
             chairmanSpeechService.updateChairmanSpeech(newsDetail);
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
             safeTextPrint(response, json);

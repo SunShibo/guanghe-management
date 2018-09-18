@@ -16,16 +16,15 @@ public class CompanyIntroductionBo {
     private String createUser;//创建用户
     private String updateUser;//修改用户
     private  String video;
-    private  String bannerImage;
+    private  String wapImage;
 
-    public String getBannerImage() {
-        return bannerImage;
+    public String getWapImage() {
+        return wapImage;
     }
 
-    public void setBannerImage(String bannerImage) {
-        this.bannerImage = bannerImage;
+    public void setWapImage(String wapImage) {
+        this.wapImage = wapImage;
     }
-
 
     public String getVideo() {
         return video;

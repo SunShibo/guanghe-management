@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8" />
-  <title>列表</title>
+  <title>发展历程列表</title>
   <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon"/>
   <link type="text/css" href="/static/css/main.css" rel="stylesheet"/>
   <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -47,14 +47,15 @@
 
 <jsp:include page="../index.jsp"></jsp:include>
 <div class="indexRight1">
-  <div class="title">商品图列表</div>
+  <div class="title">首页 >走进广和>发展历程</div>
   <div>
     <table class="table table-bordered">
       <thead>
       <tr>
-        <th style="width: 35%;">类别</th>
+        <th style="width: 15%;">年份</th>
         <th style="width: 30%;">缩略图</th>
-        <th style="width: 35%;">操作</th>
+        <th style="width: 40% ">标题</th>
+        <th style="width: 15%;">操作</th>
       </tr>
       </thead>
       <tbody id="contentData">
@@ -69,28 +70,16 @@
 </body>
 <script src="/static/js/web/page.js"></script>
 <script>
-  function GetQueryString(name) {
-    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if(r!=null)return  unescape(r[2]);
-    return null;
-  }
-  $.getJSON("/GoodsImage/detail?id="+GetQueryString("id"), function (rs) {
+  $.getJSON("/BigEvent/detail", function (rs) {
 
     var html = '';
-    for (var i = 0; i < rs.data.news.length; i++) {
-    if(rs.data.news[i].status==1) {
+    for (var i = 0; i < rs.data.data.length; i++) {
       html += '<tr>' +
-              '<td style="line-height: 105px;font-size: 20px"> 商品介绍图' + [i + 1] + '</td>'
-    }else{
-      html += '<tr>' +
-              '<td style="line-height: 105px;font-size: 20px"> 商品规格图' + [i + 1] + '</td>'
-    }
-
-           html+='<td><img style="width: 200px;height: 100px" src=" '+rs.data.Url + rs.data.news[i]['imgUrl']+ '"/></td>' +
+              '<td style="line-height: 135px;font-size: 20px">' + rs.data.data[i]['year']+ '</td>' +
+              '<td><img style="width: 150px;height: 150px" src=" '+rs.data.Url+rs.data.data[i]['image']+ '"/></td>' +
+              '<td style="font-size:15px;text-align: left">' + rs.data.data[i]['title']+ '</td>' +
               '<td style="line-height: 105px">' +
-              '<button type="button" class="btn btn-info" onclick="addImage(' + "'" + rs.data.news[i].goodsId + "'" + ')">添加图片</button>' +
-              '<button type="button" class="btn btn-danger" onclick="deleteiamge(' + "'" + rs.data.news[i].id + "'" + ')">删除</button>' +
+              '<button type="button" class="btn btn-info" onclick="ModuleUpdate(' + "'" + rs.data.data[i].id + "'" + ')">修改</button>' +
               '</td>' +
               '</tr>';
     }
@@ -98,14 +87,14 @@
 
   })
 
-  function addImage(goodsId){
-    window.location.href = '/GoodsImage/toUpdate?goodsId=' + goodsId;
+  function ModuleUpdate(id){
+    window.location.href = '/BigEvent/toupdate?id=' + id;
   }
 
-  function deleteiamge(id){
+  function deleteBanner(id){
     $.ajax({
       type : "post",
-      url : "/GoodsImage/delete",
+      url : "/Banner/delete",
       data : {"id":id},
       dataType : "json",
       async : false,
@@ -115,7 +104,7 @@
           return;
         }else{
           alert("删除成功！");
-          window.location.href="/Goods/page";
+          window.location.href="/home/list";
         }
       }
     });

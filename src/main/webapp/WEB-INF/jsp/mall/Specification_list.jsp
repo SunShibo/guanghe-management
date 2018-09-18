@@ -75,41 +75,63 @@
     if(r!=null)return  unescape(r[2]);
     return null;
   }
-  $.getJSON("/GoodsImage/detail?id="+GetQueryString("id"), function (rs) {
+  $.getJSON("/GoodsSpeciFication/detailList?id="+GetQueryString("id"), function (rs) {
 
     var html = '';
-    for (var i = 0; i < rs.data.news.length; i++) {
-      if(rs.data.news[i].status==1) {
+    for (var i = 0; i < rs.data.length; i++) {
         html += '<tr>' +
-                '<td style="line-height: 105px;font-size: 20px"> 商品介绍图' + [i + 1] + '</td>'
-      }else{
-        html += '<tr>' +
-                '<td style="line-height: 105px;font-size: 20px"> 商品规格图' + [i + 1] + '</td>'
-      }
-
-      html+='<td><img style="width: 200px;height: 100px" src=" '+rs.data.Url + rs.data.news[i]['imgUrl']+ '"/></td>' +
-              '<td style="line-height: 105px">' +
-              '<button type="button" class="btn btn-info" onclick="addImage(' + "'" + rs.data.news[i].goodsId + "'" + ')">添加商品</button>' +
-              '<button type="button" class="btn btn-danger" onclick="deleteiamge(' + "'" + rs.data.news[i].id + "'" + ')">删除</button>' +
-              '<button type="button" class="btn btn-danger" onclick="deleteiamge(' + "'" + rs.data.news[i].id + "'" + ')">修改</button>' +
-              '</td>' +
-              '</tr>';
+             '<td>' + rs.data[i].specification + '</td>' +
+                '<td>' + rs.data[i].price + '</td>'
+                        if(rs.data[i].stock==0){
+                          html+='<td>' +
+                                  '<a>此商品已经下架</a>'+
+                                  '</td>' +
+                                  '</tr>'
+                        }else {
+                          html += '<td>' +
+                                  '<button type="button" class="btn btn-info" onclick="update1(' + "'" + rs.data[i].sku + "'" + ')">修改规格</button>' +
+                                  '<button type="button" class="btn btn-danger" onclick="updatestock(' + "'" + rs.data[i].sku + "'" + ')">设为下架商品</button>' +
+                                  '<button type="button" class="btn btn-danger" onclick="deletesku(' + "'" + rs.data[i].sku + "'" + ')">删除规格</button>' +
+                                  '</td>' +
+                                  '</tr>'
+                        }
     }
     $("#contentData").html(html);
 
   })
 
   function addImage(goodsId){
-    window.location.href = '/GoodsImage/toUpdate?goodsId=' + goodsId;
+    window.location.href = '/GoodsSpeciFication/SpecificationAdd?goodsId=' + goodsId;
+  }
+  function update1(sku){
+    window.location.href = '/GoodsSpeciFication/update1?sku=' + sku;
   }
 
-  function deleteiamge(id){
+  function updatestock(sku){
     $.ajax({
       type : "post",
-      url : "/GoodsImage/delete",
-      data : {"id":id},
+      url : "/GoodsSpeciFication/updatestock",
+      data : {"sku":sku},
       dataType : "json",
-      async : false,
+
+      success : function (data){
+        if(data.success == false){
+          alert(data.errMsg);
+          return;
+        }else{
+          alert("下架成功！");
+          window.location.href="/Goods/page";
+        }
+      }
+    });
+  }
+  function   deletesku(sku){
+    $.ajax({
+      type : "post",
+      url : "/GoodsSpeciFication/delete",
+      data : {"sku":sku},
+      dataType : "json",
+
       success : function (data){
         if(data.success == false){
           alert(data.errMsg);

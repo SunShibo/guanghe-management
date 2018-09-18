@@ -99,9 +99,10 @@
                     '<td>' + rs.data.data[i].weight + '</td>' +
                     '<td>' +
                     '<button type="button" class="btn btn-info" onclick="updateGoods(' + "'" + rs.data.data[i].id + "'" + ')">商品信息修改</button>' +
-                    '<button type="button" class="btn btn-info" onclick="updateRiskManagement(' + "'" + rs.data.data[i].id + "'" + ')">商品所属品牌修改</button>' +
+                    '<button type="button" class="btn btn-info" onclick="updatebrand(' + "'" + rs.data.data[i].id + "'" + ')">商品所属品牌修改</button>' +
                     '<button type="button" class="btn btn-info" onclick="updateimage(' + "'" + rs.data.data[i].id + "'" + ')">商品图片修改</button>' +
                     '<button type="button" class="btn btn-info" onclick="updateGoodsSpeciFication(' + "'" + rs.data.data[i].id + "'" + ')">规格修改</button>' +
+                    '<button type="button" class="btn btn-info" onclick="addImage(' + "'" + rs.data.data[i].id + "'" + ')">添加规格</button>' +
                     '</td>' +
                     '</tr>';
           }
@@ -111,11 +112,17 @@
       page.init(rs.data.count,cur,options);
     })
   }
+  function addImage(id){
+    window.location.href = '/GoodsSpeciFication/SpecificationAdd?goodsId=' + id;
+  }
   function updateGoods(id){
     window.location.href = '/Goods/toUpdate?id=' + id;
   }
   function updateimage(id){
     window.location.href = '/GoodsImage/page?id=' + id;
+  }
+  function updatebrand(id){
+    window.location.href = '/Goods/brandpage?id=' + id;
   }
 
 

@@ -15,6 +15,15 @@ public class GoodsSpeciFication {
     private  Date preferentialStartTime;
     private  String specification;
     private  Integer state;//下架/无货
+    private  Integer saleCount;
+
+    public Integer getSaleCount() {
+        return saleCount;
+    }
+
+    public void setSaleCount(Integer saleCount) {
+        this.saleCount = saleCount;
+    }
 
     public Integer getState() {
         return state;

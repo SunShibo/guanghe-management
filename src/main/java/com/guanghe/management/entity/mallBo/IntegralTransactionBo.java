@@ -10,14 +10,12 @@ import java.util.Date;
 public class IntegralTransactionBo extends BaseModel{
     private  Integer id;
     private  Integer userId;
-    private  Integer orderId;
-    private  Integer state;//交易状态
+    private  Long orderId;
     private  Integer deal;//交易金额
-    private  Integer integral;//积分
-    private  String createUser;
-    private  String updateUser;
+    private  Integer oddintegral;
+    private  Integer state;//交易状态
     private  Date createTime;
-    private  Date updateTime;
+    private String payinfo;
 
     public Integer getId() {
         return id;
@@ -35,20 +33,12 @@ public class IntegralTransactionBo extends BaseModel{
         this.userId = userId;
     }
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
-    }
-
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
     }
 
     public Integer getDeal() {
@@ -59,28 +49,20 @@ public class IntegralTransactionBo extends BaseModel{
         this.deal = deal;
     }
 
-    public Integer getIntegral() {
-        return integral;
+    public Integer getOddintegral() {
+        return oddintegral;
     }
 
-    public void setIntegral(Integer integral) {
-        this.integral = integral;
+    public void setOddintegral(Integer oddintegral) {
+        this.oddintegral = oddintegral;
     }
 
-    public String getCreateUser() {
-        return createUser;
+    public Integer getState() {
+        return state;
     }
 
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
-    }
-
-    public String getUpdateUser() {
-        return updateUser;
-    }
-
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
     public Date getCreateTime() {
@@ -91,11 +73,11 @@ public class IntegralTransactionBo extends BaseModel{
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public String getPayinfo() {
+        return payinfo;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setPayinfo(String payinfo) {
+        this.payinfo = payinfo;
     }
 }

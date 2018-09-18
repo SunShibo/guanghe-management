@@ -25,4 +25,8 @@ public interface OrderDao {
     int queryOrderCount(Map<String, Object> map);
     //修改订单状态
     void updateOrderStatebyId(HashMap<String, Object> map);
+   public List<OrderBo> queryOrderMasterList(Map<String, Object> map);
+    public  int queryOrderMasterCount(Map<String,Object>map);
+    public List<OrderBo> queryOrderByorderId(Long orderId);
+     void  updateOrder(Map<String,Object>map);
 }

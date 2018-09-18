@@ -1,8 +1,8 @@
-/*
 package com.guanghe.management.web.controller.manage;
 
 import com.guanghe.management.entity.bo.CompanyIntroductionBo;
 import com.guanghe.management.entity.dto.ResultDTOBuilder;
+import com.guanghe.management.pop.SystemConfig;
 import com.guanghe.management.service.CompanyItroductionService;
 import com.guanghe.management.util.JsonUtils;
 import com.guanghe.management.util.StringUtils;
@@ -14,20 +14,27 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 
-*/
-/**
- * Created by yxw on 2018/7/18.
- *//*
+
+
+
 
 @Controller
 @RequestMapping("/CompanyIntroduction")
 public class CompanyIntroductionController extends BaseCotroller {
     @Autowired
     private CompanyItroductionService companyItroductionService;
-    @RequestMapping("/update")
-    public ModelAndView queryCompanyIntroductionList(){
+    @RequestMapping("/page")
+    public ModelAndView page(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/guangheon/company_introduction_list");
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+        view.setViewName("/guangheon/company_introduction_pc");
+        return view;
+    }
+    @RequestMapping("/wappage")
+    public ModelAndView page1(){
+        ModelAndView view = new ModelAndView();
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+        view.setViewName("/guangheon/company_introduction_wap");
         return view;
     }
     @RequestMapping("/delete")
@@ -65,26 +72,30 @@ public class CompanyIntroductionController extends BaseCotroller {
     }
 
     @RequestMapping("/update")
-    public void updateCompanyItroduction (HttpServletResponse response,CompanyIntroductionBo news) {
-        CompanyIntroductionBo newsDetail = companyItroductionService.queryCompanyItroduction(news.getId());
+    public void updateCompanyItroduction (HttpServletResponse response,String imageUrl) {
+        CompanyIntroductionBo newsDetail =  companyItroductionService.queryCompanyIntroductionDetail();
 
-        if (news == null) {
+        if (imageUrl == null) {
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
-        } else if (StringUtils.isEmpty(news.getTitle())
-                || StringUtils.isEmpty(news.getSource()) || StringUtils.isEmpty(news.getCompanyIntroduction())
-                || StringUtils.isEmpty(news.getCreateUser()) || news.getId() == null) {
+            return;
+        }else {
+            newsDetail.setImage(imageUrl);
+            companyItroductionService.updateCompanyItroduction(newsDetail);
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
+            safeTextPrint(response, json);
+        }
+    }
+    @RequestMapping("/update1")
+    public void updateCompanyItroduction1 (HttpServletResponse response,String wapImage) {
+        CompanyIntroductionBo newsDetail =  companyItroductionService.queryCompanyIntroductionDetail();
+
+        if (wapImage == null) {
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
-        } else if (newsDetail == null) {
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
-            safeTextPrint(response, json);
-        } else {
-            newsDetail.setTitle(news.getTitle());
-            newsDetail.setCompanyIntroduction(news.getCompanyIntroduction());
-            newsDetail.setSource(news.getSource());
-            newsDetail.setImage(news.getImage());
-            newsDetail.setCreateUser(news.getCreateUser());
+            return;
+        }else {
+            newsDetail.setWapImage(wapImage);
             companyItroductionService.updateCompanyItroduction(newsDetail);
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
             safeTextPrint(response, json);
@@ -103,4 +114,3 @@ public class CompanyIntroductionController extends BaseCotroller {
             }
         }
 }
-*/

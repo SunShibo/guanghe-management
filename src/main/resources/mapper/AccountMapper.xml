@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guanghe.management.dao.mallDao.AccountDao">
+    <sql id="limit">
+        limit #{pageOffset}, #{pageSize}
+    </sql>
+
+
+    <insert id="addAccount" parameterType="com.guanghe.management.entity.mallBo.AccountBo"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into mall_account SET  user_id = #{userId},create_time = NOW(),integral = #{integral},payment_password=#{paymentPassword},leavestatus=#{leavestatus}
+    </insert>
+    <update id="updatePassWord" parameterType="com.guanghe.management.entity.mallBo.AccountBo">
+        update mall_account set payment_password = #{paymentPassword}
+         where id = #{id}
+    </update>
+    <update id="updateIntegral" parameterType="com.guanghe.management.entity.mallBo.AccountBo">
+        update mall_account set integral = #{integral}
+       where id = #{id}
+    </update>
+    <update id="updateAddIntegral" parameterType="com.guanghe.management.entity.mallBo.AccountBo">
+        update mall_account set integral = #{integral}
+        ,update_time = now() where id = #{id}
+    </update>
+
+    <select id="queryAccountByUserId" parameterType="int" resultType="com.guanghe.management.entity.mallBo.AccountBo">
+        select * from mall_account WHERE user_id=#{userId}
+    </select>
+
+    <delete id="deleteAccount" parameterType="int">
+        delete from mall_account where id = #{id}
+    </delete>
+    <select id="queryList" parameterType="map" resultType="com.guanghe.management.entity.bo.AccountManagementBo">
+        SELECT u.phone_number,a.integral,a.leavestatus,u.id from gh_user u
+        LEFT JOIN mall_account a ON a.user_id=u.id
+        WHERE 1=1
+        <if test="phoneNumber != null">
+            AND u.phone_number LIKE CONCAT('%','${phoneNumber}','%')
+        </if>
+        <include refid="limit"/>
+    </select>
+    <select id="queryCount" resultType="int" parameterType="map">
+        SELECT COUNT(u.phone_number) from gh_user u
+        LEFT JOIN mall_account a ON a.user_id=u.id WHERE 1=1
+        <if test="phoneNumber != null">
+            AND phone_number LIKE CONCAT('%','${phoneNumber}','%')
+        </if>
+    </select>
+
+</mapper>

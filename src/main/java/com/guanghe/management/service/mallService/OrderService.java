@@ -3,6 +3,10 @@ package com.guanghe.management.service.mallService;
 
 import com.guanghe.management.dao.mallDao.OrderDao;
 import com.guanghe.management.entity.mallBo.OrderBo;
+import com.guanghe.management.query.PageObject;
+import com.guanghe.management.query.PageObjectUtil;
+import com.guanghe.management.query.QueryInfo;
+import com.guanghe.management.util.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,5 +70,30 @@ public class OrderService {
 
     public void updateOrderStatebyId(HashMap<String, Object> map) {
         orderDao.updateOrderStatebyId(map);
+    }
+
+
+    public PageObject<OrderBo> queryOrderMasterList(String orderInfo,
+                                                    Integer status, QueryInfo queryInfo){
+        Map<String, Object> map = new HashMap<String, Object>();
+        if(!StringUtils.isEmpty(orderInfo)) {
+            map.put("orderInfo", orderInfo);
+        }
+        if(status != null){
+            map.put("status", status);
+        }
+        if(queryInfo != null){
+            map.put("pageOffset", queryInfo.getPageOffset());
+            map.put("pageSize", queryInfo.getPageSize());
+        }
+        PageObjectUtil<OrderBo> page = new PageObjectUtil<OrderBo>();
+        return page.savePageObject(orderDao.queryOrderMasterCount(map), orderDao.
+                queryOrderMasterList(map), queryInfo);
+    }
+    public List<OrderBo> queryOrderByorderId(Long orderId){
+        return orderDao.queryOrderByorderId(orderId);
+    }
+    public void  updateOrder(Map<String,Object>map){
+        orderDao.updateOrder(map);
     }
 }

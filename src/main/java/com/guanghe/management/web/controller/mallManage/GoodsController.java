@@ -47,6 +47,13 @@ public class GoodsController extends BaseCotroller {
         view.setViewName("/mall/mall_goods");
         return view;
     }
+
+    @RequestMapping("/brandpage")
+    public ModelAndView update(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/mall/goods_brand_update");
+        return view;
+    }
     @RequestMapping("/update")
     public ModelAndView queryupdate(){
         ModelAndView view = new ModelAndView();
@@ -143,7 +150,7 @@ public class GoodsController extends BaseCotroller {
             map.put("pageOffset", queryInfo.getPageOffset());
             map.put("pageSize", queryInfo.getPageSize());
         }
-            map.put("name",name);
+            map.put("sname",name);
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("data",goodsService.queryGoods(map));
         resultMap.put("count", goodsService.updateGoodsCount(map));
@@ -167,6 +174,27 @@ public class GoodsController extends BaseCotroller {
         result.put("goodsBo", goodsBo);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(result));
         safeTextPrint(response, json);
+    }
+    @RequestMapping("/updateBrand")//添加商品
+    public void updateBrand(HttpServletResponse response,Integer id,Integer leaveId,Integer goodsTypeId ,Integer brandId){
+          if (id==null||leaveId==null||goodsTypeId==null||brandId==null){
+              String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
+              safeTextPrint(response, json);
+              return;
+          }
+        GoodsBo goodsBo =goodsService.queryGoodsById(id);
+        if (goodsBo==null){
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
+            safeTextPrint(response, json);
+            return;
+        }
+        goodsBo.setLeaveId(leaveId);
+        goodsBo.setBrandId(brandId);
+        goodsBo.setGoodsTypeId(goodsTypeId);
+        goodsService.updateGoods(goodsBo);
+        String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
+        safeTextPrint(response, json);
+
     }
 
     }

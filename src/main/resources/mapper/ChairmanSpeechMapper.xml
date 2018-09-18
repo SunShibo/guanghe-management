@@ -9,8 +9,8 @@
     chairman_speech = #{chairmanUpeech},create_user = #{createUser},image=#{image}
     </insert>
     <update id="updateChairmanSpeech" parameterType="com.guanghe.management.entity.bo.ChairmanSpeechBo">
-        update gh_guanghe_on_chairman_speech set title = #{title}, chairman_speech = #{chairmanUpeech}, image = #{image},
-        update_time = now(),update_user = #{updateUser} ,source = #{source}where id = #{id}
+        update gh_guanghe_on_chairman_speech set image = #{image},
+         wapImage=#{wapImage}where id = #{id}
     </update>
     <select id="queryChairmanSpeechDetailById" parameterType="int" resultType="com.guanghe.management.entity.bo.ChairmanSpeechBo">
         select * from gh_guanghe_on_chairman_speech where id = #{id}

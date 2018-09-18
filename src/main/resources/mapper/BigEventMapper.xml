@@ -9,8 +9,8 @@
          year = #{year},create_user = #{createUser},image=#{image}
     </insert>
     <update id="updateBigEvent" parameterType="com.guanghe.management.entity.bo.BigEventBo">
-        update gh_guanghe_on_big_event set title = #{title}, content = #{content}, image = #{image},
-        update_time = now(), update_user = #{updateUser} ,source = #{source}where id = #{id}
+        update gh_guanghe_on_big_event set title = #{title}, content = #{content}, image = #{image},year = #{year}
+        where id = #{id}
     </update>
     <select id="queryBigEvent" parameterType="int" resultType="com.guanghe.management.entity.bo.BigEventBo">
         select * from gh_guanghe_on_big_event where id = #{id}
