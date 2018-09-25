@@ -54,8 +54,9 @@
                 <%--<caption>边框表格布局</caption>--%>
                 <thead>
                 <tr>
-                    <th style="width: 15%;">姓名</th>
-                    <th style="width: 20%;">职位</th>
+                    <th style="width: 10%;">姓名</th>
+                    <th style="width: 10%;">工号</th>
+                    <th style="width: 15%;">职位</th>
                     <th style="width: 35%;">简介</th>
                     <th style="width: 30%;">操作</th>
                 </tr>
@@ -109,7 +110,7 @@
         var name = $("#name").val();
         console.log(cur+',,,'+size)
         $.getJSON("/privateConsultant/list?pageNo="+cur+"&pageSize="+size+"&name="+name, function (rs) {
-            var datas=rs.data;
+            var datas=rs.data.data;
             console.log(rs.data);
             options={
                 "id":"page",//显示页码的元素
@@ -118,26 +119,27 @@
                 "pagelistcount":size,//每页显示数据个数
                 "callBack":function(result){
                     var html = '';
-                    for (var i = 0; i < rs.data.length; i++) {
+                    for (var i = 0; i < rs.data.data.length; i++) {
 
-                        var synopsis = rs.data[i].synopsis+'';
+                        var synopsis = rs.data.data[i].synopsis+'';
                         if(synopsis.length >= 35){
                             synopsis = synopsis.substring(0,32);
                         }
                         html += '<tr>'+
-                                    '<td>'+ rs.data[i].name +'</td>'+
-                                    '<td>'+ rs.data[i].position +'</td>'+
+                                    '<td>'+ rs.data.data[i].name +'</td>'+
+                                    '<td>'+ rs.data.data[i].jobNumber +'</td>'+
+                                    '<td>'+ rs.data.data[i].position +'</td>'+
                                     '<td>'+ synopsis +'</td>'+
                                     '<td>'+
-                                        '<button type="button" class="btn btn-info" onclick="toUpdatePage('+"'"+ rs.data[i].id +"'"+')">编辑</button>'+
-                                        '<button type="button" class="btn btn-danger" onclick="deletePrivateInvestment('+"'"+ rs.data[i].id +"'"+')">删除</button>'+
+                                        '<button type="button" class="btn btn-info" onclick="toUpdatePage('+"'"+ rs.data.data[i].id +"'"+')">编辑</button>'+
+                                        '<button type="button" class="btn btn-danger" onclick="deletePrivateInvestment('+"'"+ rs.data.data[i].id +"'"+')">删除</button>'+
                                     '</td>'+
                                 '</tr>';
                     }
                     $("#contentData").html(html);
                 }
             };
-            page.init(rs.data.length,cur,options);
+            page.init(rs.data.count,cur,options);
         })
     }
 

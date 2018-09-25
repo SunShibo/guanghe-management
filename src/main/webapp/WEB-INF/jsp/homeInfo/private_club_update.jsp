@@ -17,12 +17,25 @@
     <div class="tablebox2">
       <form id="moduleForm" method="post">
         <table cellpadding="0" cellspacing="0" border="0">
+
           <tr>
             <td>内&nbsp;&nbsp;&nbsp;&nbsp;容：</td>
             <td>
               <textarea rows="10" type="text" name="moduleContent" value="${club.content}">${club.content}</textarea>
               <input name="introduce" type="hidden"/>
               <input type="hidden" name="id" value="${club.id}">
+            </td>
+          </tr>
+          <tr>
+            <td class="td1">url:</td>
+            <td class="td2">
+              <input type="text" name="url" value="${club.url}">
+            </td>
+          </tr>
+          <tr>
+            <td class="td1">wapurl:</td>
+            <td class="td2">
+              <input type="text" name="wapurl" value="${club.wapurl}">
             </td>
           </tr>
           <tr id="tdd">

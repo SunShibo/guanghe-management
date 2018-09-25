@@ -13,6 +13,15 @@ public class AssetManagementDetailsBO extends BaseModel{
     private String imgUrl;           //图片地址
     private Date createTime;         //穿件时间
     private Date updateTime;         //修改时间
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     public Integer getId() {
         return id;

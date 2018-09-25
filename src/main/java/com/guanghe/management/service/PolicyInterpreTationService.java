@@ -17,8 +17,8 @@ import java.util.Map;
 public class PolicyInterpreTationService {
     @Resource
     private PolicyInterpreTationDao policyInterpreTationDao;
-    public int queryPolicyInterpreTationCount(){
-      return   policyInterpreTationDao.queryPolicyInterpreTationCount();
+    public int queryPolicyInterpreTationCount(Map<String, Object> map){
+      return   policyInterpreTationDao.queryPolicyInterpreTationCount(map);
     }
 
     public List<PolicyInterpreTationBo> queryPolicyInterpreTationList(Map<String, Object> map){

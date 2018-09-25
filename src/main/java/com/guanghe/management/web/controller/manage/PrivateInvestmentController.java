@@ -2,6 +2,7 @@ package com.guanghe.management.web.controller.manage;
 
 import com.guanghe.management.entity.bo.PrivateInvestmentBO;
 import com.guanghe.management.entity.dto.ResultDTOBuilder;
+import com.guanghe.management.pop.SystemConfig;
 import com.guanghe.management.query.QueryInfo;
 import com.guanghe.management.service.PrivateInvestmentService;
 import com.guanghe.management.util.JsonUtils;
@@ -46,6 +47,7 @@ public class PrivateInvestmentController extends BaseCotroller {
     @RequestMapping("/toUpdate")
     public ModelAndView toUpdate(){
         ModelAndView view = new ModelAndView();
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
         view.setViewName("/privateInvestment/privateInvestment_edit");
         return view;
     }
@@ -149,15 +151,11 @@ public class PrivateInvestmentController extends BaseCotroller {
             return;
         }
         if( StringUtils.isEmpty(bo.getFundName()) || StringUtils.isEmpty(bo.getFundType())
-                || StringUtils.isEmpty(bo.getOperations()) || StringUtils.isEmpty(bo.getFundManager())
-                || StringUtils.isEmpty(bo.getFundCustodian()) || StringUtils.isEmpty(bo.getProductScale())
-                || StringUtils.isEmpty(bo.getSubscribeStartingPoint()) || StringUtils.isEmpty(bo.getProductTerm())
-                || StringUtils.isEmpty(bo.getFundInvestment())
-                || StringUtils.isEmpty(bo.getComparisonDatum()) || StringUtils.isEmpty(bo.getPerformanceReward())
+                || StringUtils.isEmpty(bo.getProductTerm())
+                || StringUtils.isEmpty(bo.getComparisonDatum())
                 || bo.getStartTime() == null || bo.getEndTime() == null
                 || bo.getAmountOfInvestment() == null || bo.getIncreasingAmount() == null
                 || bo.getProductScaleStart() == null || bo.getProductScaleEnd() == null
-                || StringUtils.isEmpty(bo.getCapitalCost())
                 || bo.getInvestmentPoinId() == null || bo.getProductTermId() == null
                 || bo.getRiskLevelId() == null || bo.getIncomeTypeId() == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
@@ -185,10 +183,9 @@ public class PrivateInvestmentController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }
-        if(StringUtils.isEmpty(bo.getFundName()) || StringUtils.isEmpty(bo.getFundType()) || StringUtils.isEmpty(bo.getOperations())
-        || StringUtils.isEmpty(bo.getFundManager()) || StringUtils.isEmpty(bo.getFundCustodian()) || StringUtils.isEmpty(bo.getProductScale())
-        || StringUtils.isEmpty(bo.getSubscribeStartingPoint()) || StringUtils.isEmpty(bo.getProductTerm()) || StringUtils.isEmpty(bo.getFundInvestment())
-        || StringUtils.isEmpty(bo.getCapitalCost()) || StringUtils.isEmpty(bo.getComparisonDatum()) || StringUtils.isEmpty(bo.getPerformanceReward())
+        if(StringUtils.isEmpty(bo.getFundName()) || StringUtils.isEmpty(bo.getFundType())
+         || StringUtils.isEmpty(bo.getProductTerm())
+        || StringUtils.isEmpty(bo.getComparisonDatum())
         || bo.getStartTime() == null || bo.getEndTime() == null || bo.getAmountOfInvestment() == null || bo.getIncreasingAmount() == null
         || bo.getProductScaleStart() == null || bo.getProductScaleEnd() == null || bo.getInvestmentPoinId() == null || bo.getProductTermId() == null
         || bo.getRiskLevelId() == null || bo.getIncomeTypeId() == null || bo.getId() == null ){

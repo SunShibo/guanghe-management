@@ -5,7 +5,7 @@
 <mapper namespace="com.guanghe.management.dao.AssetManagementDetailsDao">
 
     <select id="queryAssetManagementDetails" resultType="com.guanghe.management.entity.bo.AssetManagementDetailsBO">
-        SELECT * FROM gh_asset_management_details
+        SELECT * FROM gh_asset_management_details WHERE  status=1
     </select>
 
     <update id="updateAssetManagement" parameterType="com.guanghe.management.entity.bo.AssetManagementDetailsBO">

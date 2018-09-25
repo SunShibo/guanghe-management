@@ -32,11 +32,26 @@ public class PolicyInterpreTationController extends BaseCotroller{
     private PolicyInterpreTationService policyInterpreTationService;
 
 
+    @RequestMapping("/page")
+    public ModelAndView page(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/school/policy_newsInformation_list");
+        return view;
+    }
+
+    @RequestMapping("/findOne")
+    public ModelAndView findOne(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/school/policy_newsInformation_update");
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+        return view;
+    }
+
     @RequestMapping("/toAdd")
     public ModelAndView redirectAddPage(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/news/news_information_add");
-        sput("base_image", SystemConfig.getString("image_base_url"));
+        sput("base_image", SystemConfig.getString("image_bucketName"));
+        view.setViewName("/school/policy_newsInformation_add");
         return view;
     }
 
@@ -93,7 +108,7 @@ public class PolicyInterpreTationController extends BaseCotroller{
      * @param pageNo,pageSize
      */
     @RequestMapping("/list")
-    public void queryPolicyInterpreTationList(HttpServletResponse response,Integer pageNo, Integer pageSize){
+    public void queryPolicyInterpreTationList(HttpServletResponse response,Integer pageNo, Integer pageSize,String title){
 
         QueryInfo queryInfo = getQueryInfo(pageNo, pageSize);
 
@@ -102,11 +117,11 @@ public class PolicyInterpreTationController extends BaseCotroller{
             map.put("pageOffset", queryInfo.getPageOffset());
             map.put("pageSize", queryInfo.getPageSize());
         }
-
+        map.put("title",title);
 
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("data",policyInterpreTationService.queryPolicyInterpreTationList(map));
-        resultMap.put("count",policyInterpreTationService.queryPolicyInterpreTationCount());
+        resultMap.put("count",policyInterpreTationService.queryPolicyInterpreTationCount(map));
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(resultMap));
 
         safeTextPrint(response, json);
@@ -173,8 +188,8 @@ public class PolicyInterpreTationController extends BaseCotroller{
             return;
         }
         if(StringUtils.isEmpty(news.getTitle()) || StringUtils.isEmpty(news.getEnglishTitle())
-                || StringUtils.isEmpty(news.getImgUrl())|| StringUtils.isEmpty(news.getSource())
-                || StringUtils.isEmpty(news.getContent()) || StringUtils.isEmpty(news.getCreateNewsUser())){
+                || StringUtils.isEmpty(news.getSource())
+                || StringUtils.isEmpty(news.getContent())){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;
@@ -200,9 +215,8 @@ public class PolicyInterpreTationController extends BaseCotroller{
             return;
         }
         if(StringUtils.isEmpty(news.getTitle()) || StringUtils.isEmpty(news.getEnglishTitle())
-                || StringUtils.isEmpty(news.getImgUrl())
                 || StringUtils.isEmpty(news.getSource()) || StringUtils.isEmpty(news.getContent())
-                || StringUtils.isEmpty(news.getCreateNewsUser()) || news.getId() == null){
+                || news.getId() == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;
@@ -215,10 +229,9 @@ public class PolicyInterpreTationController extends BaseCotroller{
 
         newsDetail.setTitle(news.getTitle());
         newsDetail.setEnglishTitle(news.getEnglishTitle());
-        newsDetail.setImgUrl(news.getImgUrl());
         newsDetail.setSource(news.getSource());
         newsDetail.setContent(news.getContent());
-        newsDetail.setCreateNewsUser(news.getCreateNewsUser());
+        newsDetail.setSynopsis(news.getSynopsis());
 
         policyInterpreTationService.updatePolicyInterpreTation(newsDetail);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));

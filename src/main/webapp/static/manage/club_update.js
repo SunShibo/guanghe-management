@@ -23,15 +23,13 @@ function updateclub(){
         return ;
     }
     var imageUrl = $("input[name='imageUrl']").val();
-    if(imageUrl == ""){
-        alert("图片不能为空");
-        return ;
-    }
+    var url=$("input[name='url']").val();
+    var wapurl=$("input[name='wapurl']").val();
     var  id = GetQueryString('id');
     $.ajax({
         type : "post",
         url : "update",
-        data :{"image" : imageUrl,"id":id,"content":content,},
+        data :{"image" : imageUrl,"id":id,"content":content,"url":url,"wapurl":wapurl,},
         dataType : "json",
         success: function(result, status) {
             if(result.success== false){

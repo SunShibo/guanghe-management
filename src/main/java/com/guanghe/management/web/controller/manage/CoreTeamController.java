@@ -3,6 +3,7 @@ package com.guanghe.management.web.controller.manage;
 import com.guanghe.management.entity.bo.CoreTeamBo;
 import com.guanghe.management.entity.bo.EmployeeBo;
 import com.guanghe.management.entity.dto.ResultDTOBuilder;
+import com.guanghe.management.pop.SystemConfig;
 import com.guanghe.management.service.CoreTeamService;
 import com.guanghe.management.util.JsonUtils;
 import com.guanghe.management.util.StringUtils;
@@ -25,18 +26,33 @@ import java.util.List;
 public class CoreTeamController  extends BaseCotroller{
     @Autowired
     private CoreTeamService coreTeamService;
-    @RequestMapping("/list")
-    public ModelAndView queryCoreTeamList(){
+    @RequestMapping("/page")
+    public ModelAndView queryBigEventList(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/guangheOn/core_team");
+        view.setViewName("/guangheon/CoreTeam");
         return view;
+    }
+    @RequestMapping("toupdate")
+    public  ModelAndView toupdate(Integer id){
+        ModelAndView view =new ModelAndView();
+        view.setViewName("/guangheon/CoreTeamUpdate");
+        view.addObject("module", coreTeamService.queryCoreTeam(id));
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+
+        return  view;
+    }
+    @RequestMapping("toAdd")
+    public  ModelAndView add(Integer id){
+        ModelAndView view =new ModelAndView();
+        view.setViewName("/guangheon/CoreTeamAdd");
+        return  view;
     }
     @RequestMapping("/delete")
     public void deleteCoreTeam(HttpServletResponse response, Integer id){
         if (id == null || id == 0 ) {
             return;
         }
-        CoreTeamBo news =coreTeamService.queryCoreTeam(id);
+        EmployeeBo news =coreTeamService.queryCoreTeam(id);
 
         if (news == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
@@ -49,15 +65,11 @@ public class CoreTeamController  extends BaseCotroller{
     }
 
     @RequestMapping("/add")
-    public void addCoreTeam (HttpServletResponse response, CoreTeamBo news){
+    public void addCoreTeam (HttpServletResponse response, EmployeeBo news){
         if(news == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
-        }else if(StringUtils.isEmpty(news.getTitle())
-                || StringUtils.isEmpty(news.getSource()) || StringUtils.isEmpty(news.getCoreTeam())
-                || StringUtils.isEmpty(news.getCreateUser())){
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
-            safeTextPrint(response, json);
+
         }else{
             coreTeamService.addCoreTeam(news);
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
@@ -66,26 +78,26 @@ public class CoreTeamController  extends BaseCotroller{
     }
 
     @RequestMapping("/update")
-    public void updateCoreTeam (HttpServletResponse response,CoreTeamBo news){
-        CoreTeamBo newsDetail = coreTeamService.queryCoreTeam(news.getId());
+    public void updateCoreTeam (HttpServletResponse response,EmployeeBo news){
+        EmployeeBo newsDetail = coreTeamService.queryCoreTeam(news.getId());
 
-        if(news == null){
+        if(news == null) {
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
-        }else if(StringUtils.isEmpty(news.getTitle())
-                || StringUtils.isEmpty(news.getSource()) || StringUtils.isEmpty(news.getCoreTeam())
-                || StringUtils.isEmpty(news.getCreateUser()) || news.getId() == null){
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
+        }else if(news.getId()==null||news.getEmployeeName()==null||news.getEmployeePosition()==null||news.getImageUrl()
+                ==null||news.getIntroduction()==null)
+        {
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
             safeTextPrint(response, json);
         }else if(newsDetail == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
             safeTextPrint(response, json);
         }else{
-            newsDetail.setTitle(news.getTitle());
-            newsDetail.setCoreTeam(news.getCoreTeam());
-            newsDetail.setSource(news.getSource());
-            newsDetail.setImage(news.getImage());
-            newsDetail.setCreateUser(news.getCreateUser());
+
+            newsDetail.setEmployeeName(news.getEmployeeName());
+            newsDetail.setEmployeePosition(news.getEmployeePosition());
+            newsDetail.setImageUrl(news.getImageUrl());
+            newsDetail.setIntroduction(news.getIntroduction());
             coreTeamService.updateCoreTeam(newsDetail);
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
             safeTextPrint(response, json);
@@ -108,6 +120,7 @@ public class CoreTeamController  extends BaseCotroller{
         }
         JSONObject result = new JSONObject();
         result.put("coreTeam",list);
+        result.put("Url","https://" + SystemConfig.getString("image_bucketName")+".oss-cn-beijing.aliyuncs.com/");
         result.put("employee",employeeBo);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(result));
         safeTextPrint(response, json);

@@ -2,16 +2,22 @@ package com.guanghe.management.web.controller.manage;
 
 import com.guanghe.management.entity.bo.KnowledgeTrainingBo;
 import com.guanghe.management.entity.dto.ResultDTOBuilder;
+import com.guanghe.management.pop.SystemConfig;
+import com.guanghe.management.query.QueryInfo;
 import com.guanghe.management.service.KnowledgeTrainingService;
 import com.guanghe.management.util.JsonUtils;
 import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yxw on 2018/7/31.
@@ -19,6 +25,27 @@ import java.util.List;
 @Controller
 @RequestMapping("/KnowledgeTraining")
 public class KnowledgeTrainingController extends BaseCotroller {
+    @RequestMapping("/toAdd")
+    public ModelAndView redirectAddPage(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/school/knowledge_add");
+        return view;
+    }
+    @RequestMapping("/page")
+    public ModelAndView show(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/school/knowledge_list");
+        return view;
+    }
+
+    @RequestMapping("/toUpdate")
+    public ModelAndView redirectUpdatePage(Integer id){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/school/knowledge_update");
+        view.addObject("module", knowledgeTrainingService.queryknowledgeTraining(id));
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+        return view;
+    }
     @Autowired
     private KnowledgeTrainingService knowledgeTrainingService;
     @RequestMapping("/delete")
@@ -72,7 +99,6 @@ public class KnowledgeTrainingController extends BaseCotroller {
         }else{
 
             newsDetail.setImage(news.getImage());
-            newsDetail.setCreateUser(news.getCreateUser());
             knowledgeTrainingService.updateknowledgeTraining(newsDetail);
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
             safeTextPrint(response, json);
@@ -81,17 +107,27 @@ public class KnowledgeTrainingController extends BaseCotroller {
     }
 
     @RequestMapping("/detail")
-    public void queryKnowledgeTraining (HttpServletResponse response){
+    public void queryKnowledgeTraining (HttpServletResponse response,Integer pageNo, Integer pageSize){
+        QueryInfo queryInfo = getQueryInfo(pageNo, pageSize);
 
+        Map<String, Object> map = new HashMap<String, Object>();
+        if(queryInfo != null){
+            map.put("pageOffset", queryInfo.getPageOffset());
+            map.put("pageSize", queryInfo.getPageSize());
+        }
 
-        List<KnowledgeTrainingBo> news = knowledgeTrainingService.queryknowledgeTrainingDetail();
+        List<KnowledgeTrainingBo> news = knowledgeTrainingService.queryknowledgeTrainingDetail(map);
         if (news == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
             safeTextPrint(response, json);
+            return;
         }else{
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(news));
+            JSONObject result = new JSONObject();
+            result.put("data", news);
+            result.put("count",knowledgeTrainingService.queryCount());
+            result.put("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(result));
             safeTextPrint(response, json);
-
         }
     }
 }

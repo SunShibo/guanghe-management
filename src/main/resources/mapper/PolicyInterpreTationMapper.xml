@@ -9,13 +9,16 @@
     </sql>
 
     <select id="queryPolicyInterpreTationCount" resultType="int">
-        SELECT COUNT(id) FROM gh_policy_interpreTation
+        SELECT COUNT(id) FROM gh_policy_interpreTation WHERE 1=1
+        <if test="title != null">
+            AND title LIKE CONCAT('%','${title}','%')
+        </if>
     </select>
 
     <select id="queryPolicyInterpreTationList" parameterType="map" resultType="com.guanghe.management.entity.bo.PolicyInterpreTationBo">
         SELECT * FROM gh_policy_interpreTation WHERE 1 = 1
-        <if test="type != null">
-            AND type = #{type}
+        <if test="title != null">
+            AND title LIKE CONCAT('%','${title}','%')
         </if>
         ORDER BY create_time DESC
         <include refid="limit"/>
@@ -30,15 +33,15 @@
     </delete>
 
     <insert id="addPolicyInterpreTation" parameterType="com.guanghe.management.entity.bo.PolicyInterpreTationBo">
-        INSERT INTO gh_policy_interpreTation SET title = #{title},english_title = #{englishTitle}
-        img_url = #{imgUrl},source = #{source},create_time = NOW(),
+        INSERT INTO gh_policy_interpreTation SET title = #{title},english_title = #{englishTitle},
+        img_url = #{imgUrl},source = #{source},create_time = NOW(),synopsis=#{synopsis},
         content = #{content},create_news_user = #{createNewsUser}
 
     </insert>
 
     <update id="updatePolicyInterpreTation" parameterType="com.guanghe.management.entity.bo.PolicyInterpreTationBo">
-        UPDATE gh_policy_interpreTation  SET title = #{title},english_title = #{englishTitle}
+        UPDATE gh_policy_interpreTation  SET title = #{title},english_title = #{englishTitle},
         img_url = #{imgUrl},source = #{source},update_time = NOW(),
-        content = #{content},create_news_user = #{createNewsUser} WHERE id = #{id}
+        content = #{content},synopsis=#{synopsis}WHERE id = #{id}
     </update>
 </mapper>

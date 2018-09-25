@@ -18,6 +18,25 @@ public class PrivateConsultantDetailsBO extends BaseModel{
     private Date createTime;//创建时间
     private Date updateTime;//修改时间
 
+    private  String jobNumber;
+    private  String company;
+
+    public String getJobNumber() {
+        return jobNumber;
+    }
+
+    public void setJobNumber(String jobNumber) {
+        this.jobNumber = jobNumber;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     public String getGender() {
         return gender;
     }

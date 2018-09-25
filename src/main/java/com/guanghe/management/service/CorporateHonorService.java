@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by yxw on 2018/7/30.
@@ -19,7 +20,7 @@ public class CorporateHonorService {
           return  corporateHonorDao.queryCorporateHonor(id);
     }
 
-    public CorporateHonorBo queryCorporateHonorDetail(){
+    public List<CorporateHonorBo> queryCorporateHonorDetail(){
         return  corporateHonorDao.queryCorporateHonorDetail();
 
     }

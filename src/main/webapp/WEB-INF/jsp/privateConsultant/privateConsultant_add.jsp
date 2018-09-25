@@ -39,6 +39,18 @@
             </td>
           </tr>
           <tr>
+            <td>所属公司：</td>
+            <td>
+              <input type="text" id="company"></td>
+          </tr>
+          <tr>
+            <td>工&nbsp;&nbsp;&nbsp;&nbsp;号：</td>
+            <td>
+              <input type="text" id="jobNumber"></td>
+
+            </td>
+          </tr>
+          <tr>
             <td>简&nbsp;&nbsp;&nbsp;&nbsp;介：</td>
             <td>
               <textarea rows="10" type="text" id="synopsis" style="margin: 0px; height: 263px; width: 987px;"></textarea>
@@ -68,7 +80,16 @@
 </body>
 <script>
   function addprivateConsultant(){
-
+    var company = $("#company").val();
+    if (company == "") {
+      alert("所属公司不能为空！");
+      return;
+    }
+    var jobNumber = $("#jobNumber").val();
+    if (jobNumber == "") {
+      alert("工号不能为空！");
+      return;
+    }
     var name = $("#name").val();
     if (name == "") {
       alert("姓名不能为空！");
@@ -98,7 +119,7 @@
     $.ajax({
       type : "post",
       url : "/privateConsultant/add",
-      data : {"name":name,"gender":gender,"position":position,"synopsis":synopsis,"imgUrl":imageUrl},
+      data : {"name":name,"gender":gender,"position":position,"synopsis":synopsis,"imgUrl":imageUrl,"company":company,"jobNumber":jobNumber,},
       dataType : "json",
       async : false,
       success : function (data){

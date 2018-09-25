@@ -7,6 +7,24 @@ public class BannerBo {
     private Integer id;
     private  String image;
     private  String url;
+    private  String wapUrl;
+    private  String wapImage;
+
+    public String getWapUrl() {
+        return wapUrl;
+    }
+
+    public void setWapUrl(String wapUrl) {
+        this.wapUrl = wapUrl;
+    }
+
+    public String getWapImage() {
+        return wapImage;
+    }
+
+    public void setWapImage(String wapImage) {
+        this.wapImage = wapImage;
+    }
 
     public Integer getId() {
         return id;

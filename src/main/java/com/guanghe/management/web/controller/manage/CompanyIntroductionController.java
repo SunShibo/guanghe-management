@@ -30,6 +30,14 @@ public class CompanyIntroductionController extends BaseCotroller {
         view.setViewName("/guangheon/company_introduction_pc");
         return view;
     }
+    @RequestMapping("/page1")
+    public ModelAndView page2(){
+        ModelAndView view = new ModelAndView();
+        view.addObject("module", companyItroductionService.queryCompanyIntroductionDetail());
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+        view.setViewName("/homeInfo/company_introduction_home");
+        return view;
+    }
     @RequestMapping("/wappage")
     public ModelAndView page1(){
         ModelAndView view = new ModelAndView();

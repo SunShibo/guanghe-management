@@ -70,6 +70,13 @@
           </tr>
           <tr>
             <td style="height: 70px;">
+              <a style="font-size: 20px">首页公司介绍</a>
+            </td>
+            <td style="height: 70px;">
+              <a style="font-size: 20px"class="btn btn-info" href="/CompanyIntroduction/page1">编辑</a></td>
+          </tr>
+          <tr>
+            <td style="height: 70px;">
               <a style="font-size: 20px">俱乐部</a>
             </td>
             <td style="height: 70px;">
@@ -82,16 +89,10 @@
           </td>
           <td style="height: 70px;">
             <a style="font-size: 20px"class="btn btn-info" href="/partener/page">编辑</a>
-            <a style="font-size: 20px"class="btn btn-info" href="/partner/toAdd">添加</a>
+            <a style="font-size: 20px"class="btn btn-info" href="/partener/toAdd">添加</a>
           </td>
         </tr>
-          <tr>
-            <td style="height: 70px;">
-              <a style="font-size: 20px">首页公司介绍</a>
-            </td>
-            <td style="height: 70px;">
-              <a style="font-size: 20px"class="btn btn-info" href="/partener/page">编辑</a></td>
-          </tr>
+
         </table>
       </div>
     </form>

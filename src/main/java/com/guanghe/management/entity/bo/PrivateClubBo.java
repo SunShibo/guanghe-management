@@ -7,6 +7,24 @@ public class PrivateClubBo {
     private  Integer id;
     private  String content;
     private  String image;
+    private String url;
+    private  String wapurl;
+
+    public String getWapurl() {
+        return wapurl;
+    }
+
+    public void setWapurl(String wapurl) {
+        this.wapurl = wapurl;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public Integer getId() {
         return id;

@@ -12,7 +12,7 @@ import java.util.Map;
 政策解读
 */
 public interface PolicyInterpreTationDao {
-    public int queryPolicyInterpreTationCount();
+    public int queryPolicyInterpreTationCount(Map<String, Object> map);
 
     public List<PolicyInterpreTationBo> queryPolicyInterpreTationList(Map<String, Object> map);
 

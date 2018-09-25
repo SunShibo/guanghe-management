@@ -54,6 +54,7 @@ public class BannerController extends BaseCotroller {
     @RequestMapping("/toUpdate")
     public ModelAndView redirectUpdatePage(Integer bannerId){
         ModelAndView view = new ModelAndView();
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
         view.setViewName("/homeInfo/banner_update");
         return view;
     }
@@ -131,6 +132,9 @@ public class BannerController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }else{
+            newsDetail.setWapImage(news.getWapImage());
+            newsDetail.setUrl(news.getUrl());
+            newsDetail.setWapUrl(news.getWapUrl());
             newsDetail.setImage(news.getImage());
             bannerService.updateBanner(newsDetail);
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));

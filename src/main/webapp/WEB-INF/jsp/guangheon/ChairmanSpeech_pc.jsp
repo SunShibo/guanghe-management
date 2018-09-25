@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8" />
-  <title>公司介绍pc修改</title>
+  <title>董事长致辞pc修改</title>
   <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon"/>
   <link type="text/css" href="/static/css/main.css" rel="stylesheet"/>
   <script type="text/javascript" src="/static/js/mainJs/jquery.min.js"></script>
@@ -21,7 +21,7 @@
 <div class="index clear">
   <jsp:include page="../index.jsp"></jsp:include>
   <div class="indexRight1" width="1200px;">
-    <div class="title">公司介绍 > pc</div>
+    <div class="title">董事长致辞 > pc</div>
     <div class="tablebox2" >
       <form id="moduleForm" method="post">
         <table cellpadding="0" cellspacing="0" border="0">
@@ -112,7 +112,7 @@
       alert("请选择图片");
       return;
     }
-    debugger;
+
     $.ajax({
       type : "post",
       url : "/ChairmanSpeech/update",

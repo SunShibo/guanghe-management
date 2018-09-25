@@ -2,16 +2,19 @@ package com.guanghe.management.web.controller.manage;
 
 import com.guanghe.management.entity.bo.CorporateHonorBo;
 import com.guanghe.management.entity.dto.ResultDTOBuilder;
+import com.guanghe.management.pop.SystemConfig;
 import com.guanghe.management.service.CorporateHonorService;
 import com.guanghe.management.util.JsonUtils;
 import com.guanghe.management.util.StringUtils;
 import com.guanghe.management.web.controller.base.BaseCotroller;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by yxw on 2018/7/30.
@@ -22,12 +25,21 @@ public class CorporateHonorController  extends BaseCotroller{
 
         @Autowired
         private CorporateHonorService corporateHonorService;
-        @RequestMapping("/list")
-        public ModelAndView queryCoachList(){
-            ModelAndView view = new ModelAndView();
-            view.setViewName("/core_team");
-            return view;
-        }
+    @RequestMapping("/page")
+    public ModelAndView queryBigEventList(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/guangheon/CorporateHonor");
+        return view;
+    }
+    @RequestMapping("toupdate")
+    public  ModelAndView toupdate(Integer id){
+        ModelAndView view =new ModelAndView();
+        view.setViewName("/guangheon/CorporateHonorUpdate");
+        view.addObject("module", corporateHonorService.queryCorporateHonor(id));
+        view.addObject("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
+
+        return  view;
+    }
         @RequestMapping("/delete")
         public void deleteCoreTeam(HttpServletResponse response, Integer id){
             if (id == null || id == 0 ) {
@@ -84,12 +96,15 @@ public class CorporateHonorController  extends BaseCotroller{
         }
         @RequestMapping("/detail")
         public void queryCoreTeam (HttpServletResponse response){
-            CorporateHonorBo news = corporateHonorService.queryCorporateHonorDetail();
+            List<CorporateHonorBo> news = corporateHonorService.queryCorporateHonorDetail();
             if (news == null){
                 String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
                 safeTextPrint(response, json);
             }
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(news));
+            JSONObject result = new JSONObject();
+            result.put("data", news);
+            result.put("Url","https://" + SystemConfig.getString("image_bucketName")+".oss-cn-beijing.aliyuncs.com/");
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(result));
             safeTextPrint(response, json);
 
         }

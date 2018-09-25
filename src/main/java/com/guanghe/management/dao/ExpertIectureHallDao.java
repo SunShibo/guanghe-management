@@ -10,7 +10,7 @@ import java.util.Map;
  * Created by yxw on 2018/7/31.
  */
 public interface ExpertIectureHallDao {
-    public int queryExpertIectureHallCount();
+    public int queryExpertIectureHallCount(Map<String, Object> map);
 
     public List<ExpertIectureHallBo> queryExpertIectureHallList(Map<String, Object> map);
 

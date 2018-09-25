@@ -19,4 +19,6 @@ public interface PrivateConsultantDetailsDao {
     List<PrivateConsultantDetailsBO> queryPrivateConsultantDetailsList(Map<String, Object> map);
     //查询PrivateConsultantDetailsById
     PrivateConsultantDetailsBO queryPrivateConsultantDetailsById(Integer id);
+    int queryNewsInformationCount(Map<String, Object> map);
+
 }

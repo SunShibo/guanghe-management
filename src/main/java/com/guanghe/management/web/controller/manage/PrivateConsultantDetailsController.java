@@ -145,9 +145,11 @@ public class PrivateConsultantDetailsController extends BaseCotroller {
             map.put("pageOffset", queryInfo.getPageOffset());
             map.put("pageSize", queryInfo.getPageSize());
         }
-        map.put("name", name);
-
-        String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(privateConsultantDetailsService.queryPrivateConsultantDetailsList(map)));
+        map.put("guwenname", name);
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("data",privateConsultantDetailsService.queryPrivateConsultantDetailsList(map));
+        resultMap.put("count",privateConsultantDetailsService.queryNewsInformationCount(map));
+        String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(resultMap));
         safeTextPrint(response, json);
     }
 

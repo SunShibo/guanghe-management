@@ -9,13 +9,16 @@
     </sql>
 
     <select id="queryExpertIectureHallCount" resultType="int">
-        SELECT COUNT(id) FROM gh_expert_iecture_hall
+        SELECT COUNT(id) FROM gh_expert_iecture_hall WHERE  1=1
+        <if test="title != null">
+            AND title LIKE CONCAT('%','${title}','%')
+        </if>
     </select>
 
     <select id="queryExpertIectureHallList" parameterType="map" resultType="com.guanghe.management.entity.bo.ExpertIectureHallBo">
         SELECT * FROM gh_expert_iecture_hall WHERE 1 = 1
-        <if test="type != null">
-            AND type = #{type}
+        <if test="title != null">
+            AND title LIKE CONCAT('%','${title}','%')
         </if>
         ORDER BY create_time DESC
         <include refid="limit"/>
@@ -30,14 +33,14 @@
     </delete>
 
     <insert id="addExpertIectureHall" parameterType="com.guanghe.management.entity.bo.ExpertIectureHallBo">
-        INSERT INTO gh_expert_iecture_hall SET title = #{title},english_title = #{englishTitle}
+        INSERT INTO gh_expert_iecture_hall SET title = #{title},english_title = #{englishTitle},synopsis=#{synopsis},
         img_url = #{imgUrl},source = #{source},create_time = NOW(),
         content = #{content},create_news_user = #{createNewsUser}
     </insert>
 
     <update id="updateExpertIectureHall" parameterType="com.guanghe.management.entity.bo.ExpertIectureHallBo">
-        UPDATE gh_expert_iecture_hall  SET title = #{title},english_title = #{englishTitle}
+        UPDATE gh_expert_iecture_hall  SET title = #{title},english_title = #{englishTitle},synopsis=#{synopsis},
         img_url = #{imgUrl},source = #{source},update_time = NOW(),
-        content = #{content},create_news_user = #{createNewsUser} WHERE id = #{id}
+        content = #{content} WHERE id = #{id}
     </update>
 </mapper>

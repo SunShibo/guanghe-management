@@ -5,7 +5,7 @@
     <insert id="addImage" parameterType="com.guanghe.management.entity.bo.ImageBo"
             useGeneratedKeys="true" keyProperty="id">
         insert into gh_image SET  image = #{image},createTime = NOW()
-        ,createUser = #{createUser}
+
     </insert>
     <update id="updateImage" parameterType="com.guanghe.management.entity.bo.ImageBo">
         update gh_image set image = #{image}

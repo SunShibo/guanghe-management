@@ -8,7 +8,7 @@
         limit #{pageOffset}, #{pageSize}
     </sql>
 
-    <select id="queryNewsInformationCount" resultType="int">
+    <select id="queryNewsInformationCount" parameterType="map" resultType="int">
         SELECT COUNT(id) FROM gh_news_update_news_information WHERE 1=1
         <if test="title != null">
             AND title LIKE CONCAT('%','${title}','%')

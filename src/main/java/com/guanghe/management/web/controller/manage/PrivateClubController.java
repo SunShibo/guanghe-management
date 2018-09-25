@@ -86,7 +86,7 @@ public class PrivateClubController extends BaseCotroller {
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;
-        }else if(StringUtils.isEmpty(news.getImage()) || news.getId() == null){
+        }else if(news.getId() == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
             return;
@@ -95,6 +95,8 @@ public class PrivateClubController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }else{
+            newsDetail.setUrl(news.getUrl());
+            newsDetail.setWapurl(news.getWapurl());
             newsDetail.setContent(news.getContent());
             newsDetail.setImage(news.getImage());
             privateClubService.updatePrivateClub(newsDetail);

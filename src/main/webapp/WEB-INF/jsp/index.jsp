@@ -42,9 +42,10 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>企业荣誉</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>核心团队</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>企业文化</a></li>
+                    <li><a href="/CorporateHonor/page"><i class="fa fa-circle-o"></i>企业荣誉</a></li>
+                    <li><a href="/CoreTeam/page"><i class="fa fa-circle-o"></i>核心团队</a></li>
+                    <li><a href="/companyCultrue/page"><i class="fa fa-circle-o"></i>企业文化pc</a></li>
+                    <li><a href="/companyCultrue/pagewap"><i class="fa fa-circle-o"></i>企业文化wap</a></li>
                     <li><a href="/ChairmanSpeech/page"><i class="fa fa-circle-o"></i>董事长致辞pc</a></li>
                     <li><a href="/ChairmanSpeech/wappage"><i class="fa fa-circle-o"></i>董事长致辞wap</a></li>
                     <li><a href="/CompanyIntroduction/page"><i class="fa fa-circle-o"></i>公司介绍pc</a></li>
@@ -70,7 +71,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    <li><a href="/wealthManagement/page"><i class="fa fa-circle-o"></i>财富管理</a></li>
+                    <%--<li><a href="/wealthManagement/page"><i class="fa fa-circle-o"></i>财富管理</a></li>--%>
                     <li><a href="/privateInvestment/page"><i class="fa fa-circle-o"></i>私慕投资</a></li>
                     <li><a href="/privateConsultant/page"><i class="fa fa-circle-o"></i>私享顾问</a></li>
                 </ul>
@@ -89,15 +90,19 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu" style="display: none;">
-                <li><a href="#"><i class="fa fa-circle-o"></i>理财知识培养</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>政策解读</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>专家解读</a></li>
+                <li><a href="/KnowledgeTraining/page"><i class="fa fa-circle-o"></i>理财知识培养</a></li>
+                <li><a href="/PolicyInterpreTation/page"><i class="fa fa-circle-o"></i>政策解读</a></li>
+                <li><a href="/ExpertIectureHall/page"><i class="fa fa-circle-o"></i>专家解读</a></li>
             </ul>
         </li>
 
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-files-o"></i> <span class="home_span">会员尊享</span>
+                <i class="fa fa-angle-left pull-right"></i>
+                <ul class="treeview-menu" style="display: none;">
+                    <li><a href="/activites/page"><i class="fa fa-circle-o"></i>会员活动</a></li>
+                </ul>
             </a>
         </li>
 

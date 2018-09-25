@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yxw on 2018/7/31.
@@ -20,8 +21,8 @@ public class KnowledgeTrainingService {
         return  knowledgeTrainingDao.queryknowledgeTraining(id);
     }
 
-    public List<KnowledgeTrainingBo> queryknowledgeTrainingDetail(){
-         return knowledgeTrainingDao.queryknowledgeTrainingDetail();
+    public List<KnowledgeTrainingBo> queryknowledgeTrainingDetail(Map<String,Object> map){
+         return knowledgeTrainingDao.queryknowledgeTrainingDetail(map);
     }
     public void updateknowledgeTraining(KnowledgeTrainingBo knowledgeTraining){
               knowledgeTrainingDao.updateknowledgeTraining(knowledgeTraining);
@@ -31,5 +32,8 @@ public class KnowledgeTrainingService {
     }
     public void deleteknowledgeTraining(Integer id){
          knowledgeTrainingDao.deleteknowledgeTraining(id);
+    }
+    public int queryCount(){
+        return  knowledgeTrainingDao.queryCount();
     }
 }

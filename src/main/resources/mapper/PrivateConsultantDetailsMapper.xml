@@ -9,16 +9,16 @@
     </sql>
 
     <select id="queryNewsInformationCount" resultType="int">
-        SELECT COUNT(id) FROM gh_news_update_news_information
+        SELECT COUNT(id) FROM gh_private_consultant_details WHERE  1=1
+        <if test="guwenname !=''">
+            AND name LIKE CONCAT('%','${guwenname}','%')
+        </if>
     </select>
 
     <select id="queryPrivateConsultantDetailsList" parameterType="map" resultType="com.guanghe.management.entity.bo.PrivateConsultantDetailsBO">
         SELECT * FROM gh_private_consultant_details WHERE 1 = 1
-        <if test="type != null">
-            AND type = #{type}
-        </if>
-        <if test="name != '' ">
-            AND name LIKE CONCAT('%','${name}','%')
+        <if test="guwenname !=''">
+            AND name LIKE CONCAT('%','${guwenname}','%')
         </if>
         ORDER BY create_time DESC
         <include refid="limit"/>
@@ -35,14 +35,15 @@
     <insert id="addPrivateConsultant" parameterType="com.guanghe.management.entity.bo.PrivateConsultantDetailsBO"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO gh_private_consultant_details
-          (name,gender,position,synopsis,img_url,create_time)
-          VALUES (#{name},#{gender},#{position},#{synopsis},#{imgUrl},NOW())
+          (name,gender,position,synopsis,img_url,create_time,job_number,company)
+          VALUES (#{name},#{gender},#{position},#{synopsis},#{imgUrl},NOW(),#{jobNumber},#{company})
 
     </insert>
 
     <update id="updatePrivateConsultantbyId" parameterType="com.guanghe.management.entity.bo.PrivateConsultantDetailsBO">
         UPDATE gh_private_consultant_details  SET name = #{name} ,gender = #{gender},position = #{position},
-        synopsis = #{synopsis},img_url = #{imgUrl} , create_user = #{createUser},update_time = NOW()
+        synopsis = #{synopsis},img_url = #{imgUrl} , create_user = #{createUser},update_time = NOW(),company=#{company}
+        ,job_number=#{jobNumber}
         WHERE id = #{id}
     </update>
 </mapper>

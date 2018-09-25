@@ -39,6 +39,18 @@
             </td>
           </tr>
           <tr>
+            <td>所属公司：</td>
+            <td>
+              <input type="text" id="company"></td>
+          </tr>
+          <tr>
+            <td>工&nbsp;&nbsp;&nbsp;&nbsp;号：</td>
+            <td>
+              <input type="text" id="jobNumber"></td>
+
+            </td>
+          </tr>
+          <tr>
             <td>简&nbsp;&nbsp;&nbsp;&nbsp;介：</td>
             <td>
               <textarea rows="10" type="text" id="synopsis" style="margin: 0px; height: 263px; width: 987px;"></textarea>
@@ -95,6 +107,16 @@
       alert("性别不能为空！");
       return;
     }
+    var company = $("#company").val();
+    if (company == "") {
+      alert("所属公司不能为空！");
+      return;
+    }
+    var jobNumber = $("#jobNumber").val();
+    if (jobNumber == "") {
+      alert("工号不能为空！");
+      return;
+    }
     var position = $("#position").val();
     if (position == "") {
       alert("职位不能为空！");
@@ -113,7 +135,7 @@
     $.ajax({
       type : "post",
       url : "/privateConsultant/update",
-      data : {"id":id,"name":name,"gender":gender,"position":position,"synopsis":synopsis,"imgUrl":imageUrl},
+      data : {"id":id,"name":name,"gender":gender,"position":position,"synopsis":synopsis,"imgUrl":imageUrl,"jobNumber":jobNumber,"company":company,},
       dataType : "json",
       async : false,
       success : function (data){
@@ -147,6 +169,8 @@
           document.getElementById("gender").value = data.data.gender;
           $("#position").val(data.data.position);
           $("#synopsis").val(data.data.synopsis);
+          $("#company").val(data.data.company);
+          $("#jobNumber").val(data.data.jobNumber);
           $("#uploadImage").attr("src",'${Url}'+data.data.imgUrl);
           $("input[name='imageUrl']").val(data.data.imgUrl);
           uploadImageUrl();

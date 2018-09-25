@@ -50,10 +50,12 @@
   <div class="title">首页 > banner图列表</div>
   <div>
     <table class="table table-bordered">
+
       <thead>
       <tr>
-        <th style="width: 35%;">名称</th>
-        <th style="width: 30%;">缩略图</th>
+        <th style="width: 25%;">名称</th>
+        <th style="width: 20%;">pc缩略图</th>
+        <th style="width: 20%;">wap缩略图</th>
         <th style="width: 35%;">操作</th>
       </tr>
       </thead>
@@ -76,6 +78,7 @@
             html += '<tr>' +
                     '<td style="line-height: 105px;font-size: 20px"> 图片' + [i+1] + '</td>' +
                     '<td><img style="width: 200px;height: 100px" src=" '+rs.data.Url + rs.data.news[i]['image']+ '"/></td>' +
+                    '<td><img style="width: 200px;height: 100px" src=" '+rs.data.Url + rs.data.news[i]['wapImage']+ '"/></td>' +
                     '<td style="line-height: 105px">' +
                     '<button type="button" class="btn btn-info" onclick="updateBanner(' + "'" + rs.data.news[i].id + "'" + ')">修改</button>' +
                     '<button type="button" class="btn btn-danger" onclick="deleteBanner(' + "'" + rs.data.news[i].id + "'" + ')">删除</button>' +

@@ -7,26 +7,18 @@
   <link type="text/css" href="/static/css/main.css" rel="stylesheet"/>
   <script type="text/javascript" src="/static/js/mainJs/jquery.min.js"></script>
   <script type="text/javascript" src="/static/js/common/ajaxupload.js"></script>
-  <script type="text/javascript" src="/static/manage/module_update.js"></script>
+  <script type="text/javascript" src="/static/manage/school_update.js"></script>
 </head>
 <body>
 <div class="index clear">
   <jsp:include page="../index.jsp"></jsp:include>
   <div class="indexRight1">
-    <div class="title">私享俱乐部> 修改</div>
+    <div class="title"> 修改</div>
     <div class="tablebox2">
       <form id="moduleForm" method="post">
         <table cellpadding="0" cellspacing="0" border="0">
           <tr>
-            <td>内&nbsp;&nbsp;&nbsp;&nbsp;容：</td>
-            <td>
-              <textarea rows="10" type="text" name="moduleContent" value="${module.content}">${module.content}</textarea>
-              <input name="introduce" type="hidden"/>
-              <input type="hidden" name="id" value="${module.id}">
-            </td>
-          </tr>
-          <tr>
-            <td>图&nbsp;&nbsp;&nbsp;&nbsp;片：</td>
+            <td>图&nbsp;&nbsp;&nbsp;&nbsp;像：</td>
             <td>
               <div class="suolue">
                 <div class="uploadimg">

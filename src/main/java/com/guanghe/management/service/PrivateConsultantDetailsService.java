@@ -56,4 +56,7 @@ public class PrivateConsultantDetailsService {
     public PrivateConsultantDetailsBO queryPrivateConsultantDetailsById(Integer id){
         return privateConsultantDetailsDao.queryPrivateConsultantDetailsById(id);
     }
+    public int queryNewsInformationCount(Map<String, Object> map){
+        return  privateConsultantDetailsDao.queryNewsInformationCount(map);
+    }
 }

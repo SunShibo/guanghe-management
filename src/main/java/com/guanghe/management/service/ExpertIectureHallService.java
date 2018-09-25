@@ -17,8 +17,8 @@ import java.util.Map;
 public class ExpertIectureHallService {
     @Resource
     private ExpertIectureHallDao expertIectureHallDao;
-    public int queryExpertIectureHallCount(){
-        return  expertIectureHallDao.queryExpertIectureHallCount();
+    public int queryExpertIectureHallCount(Map<String, Object> map){
+        return  expertIectureHallDao.queryExpertIectureHallCount(map);
     }
 
     public List<ExpertIectureHallBo> queryExpertIectureHallList(Map<String, Object> map){

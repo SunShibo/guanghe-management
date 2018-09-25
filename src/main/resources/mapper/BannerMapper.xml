@@ -7,11 +7,11 @@
     </select>
     <insert id="addBanner" parameterType="com.guanghe.management.entity.bo.BannerBo"
             useGeneratedKeys="true" keyProperty="id">
-        insert into gh_banner SET  image = #{image},createTime = NOW()
+        insert into gh_banner SET  image = #{image},createTime = NOW(),wapUrl=#{wapUrl},url=#{url},wapImage=#{wapImage}
     </insert>
     <update id="updateBanner" parameterType="com.guanghe.management.entity.bo.BannerBo">
         update gh_banner set image = #{image}
-        ,updateTime = now() where id = #{id}
+        ,updateTime = now(),wapImage=#{wapImage},url=#{url},wapUrl=#{wapUrl} where id = #{id}
     </update>
     <select id="queryBanner" parameterType="int" resultType="com.guanghe.management.entity.bo.BannerBo">
         select * from gh_banner WHERE id=#{id}

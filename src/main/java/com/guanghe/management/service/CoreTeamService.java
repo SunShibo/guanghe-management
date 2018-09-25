@@ -17,10 +17,10 @@ import java.util.List;
 public class CoreTeamService {
     @Resource
     private CoreTeamDao coreTeamDao;
-    public CoreTeamBo queryCoreTeam(Integer id){
+    public EmployeeBo queryCoreTeam(Integer id){
         return coreTeamDao.queryCoreTeam(id);
     }
-    public  void updateCoreTeam (CoreTeamBo coreTeam){
+    public  void updateCoreTeam (EmployeeBo coreTeam){
 
         coreTeamDao.updateCoreTeam(coreTeam);
        }
@@ -28,7 +28,7 @@ public class CoreTeamService {
 
         coreTeamDao.deleteCoreTeam(id);
     }
-    public  void addCoreTeam(CoreTeamBo coreTeam){
+    public  void addCoreTeam(EmployeeBo coreTeam){
         // 添加数据
         coreTeamDao.addCoreTeam(coreTeam);
     }

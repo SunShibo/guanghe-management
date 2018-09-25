@@ -3,26 +3,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.guanghe.management.dao.CoreTeamDao">
     <!-- 添加-->
-    <insert id="addCoreTeam" parameterType="com.guanghe.management.entity.bo.CoreTeamBo"
+    <insert id="addCoreTeam" parameterType="com.guanghe.management.entity.bo.EmployeeBo"
             useGeneratedKeys="true" keyProperty="id">
-        insert into gh_guanghe_on_core_team SET  title = #{title},source = #{source},create_time = NOW(),
-    core_team = #{coreTeam},create_user = #{createUser},image=#{image}
+        insert into gh_employee SET  employeeName = #{employeeName}, employeePosition = #{employeePosition}, image_url = #{imageUrl},
+        introduction = #{introduction}
     </insert>
-    <update id="updateCoreTeam" parameterType="com.guanghe.management.entity.bo.CoreTeamBo">
-        update gh_guanghe_on_core_team set title = #{title}, core_team = #{coreTeam}, image = #{image},
-        update_time = now(),update_user = #{updateUser} ,source = #{source} where id = #{id}
-    </update>
-    <select id="queryCoreTeam" parameterType="int" resultType="com.guanghe.management.entity.bo.CoreTeamBo">
-        select * from gh_guanghe_on_core_team where id = #{id}
+
+    <select id="queryCoreTeam" parameterType="int" resultType="com.guanghe.management.entity.bo.EmployeeBo">
+        select * from gh_employee where id = #{id}
     </select>
     <select id="queryHomeCoreTeam" parameterType="int" resultType="com.guanghe.management.entity.bo.CoreTeamBo">
         select * from gh_guanghe_on_core_team limit 1
     </select>
 
     <delete id="deleteCoreTeam" parameterType="int">
-        delete from gh_guanghe_on_core_team where id = #{id}
+        delete from gh_employee where id = #{id}
     </delete>
     <select id="queryEmployee" parameterType="int" resultType="com.guanghe.management.entity.bo.EmployeeBo">
         select * from gh_employee
     </select>
+    <update id="updateCoreTeam" parameterType="com.guanghe.management.entity.bo.EmployeeBo">
+        update gh_employee set employeeName = #{employeeName}, employeePosition = #{employeePosition}, image_url = #{imageUrl},
+        introduction = #{introduction} where id = #{id}
+    </update>
 </mapper>

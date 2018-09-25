@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 【用户】 -->
+<mapper namespace="com.guanghe.management.dao.MembershipActivitesDao">
+
+    <sql id="limit">
+        limit #{pageOffset}, #{pageSize}
+    </sql>
+
+    <select id="getMembershipActivitesCount" parameterType="map" resultType="int">
+      SELECT COUNT(id) FROM gh_membership_activites WHERE 1=1
+        <if test="title != null">
+            AND title LIKE CONCAT('%','${title}','%')
+        </if>
+    </select>
+
+    <select id="getMembershipActivitesList" resultType="com.guanghe.management.entity.bo.MembershipActivitesBo" parameterType="map">
+        SELECT * FROM gh_membership_activites WHERE 1 = 1
+        <if test="title != null">
+            AND title LIKE CONCAT('%','${title}','%')
+        </if>
+        ORDER BY create_time DESC
+        <include refid="limit"/>
+    </select>
+
+    <select id="getMembershipActivitesDetails" resultType="com.guanghe.management.entity.bo.MembershipActivitesBo" parameterType="int">
+        SELECT * FROM gh_membership_activites WHERE id = #{id}
+    </select>
+    <delete id="deleteMembershipActivites" parameterType="int">
+        DELETE FROM gh_membership_activites WHERE id = #{id}
+    </delete>
+
+    <insert id="addMembershipActivite" parameterType="com.guanghe.management.entity.bo.MembershipActivitesBo">
+        INSERT INTO gh_membership_activites
+        SET
+        title = #{title},
+        img_url = #{imgUrl},
+        content = #{content},
+        activitie_time=#{activitieTime},
+        local=#{local},
+        price=#{price},
+        create_time = NOW(),
+        synopsis = #{synopsis}
+
+
+    </insert>
+
+    <update id="updateMembershipActivites" parameterType="com.guanghe.management.entity.bo.MembershipActivitesBo">
+        UPDATE gh_membership_activites
+        SET
+        title = #{title},
+        img_url = #{imgUrl},
+        content = #{content},
+        activitie_time=#{activitieTime},
+        local=#{local},
+        price=#{price},
+        update_time = NOW(),
+        synopsis = #{synopsis}
+
+        WHERE
+        id = #{id};
+
+    </update>
+</mapper>

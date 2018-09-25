@@ -28,7 +28,7 @@
         }
 
     </style>
-
+    <script type="text/javascript" src="/static/js/common/ajaxupload.js"></script>
     <script type="text/javascript" src="/static/js/mainJs/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/mainJs/bootstrap.min.js"></script>
 </head>
@@ -71,16 +71,16 @@
 
         <div class="row clearfix" >
             <div class="col-xs-1 column text-right">
-                运作方式:
+                产品期限:
             </div>
             <div class="col-xs-3 column">
-                <input id="operations" />
+                <input id="productTerm" />
             </div>
             <div class="col-xs-1 column text-right">
-                基金管理人:
+                比较基准:
             </div>
             <div class="col-xs-3 column">
-                <input id="fundManager" />
+                <input id="comparisonDatum" />
             </div>
 
             <div class="col-xs-1 column text-right">
@@ -95,17 +95,17 @@
 
         <div class="row clearfix" >
             <div class="col-xs-1 column text-right">
-                基金托管人:
+                起投金额:
             </div>
             <div class="col-xs-3 column">
-                <input id="fundCustodian" />
+                <input id="amountOfInvestment" />
             </div>
 
             <div class="col-xs-1 column text-right">
-                产品规模:
+                递增金额:
             </div>
             <div class="col-xs-3 column">
-                <input id="productScale" />
+                <input id="increasingAmount" />
             </div>
 
             <div class="col-xs-1 column text-right">
@@ -120,82 +120,6 @@
 
         <div class="row clearfix" >
             <div class="col-xs-1 column text-right">
-                认购起点:
-            </div>
-            <div class="col-xs-3 column">
-                <input id="subscribeStartingPoint" />
-            </div>
-
-            <div class="col-xs-1 column text-right">
-                产品期限:
-            </div>
-            <div class="col-xs-3 column">
-                <input id="productTerm" />
-            </div>
-            <div class="col-xs-1 column text-right">
-                收益类型:
-            </div>
-            <div class="col-xs-3 column">
-                <select id="incomeTypeId">
-                    <option value="">-请选择-</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row clearfix" >
-            <div class="col-xs-1 column text-right">
-                基金投向:
-            </div>
-            <div class="col-xs-3 column">
-                <input id="fundInvestment" />
-            </div>
-
-            <div class="col-xs-1 column text-right">
-                比较基准:
-            </div>
-            <div class="col-xs-7 column">
-                <input id="comparisonDatum" />
-            </div>
-        </div>
-
-        <div class="row clearfix" >
-            <div class="col-xs-1 column text-right">
-                业绩报酬:
-            </div>
-            <div class="col-xs-3 column">
-                <input id="performanceReward" />
-            </div>
-
-            <div class="col-xs-1 column text-right">
-                资金费用:
-            </div>
-            <div class="col-xs-7 column">
-                <input id="capitalCost" />
-            </div>
-
-        </div>
-
-        <div class="row clearfix" >
-
-            <div class="col-xs-1 column text-right">
-                起投金额:
-            </div>
-            <div class="col-xs-3 column">
-                <input id="amountOfInvestment" />
-            </div>
-
-            <div class="col-xs-1 column text-right">
-                递增金额:
-            </div>
-            <div class="col-xs-7 column">
-                <input id="increasingAmount" />
-            </div>
-
-
-        </div>
-
-        <div class="row clearfix" >
-            <div class="col-xs-1 column text-right">
                 产品规模(最少):
             </div>
             <div class="col-xs-3 column">
@@ -205,8 +129,16 @@
             <div class="col-xs-1 column text-right">
                 产品规模(最多):
             </div>
-            <div class="col-xs-7 column">
+            <div class="col-xs-3 column">
                 <input id="productScaleEnd" />
+            </div>
+            <div class="col-xs-1 column text-right">
+                收益类型:
+            </div>
+            <div class="col-xs-3 column">
+                <select id="incomeTypeId">
+                    <option value="">-请选择-</option>
+                </select>
             </div>
         </div>
 
@@ -224,12 +156,38 @@
                 <input id="endTime" type="date"/>
             </div>
         </div>
+        <div class="row clearfix">
+            <div class="col-xs-1 column text-right">
+                产品详情图pc:
+            </div>
+            <div class="col-xs-3 column">
+                <div class="suolue">
+                    <div class="uploadimg">
+                        <img width="160px;" height="160px;" id="uploadImage">
+                        <input type="hidden" name="imageUrl"><br/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1 column">
+                产品详情图wap:
+            </div>
+            <div class="col-xs-3 column text-right">
+                <div class="suolue">
+                    <div class="uploadimg">
+                        <img width="160px;" height="160px;" id="uploadImagewap">
+                        <input type="hidden" name="imageUrlwap"><br/>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
 
 
 
         <div class="row clearfix" style="margin-top: 30px;">
             <div class="col-xs-10 column text-right">
-                <button  style="width:85%;" type="button" class="btn btn-primary" onclick="addPrivateInvestment();">添加</button>
+                <button  style="width:85%;" type="button" class="btn btn-primary" id="B_submit">添加</button>
             </div>
         </div>
         <%--<div style="height: 28px; width: 360px; margin: 0 auto;">--%>
@@ -240,7 +198,15 @@
 
 
 <script>
+    $(function (){
+        // 添加菜单样式
+        $("div[id^='menu_']").removeClass("on");
+        $("div[id='menu_banner']").addClass("on");
 
+        $("#B_submit").click(addPrivateInvestment);
+        uploadImageUrl();
+        uploadwapImageUrl()
+    })
     function addPrivateInvestment(){
 
 
@@ -263,58 +229,6 @@
             alert("基金类型输入过长！")
             return;
         }
-
-        var operations = $("#operations").val();
-        if(operations == ""){
-            alert("运作方式不能为空！");
-            return;
-        }
-        if(operations.length > 100){
-            alert("运作方式输入过长！")
-            return;
-        }
-
-        var fundManager = $("#fundManager").val();
-        if(fundManager == ""){
-            alert("基金管理人不能为空！");
-            return;
-        }
-        if(fundManager.length > 100){
-            alert("基金管理人输入过长！")
-            return;
-        }
-
-        var fundCustodian = $("#fundCustodian").val();
-        if(fundCustodian == ""){
-            alert("基金托管人不能为空！");
-            return;
-        }
-        if(fundCustodian.length > 100){
-            alert("基金托管人输入过长！")
-            return;
-        }
-
-
-        var productScale = $("#productScale").val();
-        if(productScale == ""){
-            alert("产品规模不能为空！");
-            return;
-        }
-        if(productScale.length > 100){
-            alert("产品规模输入过长！")
-            return;
-        }
-
-        var subscribeStartingPoint = $("#subscribeStartingPoint").val();
-        if(subscribeStartingPoint == ""){
-            alert("认购起点不能为空！");
-            return;
-        }
-        if(subscribeStartingPoint.length > 100){
-            alert("认购起点输入过长！")
-            return;
-        }
-
         var productTerm = $("#productTerm").val();
         if(productTerm == ""){
             alert("产品期限不能为空！");
@@ -322,17 +236,6 @@
         }
         if(productTerm.length > 100){
             alert("产品期限输入过长！")
-            return;
-        }
-
-        var fundInvestment = $("#fundInvestment").val();
-        if(fundInvestment == ""){
-            alert("基金投向不能为空！");
-            return;
-        }
-
-        if(fundInvestment.length > 100){
-            alert("基金投向输入过长！")
             return;
         }
         var comparisonDatum = $("#comparisonDatum").val();
@@ -344,27 +247,6 @@
             alert("比较基准输入过长！")
             return;
         }
-
-        var performanceReward = $("#performanceReward").val();
-        if(performanceReward == ""){
-            alert("业绩报酬不能为空！");
-            return;
-        }
-        if(performanceReward.length > 100){
-            alert("业绩报酬输入过长！")
-            return;
-        }
-
-        var capitalCost = $("#capitalCost").val();
-        if(capitalCost == ""){
-            alert("资金费用不能为空！")
-            return;
-        }
-        if(capitalCost.length > 100){
-            alert("资金费用输入过长！")
-            return;
-        }
-
         var amountOfInvestment = $("#amountOfInvestment").val();
         if(amountOfInvestment == ""){
             alert("起投金额不能为空！");
@@ -394,7 +276,6 @@
             alert("递增金额输入正整数！")
             return;
         }
-
         var productScaleStart = $("#productScaleStart").val();
         if(productScaleStart == ""){
             alert("产品规模起点不能为空！");
@@ -422,7 +303,6 @@
             alert("产品规模结束输入正整数！")
             return;
         }
-
         var startTime = $("#startTime").val();
         if(startTime == ""){
             alert("开始时间不能为空！");
@@ -434,7 +314,16 @@
             alert("结束时间不能为空！");
             return;
         }
-
+        var imageUrl = $("input[name='imageUrl']").val();
+        if (imageUrl == "") {
+            alert("请选择图片");
+            return;
+        }
+        var wapImage = $("input[name='imageUrlwap']").val();
+        if (wapImage == "") {
+            alert("请选择图片");
+            return;
+        }
         var investmentPoinIds = $("#investmentPoinId option:selected");
         var investmentPoinId = investmentPoinIds.val();
         if(investmentPoinId == ""){
@@ -466,14 +355,23 @@
         $.ajax({
             type : "post",
             url : "/privateInvestment/add",
-            data : {"fundName" : fundName,"fundType":fundType,"operations":operations,
-                "fundManager" : fundManager,"fundCustodian":fundCustodian,"productScale":productScale,
-                "subscribeStartingPoint" : subscribeStartingPoint,"productTerm":productTerm,
-                "fundInvestment":fundInvestment,"comparisonDatum":comparisonDatum,
-                "performanceReward":performanceReward,"amountOfInvestment":amountOfInvestment,
-                "increasingAmount":increasingAmount,"productScaleStart":productScaleStart,
-                "productScaleEnd":productScaleEnd,"startTime":startTime,"endTime":endTime,"capitalCost" : capitalCost,
-                "incomeTypeId":incomeTypeId,"riskLevelId":riskLevelId,"productTermId":productTermId,"investmentPoinId":investmentPoinId},
+            data : {
+                "fundName" : fundName,
+                "fundType":fundType,
+                "productTerm":productTerm,
+                "comparisonDatum":comparisonDatum,
+               "amountOfInvestment":amountOfInvestment,
+                "startTime":new Date(startTime),
+                "endTime":new Date(endTime),
+                "increasingAmount":increasingAmount,
+                "productScaleStart":productScaleStart,
+                "productScaleEnd":productScaleEnd,
+                "imgUrl":imageUrl,
+                "incomeTypeId":incomeTypeId,
+                "riskLevelId":riskLevelId,
+                "productTermId":productTermId,
+                "investmentPoinId":investmentPoinId,
+                "wapImage":wapImage},
             dataType : "json",
             async : false,
             success : function (data){
@@ -564,6 +462,57 @@
                 }
 
                 $("#incomeTypeId").append(html);
+            }
+        });
+    }
+    function uploadImageUrl(){
+        var button = $("#uploadImage"), interval;
+        new AjaxUpload(button, {
+            action: "/privateConsultant/uploadImage",
+            type:"post",
+            name: 'myFile',
+            responseType : 'json',
+            onSubmit: function(file, ext) {
+                if (!(ext && /^(jpg|JPG|png|PNG|gif|GIF)$/.test(ext))) {
+                    alert("您上传的图片格式不对，请重新选择！");
+                    return false;
+                }
+            },
+            onComplete: function(file, response) {
+                if(response.success == true){
+                    var resultData = response.data;
+                    console.log(resultData)
+                    $("#uploadImage").attr("src", resultData.Url);
+                    $("input[name='imageUrl']").val(resultData.imageUrl);
+                }else{
+                    alert("上传失败");
+                }
+            }
+        });
+    }
+
+    function uploadwapImageUrl(){
+        var button = $("#uploadImagewap"), interval;
+        new AjaxUpload(button, {
+            action: "/privateConsultant/uploadImage",
+            type:"post",
+            name: 'myFile',
+            responseType : 'json',
+            onSubmit: function(file, ext) {
+                if (!(ext && /^(jpg|JPG|png|PNG|gif|GIF)$/.test(ext))) {
+                    alert("您上传的图片格式不对，请重新选择！");
+                    return false;
+                }
+            },
+            onComplete: function(file, response) {
+                if(response.success == true){
+                    var resultData = response.data;
+                    console.log(resultData)
+                    $("#uploadImagewap").attr("src", resultData.Url);
+                    $("input[name='imageUrlwap']").val(resultData.imageUrl);
+                }else{
+                    alert("上传失败");
+                }
             }
         });
     }

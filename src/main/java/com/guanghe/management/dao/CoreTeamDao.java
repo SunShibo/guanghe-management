@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface CoreTeamDao {
 
-    public CoreTeamBo queryCoreTeam(Integer id);
-    public void updateCoreTeam(CoreTeamBo coreTeam);
-    public  void addCoreTeam(CoreTeamBo coreTeam);
+    public EmployeeBo queryCoreTeam(Integer id);
+    public void updateCoreTeam(EmployeeBo coreTeam);
+    public  void addCoreTeam(EmployeeBo coreTeam);
     public void deleteCoreTeam(Integer Id);
     public List<EmployeeBo> queryEmployee();
     public  CoreTeamBo queryHomeCoreTeam();

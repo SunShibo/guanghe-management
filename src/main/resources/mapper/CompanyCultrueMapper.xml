@@ -37,8 +37,12 @@
     </insert>
 
     <update id="updateCompanyCultrueBO" parameterType="com.guanghe.management.entity.bo.CompanyCultrueBO">
-        UPDATE gh_news_update_company_cultrue  SET title = #{title},
-        head_title = #{headTitle},source = #{source},update_time = NOW(),
-        content = #{content},create_news_user = #{createNewsUser} WHERE id = #{id}
+        UPDATE gh_news_update_company_cultrue  SET image=#{image} WHERE id = #{id}
     </update>
+    <select id="queryCompanyCultruePc" parameterType="int" resultType="com.guanghe.management.entity.bo.CompanyCultrueBO">
+        select * from gh_news_update_company_cultrue WHERE status = 1
+    </select>
+    <select id="queryCompanyCultrueWap"  resultType="com.guanghe.management.entity.bo.CompanyCultrueBO">
+        select * from gh_news_update_company_cultrue WHERE status = 2
+    </select>
 </mapper>

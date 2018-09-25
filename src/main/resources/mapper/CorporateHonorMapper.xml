@@ -20,6 +20,6 @@
         delete  from gh_guanghe_on_corporate_honor where id = #{id}
     </delete>
     <select id="queryCorporateHonorDetail"  resultType="com.guanghe.management.entity.bo.CorporateHonorBo">
-        select * from gh_guanghe_on_corporate_honor limit 1
+        select * from gh_guanghe_on_corporate_honor
     </select>
 </mapper>

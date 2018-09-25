@@ -135,10 +135,6 @@
                                 '<td>' + amountOfInvestment + '</td>' +
                                 '<td>' +
                                 '<button type="button" class="btn btn-info" onclick="updatePrivateInvestment(' + "'" + rs.data.data[i].id + "'" + ')">编辑</button>' +
-                                '<button type="button" class="btn btn-info" onclick="updateRiskManagement(' + "'" + rs.data.data[i].id + "'" + ')">风险控制</button>' +
-                                '<button type="button" class="btn btn-info" onclick="updateTransactionRecord(' + "'" + rs.data.data[i].id + "'" + ')">历史情况</button>' +
-                                '<button type="button" class="btn btn-info" onclick="updateProductAdvantage(' + "'" + rs.data.data[i].id + "'" + ')">产品优势</button>' +
-                                '<button type="button" class="btn btn-info" onclick="updateCollectProduct(' + "'" + rs.data.data[i].id + "'" + ')">采集产品</button>' +
                                 '<button type="button" class="btn btn-danger" onclick="deletePrivateInvestment(' + "'" + rs.data.data[i].id + "'" + ')">删除</button>' +
                                 '</td>' +
                                 '</tr>';

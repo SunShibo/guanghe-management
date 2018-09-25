@@ -13,7 +13,7 @@
 <div class="index clear">
   <jsp:include page="../index.jsp"></jsp:include>
   <div class="indexRight1">
-    <div class="title">广和商学院/私享顾问/财富管理/> 修改</div>
+    <div class="title"> 修改</div>
     <div class="tablebox2">
       <form id="moduleForm" method="post">
         <table cellpadding="0" cellspacing="0" border="0">
