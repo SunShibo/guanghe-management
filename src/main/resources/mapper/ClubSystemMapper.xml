@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guanghe.management.dao.ClubSystemDao">
+    <insert id="addClubSystem" parameterType="com.guanghe.management.entity.bo.ClubSystemBo"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into gh_club_system SET  image = #{image},createTime = NOW(),wapUrl=#{wapUrl},url=#{url}
+        ,createUser = #{createUser},content=#{content},title=#{title}
+    </insert>
+    <update id="updateClubSystem" parameterType="com.guanghe.management.entity.bo.ClubSystemBo">
+        update gh_club_system set image = #{image},wapurl=#{wapurl},url=#{url}
+        ,updateTime = now(),title=#{title}
+        ,content=#{content} where id = #{id}
+    </update>
+    <select id="queryClubSystemb" parameterType="int" resultType="com.guanghe.management.entity.bo.ClubSystemBo">
+        select * from gh_club_system WHERE id=#{id}
+    </select>
+
+    <delete id="deleteClubSystem" parameterType="int">
+        delete from gh_club_system where id = #{id}
+    </delete>
+    <select id="queryClubSystemBo"  resultType="com.guanghe.management.entity.bo.ClubSystemBo">
+        SELECT * FROM gh_club_system
+    </select>
+</mapper>

@@ -102,6 +102,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
                 <ul class="treeview-menu" style="display: none;">
                     <li><a href="/activites/page"><i class="fa fa-circle-o"></i>会员活动</a></li>
+                    <li><a href="/ClubSystem/page"><i class="fa fa-circle-o"></i>会员尊享管理</a></li>
                 </ul>
             </a>
         </li>
