@@ -10,7 +10,7 @@
     </insert>
     <update id="updateCompanyIntroduction" parameterType="com.guanghe.management.entity.bo.CompanyIntroductionBo">
         update gh_guanghe_on_company_introduction set title = #{title}, company_introduction = #{companyIntroduction}, image = #{image},
-        update_time = now(),update_user = #{updateUser} ,source = #{source},wap_image=#{wapImage} where id = #{id}
+        update_time = now(),update_user = #{updateUser} ,source = #{source},wap_image=#{wapImage} ,video=#{video} where id = #{id}
     </update>
     <select id="queryCompanyIntroduction" parameterType="int" resultType="com.guanghe.management.entity.bo.CompanyIntroductionBo">
         select * from gh_guanghe_on_company_introduction where id = #{id}

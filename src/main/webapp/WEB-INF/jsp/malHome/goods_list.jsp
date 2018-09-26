@@ -44,6 +44,11 @@
         <div class="screen clear">
             <div class="form">
                 <input type="text" placeholder="请输入商品名" id="title">
+                <select id="type">
+                    <option value="0">全部商品</option>
+                    <option value="1">新品推荐</option>
+                    <option value="2">新品上架</option>
+                </select>
                 <button type="button" style=" margin-left: 20px;" class="btn btn-primary" onclick="getdata(1,10);">搜索</button>
             </div>
 
@@ -53,8 +58,9 @@
                 <%--<caption>边框表格布局</caption>--%>
                 <thead>
                 <tr>
-                    <th style="width: 35%;">商品名</th>
-                    <th style="width: 30%;">类型</th>
+                    <th style="width: 25%;">商品名</th>
+                    <th style="width: 25%;">类型</th>
+                    <th style="width: 20%;">序列号</th>
                     <th style="width: 30%;">操作</th>
                 </tr>
                 </thead>
@@ -105,7 +111,8 @@
     getdata(1,10);
     function getdata(cur,size){
         var title = $("#title").val();
-        $.getJSON("/homeGoods/detailList?pageNo="+cur+"&pageSize="+size+"&title="+title, function (rs) {
+        var type = $("#type").val();
+        $.getJSON("/homeGoods/detailList?pageNo="+cur+"&pageSize="+size+"&title="+title+"&type="+type, function (rs) {
             var datas=rs.data.data;
             console.log(datas);
             options={
@@ -120,7 +127,10 @@
                         if(urlImg == undefined){
                             urlImg = '';
                         }
-
+                          var  sort=rs.data.data[i].sort;
+                        if(sort==undefined){
+                            sort="";
+                        }
                         var homeState = rs.data.data[i].homeState;
                         var html1 = '';
                         if(homeState == 1){
@@ -138,18 +148,44 @@
                         html += '<tr>'+
                                     '<td>'+ rs.data.data[i].name +'</td>'+
                                     '<td>'+ homeState +'</td>'+
-                                    '<td>'+
-                                        '<button type="button" class="btn btn-info" onclick="updateState('+"'"+ rs.data.data[i].id +"',"+"'"+ 1 +"'"+')">设为精品推荐</button>'+
-                                        '<button type="button" class="btn btn-info" onclick="updateState('+"'"+ rs.data.data[i].id +"',"+"'"+ 2 +"'"+')">设为新品上架</button>'+
-                                        html1+
+                                     '<td>'+ sort +'</td>'
+                        if(rs.data.data[i].homeState==0) {
+                            html += '<td>' +
+                                    '<button type="button" class="btn btn-info" onclick="updateState1(' + "'" + rs.data.data[i].id+"'" + ')">设为精品推荐</button>' +
+                                    '<button type="button" class="btn btn-info" onclick="updateState2(' + "'" + rs.data.data[i].id + "'" + ')">设为新品上架</button>' +
+                                    html1 +
                                     '</td>'+
-                                '</tr>';
+                                    '</tr>';
+                        }
+                        if(rs.data.data[i].homeState==1) {
+                            html += '<td>' +
+                                    '<button type="button" class="btn btn-info" onclick="updateState(' + "'" + rs.data.data[i].id + "'," + "'" + 0 + "'" + ')">下架精品推荐</button>' +
+                                    '<button type="button" class="btn btn-info" onclick="updateState2(' + "'" + rs.data.data[i].id+ "'" + ')">设为新品上架</button>' +
+                                    html1 +
+                                    '</td>'+
+                                    '</tr>';
+                        }
+                        if(rs.data.data[i].homeState==2) {
+                            html += '<td>' +
+                                    '<button type="button" class="btn btn-info" onclick="updateState1(' + "'" + rs.data.data[i].id +  "'" + ')">设为精品推荐</button>' +
+                                    '<button type="button" class="btn btn-info" onclick="updateState(' + "'" + rs.data.data[i].id + "'," + "'" + 0 + "'" + ')">下架新品上架</button>' +
+                                    html1 +
+                                    '</td>'+
+                                    '</tr>';
+                        }
+
                     }
                     $("#contentData").html(html);
                 }
             };
             page.init(rs.data.count,cur,options);
         })
+    }
+function updateState1(id){
+window.location.href='/homeGoods/update1?id='+ id
+}
+    function updateState2(id){
+        window.location.href='/homeGoods/update2?id=' + id
     }
     function updateState(id,homeState){
         $.ajax({

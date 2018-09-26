@@ -41,6 +41,12 @@ public class AccountController extends BaseCotroller {
         view.setViewName("/mall/mall_account_add");
         return view;
     }
+    @RequestMapping("/toupdate")
+    public ModelAndView toupdate(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/mall/mall_account_update");
+        return view;
+    }
     @RequestMapping("/querycount")
     public ModelAndView querycount(){
         ModelAndView view = new ModelAndView();
@@ -175,6 +181,27 @@ public class AccountController extends BaseCotroller {
         resultMap.put("count",accountService.queryCount(map));
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(resultMap));
         safeJsonPrint(response,json);
+    }
+
+    @RequestMapping("/update1")
+    public void update1 (HttpServletResponse response,Integer id,Integer type){
+        if (id==null||type==null){
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
+            safeTextPrint(response, json);
+        }
+        AccountBo news = accountService.queryAccountByUserId(id);
+        if (news == null){
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
+            safeTextPrint(response, json);
+        }
+        if (news != null) {
+            news.setLeavestatus(type);
+        }
+         accountService.updateAccount(news);
+
+        String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
+        safeTextPrint(response, json);
+
     }
 
 }

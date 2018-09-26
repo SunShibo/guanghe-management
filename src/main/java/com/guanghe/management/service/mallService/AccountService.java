@@ -50,4 +50,7 @@ public class AccountService {
     public int queryCount(Map<String,Object>map){
         return accountDao.queryCount(map);
     }
+    public void updateAccount(AccountBo accountBo){
+        accountDao.updateAccount(accountBo);
+    }
 }

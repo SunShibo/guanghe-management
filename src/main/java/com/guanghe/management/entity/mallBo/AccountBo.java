@@ -12,6 +12,15 @@ public class AccountBo {
     private  String paymentPassword;//支付密码
     private  Integer integral;//积分余额
     private Date createTime;
+    private  Integer leavestatus;
+
+    public Integer getLeavestatus() {
+        return leavestatus;
+    }
+
+    public void setLeavestatus(Integer leavestatus) {
+        this.leavestatus = leavestatus;
+    }
 
     public Integer getId() {
         return id;

@@ -84,6 +84,22 @@
             </td>
           </tr>
           <tr>
+            <td style="height: 70px;">
+              <a style="font-size: 20px">会员活动</a>
+            </td>
+            <td style="height: 70px;">
+              <a style="font-size: 20px"class="btn btn-info" href="/HomeGoodsActiviti/page">编辑</a>
+            </td>
+          </tr>
+          <tr>
+            <td style="height: 70px;">
+              <a style="font-size: 20px">和悦商城</a>
+            </td>
+            <td style="height: 70px;">
+              <a style="font-size: 20px"class="btn btn-info" href="/HomeGoodsActiviti/page1">编辑</a>
+            </td>
+          </tr>
+          <tr>
           <td style="height: 70px;">
             <a style="font-size: 20px">合作伙伴</a>
           </td>

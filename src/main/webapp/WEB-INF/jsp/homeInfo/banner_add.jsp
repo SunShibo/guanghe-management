@@ -36,7 +36,7 @@
 
 <jsp:include page="../index.jsp"></jsp:include>
 <div class="indexRight1">
-  <div class="title">私募投资 > 添加私募产品</div>
+  <div class="title">Banner > 添加</div>
   <%--<div class="screen clear">--%>
   <%--<div class="form">--%>
   <%--<input type="text" placeholder="请输入产品名称" id="privateInvestmentName">--%>

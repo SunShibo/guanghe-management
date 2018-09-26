@@ -94,6 +94,22 @@ public class CompanyIntroductionController extends BaseCotroller {
             safeTextPrint(response, json);
         }
     }
+    @RequestMapping("/update2")
+    public void updateCompanyItroduction21(HttpServletResponse response,CompanyIntroductionBo companyIntroductionBo) {
+        CompanyIntroductionBo newsDetail =  companyItroductionService.queryCompanyIntroductionDetail();
+
+        if (companyIntroductionBo.getVideo() == null) {
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
+            safeTextPrint(response, json);
+            return;
+        }else {
+            newsDetail.setVideo(companyIntroductionBo.getVideo());
+            newsDetail.setCompanyIntroduction(companyIntroductionBo.getCompanyIntroduction());
+            companyItroductionService.updateCompanyItroduction(newsDetail);
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
+            safeTextPrint(response, json);
+        }
+    }
     @RequestMapping("/update1")
     public void updateCompanyItroduction1 (HttpServletResponse response,String wapImage) {
         CompanyIntroductionBo newsDetail =  companyItroductionService.queryCompanyIntroductionDetail();

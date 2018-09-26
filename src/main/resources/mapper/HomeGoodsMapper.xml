@@ -10,7 +10,7 @@
 
     <select id="getHomeGoodsList" resultType="map" parameterType="map">
         SELECT
-            g.id,g.`name`,g.homeState,mhgi.img_url
+            g.id,g.`name`,g.homeState,mhgi.img_url,mhgi.sort
         FROM
             mall_goods g
         LEFT JOIN mall_home_goods_img mhgi ON g.id=mhgi.goods_id
@@ -18,7 +18,10 @@
         <if test="title != ''">
             AND g.`name` LIKE CONCAT('%','${title}','%')
         </if>
-        ORDER BY g.create_time,g.homeState
+        <if test="type!=''">
+            AND homeState=#{type}
+        </if>
+        ORDER BY g.create_time DESC
         <include refid="limit"/>
     </select>
 
@@ -31,6 +34,9 @@
         <if test="title != ''">
             AND `name` LIKE CONCAT('%','${title}','%')
         </if>
+        <if test="type!=''">
+            AND homeState=#{type}
+                </if>
     </select>
 
     <update id="updateState" parameterType="map">
@@ -50,11 +56,14 @@
         SELECT count(id) FROM mall_home_goods_img WHERE goods_id = #{id}
     </select>
 
-    <insert id="createImgUrl" parameterType="int">
-        INSERT INTO mall_home_goods_img SET goods_id = #{id}
+    <insert id="createImgUrl" parameterType="map">
+        INSERT INTO mall_home_goods_img SET goods_id = #{id},img_url = #{image},sort=#{sort}
     </insert>
 
     <update id="updateImgUrl" parameterType="map">
         UPDATE mall_home_goods_img SET img_url = #{image} WHERE goods_id = #{id}
     </update>
+    <delete id="deleteInfo">
+        DELETE FROM  mall_home_goods_img WHERE goods_id=#{id}
+    </delete>
 </mapper>

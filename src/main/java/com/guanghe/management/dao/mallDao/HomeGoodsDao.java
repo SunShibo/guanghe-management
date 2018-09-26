@@ -18,7 +18,8 @@ public interface HomeGoodsDao {
 
     int getImgUrlCount(Integer id);
     
-    void createImgUrl(Integer id);
+    void createImgUrl(Map<String, Object> map);
     
     void updateImgUrl(Map<String, Object> map);
+    void  deleteInfo(Integer id);
 }

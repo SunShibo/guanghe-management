@@ -262,6 +262,8 @@ public class OssUploadFileUtil {
             return "text/html";
         }else if("txt".equalsIgnoreCase(fileExtension)) {
             return "text/plain";
+        }else if ("mp4".equalsIgnoreCase(fileExtension)){
+            return "video/mpeg4";
         }else if("vsd".equalsIgnoreCase(fileExtension)) {
             return "application/vnd.visio";
         }else if("ppt".equalsIgnoreCase(fileExtension) || "pptx".equalsIgnoreCase(fileExtension)) {

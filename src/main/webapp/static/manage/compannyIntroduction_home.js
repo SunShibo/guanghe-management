@@ -20,14 +20,14 @@ function updateModule(){
     }
     var imageUrl = $("input[name='imageUrl']").val();
     if(imageUrl == ""){
-        alert("图片不能为空");
+        alert("视频不能为空");
         return ;
     }
     var  id = GetQueryString('id');
     $.ajax({
         type : "post",
-        url : "update",
-        data :{"image" : imageUrl,"id":id,"companyIntroduction":content,},
+        url : "/CompanyIntroduction/update2",
+        data :{"video" : imageUrl,"id":id,"companyIntroduction":content,},
         dataType : "json",
         success: function(result, status) {
             if(result.success== false){
@@ -35,7 +35,7 @@ function updateModule(){
                 return ;
             }else {
                 alert("修改成功");
-                window.location.href = "page";
+                window.location.href = "/home/list";
             }
         }
     })
@@ -43,7 +43,7 @@ function updateModule(){
 function uploadImageUrl(){
     var button = $("#uploadImage"), interval;
     new AjaxUpload(button, {
-        action: "uploadImage",
+        action: "/privateConsultant/uploadImage",
         type:"post",
         name: 'myFile',
         responseType : 'json',

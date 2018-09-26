@@ -39,12 +39,16 @@ public class HomeGoodsService {
         return homeGoodsDao.getImgUrlCount(id);
     }
 
-    public void createImgUrl(Integer id) {
-        homeGoodsDao.createImgUrl(id);
+    public void createImgUrl(Map<String, Object> map) {
+        homeGoodsDao.createImgUrl(map);
 
     }
 
     public void updateImgUrl(Map<String, Object> map) {
         homeGoodsDao.updateImgUrl(map);
     }
+    public  void  deleteInfo(Integer id){
+        homeGoodsDao.deleteInfo(id);
+    }
+
 }

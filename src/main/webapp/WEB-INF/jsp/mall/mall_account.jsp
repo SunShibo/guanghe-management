@@ -118,29 +118,16 @@
         "callBack":function(result){
           var html = '';
           for (var i = 0; i < rs.data.data.length; i++) {
-            html += '<tr>' +
-                    '<td>' + rs.data.data[i].phoneNumber + '</td>' +
-                    '<td>' + rs.data.data[i].integral + '</td>'
-                     if(rs.data.data[i].leaveStatus==0){
-                              html +=   '<td>' + "普通会员" + '</td>'
-                               }
-                     if(rs.data.data[i].leaveStatus==1){
-                               html +=   '<td>' + "悦享卡会员" + '</td>'
-                            }
-                     if(rs.data.data[i].leaveStatus==2){
-                                   html +=   '<td>' + "悦亲卡会员" + '</td>'
-                                                 }
-                     if(rs.data.data[i].leaveStatus==3){
-                               html +=   '<td>' + "悦荣卡会员" + '</td>'
-                                     }else if(rs.data.data[i].leaveStatus==4){
-                               html +=   '<td>' + "悦尊卡会员" + '</td>'
-                                  }
-                    html += '<td>' +
-                    '<button type="button" class="btn btn-info" onclick="query(' + "'" + rs.data.data[i].id + "'" + ')">查看用户积分记录</button>' +
-                    '<button type="button" class="btn btn-info" onclick="add(' + "'" + rs.data.data[i].id + "'" + ')">增加积分</button>' +
-                    '<button type="button" class="btn btn-info" onclick="update(' + "'" + rs.data.data[i].id + "'" + ')">修改会员级别</button>' +
-                    '</td>' +
-                    '</tr>';
+            html += ['<tr>',
+                    '<td>' + rs.data.data[i].phoneNumber + '</td>',
+                    '<td>' + rs.data.data[i].integral + '</td>',
+                    checkStatus(rs,i) ,
+                    '<td>',
+                    '<button type="button" class="btn btn-info" onclick="query(' + "'" + rs.data.data[i].id + "'" + ')">查看用户积分记录</button>',
+                    '<button type="button" class="btn btn-info" onclick="add(' + "'" + rs.data.data[i].id + "'" + ')">增加积分</button>',
+                    '<button type="button" class="btn btn-info" onclick="update(' + "'" + rs.data.data[i].id + "'" + ')">修改会员级别</button>',
+                    '</td>' ,
+                    '</tr>'].join("")
           }
           $("#contentData").html(html);
         }
@@ -150,6 +137,23 @@
   }
 
 
+  function checkStatus(rs,i){
+    if(rs.data.data[i].leaveStatus==0){
+      return '<td>' + "普通会员" + '</td>'
+    }
+    if(rs.data.data[i].leaveStatus==1){
+      return '<td>' + "悦享卡会员" + '</td>'
+    }
+    if(rs.data.data[i].leaveStatus==2){
+      return  '<td>' + "悦亲卡会员" + '</td>'
+    }
+    if(rs.data.data[i].leaveStatus==3){
+      return  '<td>' + "悦荣卡会员" + '</td>'
+    }
+    if(rs.data.data[i].leaveStatus==4){
+      return  '<td>' + "悦尊卡会员" + '</td>'
+    }
+  }
 
 
 
@@ -158,8 +162,9 @@
 
 
 
-
-
+function update(id){
+  window.location.href='/Account/toupdate?id='+id;
+}
 
   function add(id){
     window.location.href = '/Account/toadd?id=' + id;

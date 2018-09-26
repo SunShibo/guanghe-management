@@ -7,7 +7,7 @@ public class AccountManagementBo {
     private  Integer id;
     private  String phone_number;
     private  Integer integral;
-    private Integer leaveStatus;
+    private Integer leavestatus;
 
     public Integer getId() {
         return id;
@@ -34,10 +34,10 @@ public class AccountManagementBo {
     }
 
     public Integer getLeaveStatus() {
-        return leaveStatus;
+        return leavestatus;
     }
 
     public void setLeaveStatus(Integer leaveStatus) {
-        this.leaveStatus = leaveStatus;
+        this.leavestatus = leaveStatus;
     }
 }

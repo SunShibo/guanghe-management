@@ -19,6 +19,10 @@
         update mall_account set integral = #{integral}
        where id = #{id}
     </update>
+    <update id="updateAccount" parameterType="com.guanghe.management.entity.mallBo.AccountBo">
+        update mall_account set leavestatus = #{leavestatus}
+        where user_id = #{userId}
+    </update>
     <update id="updateAddIntegral" parameterType="com.guanghe.management.entity.mallBo.AccountBo">
         update mall_account set integral = #{integral}
         ,update_time = now() where id = #{id}

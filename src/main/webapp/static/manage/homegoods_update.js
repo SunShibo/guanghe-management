@@ -28,8 +28,8 @@ function updateclub(){
     var  id = GetQueryString('id');
     $.ajax({
         type : "post",
-        url : "update",
-        data :{"image" : imageUrl,"id":id,"content":content,"url":url,"wapurl":wapurl,},
+        url : "update1",
+        data :{"image" : imageUrl,"id":id,"content":content,"url":url,"wapUrl":wapurl,},
         dataType : "json",
         success: function(result, status) {
             if(result.success== false){
@@ -45,7 +45,7 @@ function updateclub(){
 function uploadImageUrl(){
     var button = $("#uploadImage"), interval;
     new AjaxUpload(button, {
-        action: "uploadImage",
+        action: "/privateConsultant/uploadImage",
         type:"post",
         name: 'myFile',
         responseType : 'json',

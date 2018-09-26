@@ -34,6 +34,18 @@ public class HomeGoodsController extends BaseCotroller {
         view.setViewName("/malHome/goods_list");
         return view;
     }
+    @RequestMapping("/update1")
+    public ModelAndView queryCoreTeamList1(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/malHome/goods_update1");
+        return view;
+    }
+    @RequestMapping("/update2")
+    public ModelAndView queryCoreTeamList2(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/malHome/goods_update2");
+        return view;
+    }
     @RequestMapping("/toUpdate")
     public ModelAndView redirectUpdatePage(Integer bannerId){
         ModelAndView view = new ModelAndView();
@@ -42,7 +54,7 @@ public class HomeGoodsController extends BaseCotroller {
         return view;
     }
     @RequestMapping("/detailList")//列表页
-    public void  sort(HttpServletResponse response,Integer pageNo, Integer pageSize,String title){
+    public void  sort(HttpServletResponse response,Integer pageNo, Integer pageSize,String title,Integer type){
         QueryInfo queryInfo = getQueryInfo(pageNo,pageSize);
         Map<String, Object> map = new HashMap<String, Object>();
         if(queryInfo != null){
@@ -51,6 +63,7 @@ public class HomeGoodsController extends BaseCotroller {
         }
 
         map.put("title", title);
+        map.put("type",type);
         Map<String,Object> result = new HashMap<String, Object>();
 
         result.put("count",homeGoodsService.getHomeGoodsCount(map));
@@ -74,8 +87,11 @@ public class HomeGoodsController extends BaseCotroller {
 
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("id",id);
-        map.put("homeState",homeState);
+        map.put("homeState", homeState);
         homeGoodsService.updateState(map);
+        if (homeState==0) {
+            homeGoodsService.deleteInfo(id);
+        }
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
         safeTextPrint(response, json);
     }
@@ -88,13 +104,8 @@ public class HomeGoodsController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }
-
-        int count = homeGoodsService.getImgUrlCount(id);
-        if(count == 0){
-            homeGoodsService.createImgUrl(id);
-        }
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("id",id);
+        map.put("id", id);
         map.put("image",image);
         homeGoodsService.updateImgUrl(map);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
@@ -113,6 +124,30 @@ public class HomeGoodsController extends BaseCotroller {
         Map<String, Object> map = homeGoodsService.details(id);
         map.put("Url", "https://" + SystemConfig.getString("image_bucketName") + ".oss-cn-beijing.aliyuncs.com/");
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(map));
+        safeTextPrint(response, json);
+    }
+    @RequestMapping("/add")
+    public void add(HttpServletResponse response, Integer id,String imgUrl,Integer sort,Integer status){
+        if (id==null||imgUrl==null||sort==null|status==null){
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
+            safeTextPrint(response, json);
+            return;
+        }
+        Integer s=homeGoodsService.getImgUrlCount(id);
+        if (s!=0){
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
+            safeTextPrint(response, json);
+            return;
+        }
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("id",id);
+        map.put("homeState",status);
+        map.put("image",imgUrl);
+        map.put("sort",sort);
+        homeGoodsService.updateState(map);
+        homeGoodsService.createImgUrl(map);
+        String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
         safeTextPrint(response, json);
     }
 

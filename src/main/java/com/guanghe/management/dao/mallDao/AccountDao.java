@@ -19,4 +19,5 @@ public interface AccountDao {
     public  void deleteAccount(Integer id);
     public List<AccountManagementBo> queryList(Map<String,Object>map);
     public int queryCount(Map<String,Object>map);
+    public void updateAccount(AccountBo accountBo);
 }

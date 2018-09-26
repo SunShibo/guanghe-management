@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guanghe.management.dao.homeGoodsActivitiDao">
+    <update id="updateHomeGoods" parameterType="com.guanghe.management.entity.bo.HomeGoods">
+        update gh_home_goods set image = #{image},wapUrl=#{wapUrl},url=#{url}
+        ,updateTime = now()
+        ,content=#{content} where id = #{id}
+    </update>
+    <select id="queryHomeGoods" parameterType="int" resultType="com.guanghe.management.entity.bo.HomeGoods">
+        select * from gh_home_goods WHERE id=#{id}
+    </select>
+    <select id="queryListInfo"  resultType="com.guanghe.management.entity.bo.HomeGoods">
+        SELECT * FROM gh_home_goods
+    </select>
+    <update id="updatehomeActivitesBo" parameterType="com.guanghe.management.entity.bo.HomeActivitesBo">
+        update gh_home_activites set image = #{image},wapUrl=#{wapUrl},url=#{url}
+        ,updateTime = now()
+        ,content=#{content} where id = #{id}
+    </update>
+    <select id="queryhomeActivitesBo" parameterType="int" resultType="com.guanghe.management.entity.bo.HomeActivitesBo">
+        select * from gh_home_activites WHERE id=#{id}
+    </select>
+    <select id="queryhomeActivitesListInfo"  resultType="com.guanghe.management.entity.bo.HomeActivitesBo">
+        SELECT * FROM gh_home_activites
+    </select>
+</mapper>
