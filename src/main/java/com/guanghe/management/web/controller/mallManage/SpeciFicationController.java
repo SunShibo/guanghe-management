@@ -134,6 +134,24 @@ public class SpeciFicationController extends BaseCotroller {
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
         safeTextPrint(response, json);
     }
+    @RequestMapping("/updatestock1")
+    public void updatestock1 (HttpServletResponse response,Integer sku){
+        if (sku==null){
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
+            safeTextPrint(response, json);
+            return;
+        }
+        GoodsSpeciFication goodsSpeciFication=goodsSpecificationService.queryGoodsSpeciFicationById(sku);
+        if (goodsSpeciFication==null){
+            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
+            safeTextPrint(response, json);
+            return;
+        }
+        goodsSpeciFication.setStock(1000);
+        goodsSpecificationService.updateGoodsSpeciFication(goodsSpeciFication);
+        String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
+        safeTextPrint(response, json);
+    }
 
     @RequestMapping("/detail")
     public void detail (HttpServletResponse response,Integer id ){

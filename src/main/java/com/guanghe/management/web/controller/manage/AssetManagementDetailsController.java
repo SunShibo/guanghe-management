@@ -49,8 +49,9 @@ public class AssetManagementDetailsController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }
-
-        assetManagementDetailsService.updateAssetManagement(asset);
+        AssetManagementDetailsBO Assett = assetManagementDetailsService.queryAssetManagementDetails();
+        Assett.setImgUrl(asset.getImgUrl());
+        assetManagementDetailsService.updateAssetManagement(Assett);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
         safeTextPrint(response, json);
     }

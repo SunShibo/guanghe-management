@@ -81,7 +81,8 @@ public class MallImageController extends BaseCotroller {
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
             safeTextPrint(response, json);
         }else{
-
+            newsDetail.setLevelId(news.getLevelId());
+            newsDetail.setGoodsTypeId(news.getGoodsTypeId());
             newsDetail.setImage(news.getImage());
             mallImageService.updateMallImage(newsDetail);
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));

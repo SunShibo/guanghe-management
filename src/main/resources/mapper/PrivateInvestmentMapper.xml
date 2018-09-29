@@ -71,7 +71,8 @@
       comparison_datum = #{comparisonDatum},
       create_time = NOW(),start_time=#{startTime},end_time = #{endTime},amount_of_investment=#{amountOfInvestment},increasing_amount=#{increasingAmount},
       product_scale_start = #{productScaleStart},product_scale_end=#{productScaleEnd},wapImage=#{wapImage},img_url=#{imgUrl},
-      investment_poin_id = #{investmentPoinId},product_term_id=#{productTermId},risk_level_id = #{riskLevelId},income_type_id=#{incomeTypeId}
+      investment_poin_id = #{investmentPoinId},product_term_id=#{productTermId},risk_level_id = #{riskLevelId},income_type_id=#{incomeTypeId},openDay=#{openDay},
+      exitday=#{exitday},extendedday=#{extendedday},closeTime=#{closeTime},earnings=#{earnings},prestorelimit=#{prestorelimit},productType=#{productType}
     </insert>
 
     <update id="updatePrivateInvestmentBO" parameterType="com.guanghe.management.entity.bo.PrivateInvestmentBO">
@@ -79,7 +80,8 @@
       product_term=#{productTerm},comparison_datum = #{comparisonDatum},
       create_time = NOW(),start_time=#{startTime},end_time = #{endTime},amount_of_investment=#{amountOfInvestment},increasing_amount=#{increasingAmount},
       product_scale_start = #{productScaleStart},product_scale_end=#{productScaleEnd},wapImage=#{wapImage},img_url=#{imgUrl},
-      investment_poin_id = #{investmentPoinId},product_term_id=#{productTermId},risk_level_id = #{riskLevelId},income_type_id=#{incomeTypeId} WHERE id = #{id}
+      investment_poin_id = #{investmentPoinId},product_term_id=#{productTermId},risk_level_id = #{riskLevelId},income_type_id=#{incomeTypeId},openDay=#{openDay}
+      ,exitday=#{exitday},extendedday=#{extendedday},closeTime=#{closeTime},earnings=#{earnings},prestorelimit=#{prestorelimit},productType=#{productType} WHERE id = #{id}
     </update>
 
     <update id="setRecommendTime">

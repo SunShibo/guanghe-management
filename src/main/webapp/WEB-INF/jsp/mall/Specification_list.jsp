@@ -85,6 +85,7 @@
                         if(rs.data[i].stock==0){
                           html+='<td>' +
                                   '<a>此商品已经下架</a>'+
+                                  '<button type="button" class="btn btn-danger" onclick="updatestock1(' + "'" + rs.data[i].sku + "'" + ')">上架商品</button>' +
                                   '</td>' +
                                   '</tr>'
                         }else {
@@ -120,6 +121,24 @@
           return;
         }else{
           alert("下架成功！");
+          window.location.href="/Goods/page";
+        }
+      }
+    });
+  }
+  function updatestock1(sku){
+    $.ajax({
+      type : "post",
+      url : "/GoodsSpeciFication/updatestock1",
+      data : {"sku":sku},
+      dataType : "json",
+
+      success : function (data){
+        if(data.success == false){
+          alert(data.errMsg);
+          return;
+        }else{
+          alert("上架成功！");
           window.location.href="/Goods/page";
         }
       }

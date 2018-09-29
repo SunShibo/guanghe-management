@@ -10,6 +10,6 @@
 
     <update id="updateAssetManagement" parameterType="com.guanghe.management.entity.bo.AssetManagementDetailsBO">
         UPDATE gh_asset_management_details  SET img_url = #{imgUrl},
-        update_time = NOW()
+        update_time = NOW() WHERE status=1
     </update>
 </mapper>

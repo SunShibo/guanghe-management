@@ -8,7 +8,7 @@
         ,createUser = #{createUser},content=#{content},title=#{title}
     </insert>
     <update id="updateClubSystem" parameterType="com.guanghe.management.entity.bo.ClubSystemBo">
-        update gh_club_system set image = #{image},wapurl=#{wapurl},url=#{url}
+        update gh_club_system set image = #{image},wapUrl=#{wapUrl},url=#{url}
         ,updateTime = now(),title=#{title}
         ,content=#{content} where id = #{id}
     </update>

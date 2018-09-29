@@ -80,7 +80,7 @@
           return;
         } else {
           // 添加成功，跳转到列表页面
-          alert("修改banner信息成功");
+          alert("添加banner信息成功");
           window.location.href = "/MallBanner/page";
         }
       }

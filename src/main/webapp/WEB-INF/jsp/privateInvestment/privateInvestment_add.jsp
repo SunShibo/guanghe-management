@@ -26,7 +26,25 @@
             width: 260px;
             height: 30px;
         }
+        .tab {
+            background: #fafafa;
+            color: #333;
+            font-size: 14px;
+            border: 1px solid #ccc;
 
+            height: 40px;
+            width: 88px;
+            margin-right: 2px;
+        }
+
+        .tab.act {
+            color: #D3A359;
+            background: #fff;
+            height: 40px;
+        }
+        .hide{
+            display: none;
+        }
     </style>
     <script type="text/javascript" src="/static/js/common/ajaxupload.js"></script>
     <script type="text/javascript" src="/static/js/mainJs/jquery.min.js"></script>
@@ -182,9 +200,69 @@
 
 
         </div>
+        <div class="row clearfix" style="margin-top: 20px;">
+            <div class="col-xs-1 column">
+                请选择类型:
+            </div>
+            <div class="col-xs-3 column">
+             <button data-type="1" class="tab act">股权</button>
+             <button data-type="2" class="tab">证券</button>
+             <button data-type="3" class="tab">票据</button>
+            </div>
+        </div>
+        <div class="row clearfix guquan _sele_" >
+            <div class="col-xs-1 column text-right">
+                开放日:
+            </div>
+            <div class="col-xs-3 column">
+                <input id="openDay1" />
+            </div>
+
+            <div class="col-xs-1 column text-right">
+                退出期:
+            </div>
+            <div class="col-xs-3 column">
+                <input id="exitday1" />
+            </div>
+            <div class="col-xs-1 column text-right">
+                退出延长期:
+            </div>
+            <div class="col-xs-3 column">
+                <input id="extendedday1" />
+            </div>
+        </div>
+        <div class="row clearfix zhengquan _sele_ hide" >
+            <div class="col-xs-1 column text-right">
+                开放日:
+            </div>
+            <div class="col-xs-3 column">
+                <input id="openDay2" />
+            </div>
+            <div class="col-xs-1 column text-right">
+                封闭结束日:
+            </div>
+            <div class="col-xs-3 column">
+                <input id="closeTime2" type="date" />
+            </div>
 
 
+        </div>
+        <div class="row clearfix piaoju _sele_ hide" >
+            <div class="col-xs-1 column text-right">
+                年化收益率:
+            </div>
+            <div class="col-xs-3 column">
+                <input id="earnings3" />
+            </div>
 
+            <div class="col-xs-1 column text-right">
+                预存期限:
+            </div>
+            <div class="col-xs-3 column">
+                <input id="prestorelimit3" />
+            </div>
+
+        </div>
         <div class="row clearfix" style="margin-top: 30px;">
             <div class="col-xs-10 column text-right">
                 <button  style="width:85%;" type="button" class="btn btn-primary" id="B_submit">添加</button>
@@ -351,27 +429,54 @@
             alert("请选择收益类型！");
             return;
         }
+var pd = {
+            "fundName" : fundName,
+            "fundType":fundType,
+            "productTerm":productTerm,
+            "comparisonDatum":comparisonDatum,
+            "amountOfInvestment":amountOfInvestment,
+            "startTime":new Date(startTime),
+            "endTime":new Date(endTime),
+            "increasingAmount":increasingAmount,
+            "productScaleStart":productScaleStart,
+            "productScaleEnd":productScaleEnd,
+            "imgUrl":imageUrl,
+            "incomeTypeId":incomeTypeId,
+            "riskLevelId":riskLevelId,
+            "productTermId":productTermId,
+            "investmentPoinId":investmentPoinId,
+            "openDay":document.getElementById("openDay1").value,
+            "exitday":document.getElementById("exitday1").value,
+            "extendedday":document.getElementById("extendedday1").value,
+            "closeTime":new Date(document.getElementById("closeTime2").value),
+            "earnings":document.getElementById("earnings3").value,
+            "prestorelimit":document.getElementById("prestorelimit3").value,
+            "wapImage":wapImage};
+        var _t = $(".act").data("type");
+        if(_t==1){
+            delete pd.closeTime;
+            delete pd.earnings;
+            delete pd.prestorelimit;
+            pd.productType = 1;
+        }else if(_t==2){
+            pd.openDay = document.getElementById("openDay2").value;
+            delete pd.exitday;
+            delete pd.extendedday;
+            delete pd.earnings;
+            delete pd.prestorelimit;
+            pd.productType = 2;
+        }else{
+            delete pd.openDay;
+            delete pd.exitday;
+            delete pd.extendedday;
+            delete pd.closeTime;
+            pd.productType = 3;
+        }
 
         $.ajax({
             type : "post",
             url : "/privateInvestment/add",
-            data : {
-                "fundName" : fundName,
-                "fundType":fundType,
-                "productTerm":productTerm,
-                "comparisonDatum":comparisonDatum,
-               "amountOfInvestment":amountOfInvestment,
-                "startTime":new Date(startTime),
-                "endTime":new Date(endTime),
-                "increasingAmount":increasingAmount,
-                "productScaleStart":productScaleStart,
-                "productScaleEnd":productScaleEnd,
-                "imgUrl":imageUrl,
-                "incomeTypeId":incomeTypeId,
-                "riskLevelId":riskLevelId,
-                "productTermId":productTermId,
-                "investmentPoinId":investmentPoinId,
-                "wapImage":wapImage},
+            data : pd,
             dataType : "json",
             async : false,
             success : function (data){
@@ -516,5 +621,19 @@
             }
         });
     }
+    $tab = $(".tab");
+    $tab.on("click", function() {
+        $tab.removeClass("act");
+        $(this).addClass("act");
+        var type = $(this).data("type");
+        $("._sele_").addClass("hide")
+        if(type==1){
+           $(".guquan").removeClass("hide")
+        }else if(type==2){
+            $(".zhengquan").removeClass("hide")
+        }else{
+            $(".piaoju").removeClass("hide")
+        }
+    })
 </script>
 </html>

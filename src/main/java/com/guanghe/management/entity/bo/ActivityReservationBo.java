@@ -10,6 +10,7 @@ public class ActivityReservationBo  {
 
     private Integer id;//id
     private Integer userId;//用户id
+    private  String title;
     private Integer membershipActivitesId;//产品id
     private String name;//联系人姓名
     private String phone;//联系电话
@@ -18,6 +19,32 @@ public class ActivityReservationBo  {
     private Integer personNum;//报名人数
     private Date createTime;//创建时间
     private  Integer code;
+    private  Integer status;
+    private  String phoneNumber;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public Integer getCode() {
         return code;

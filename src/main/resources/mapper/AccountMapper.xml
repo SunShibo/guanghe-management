@@ -20,7 +20,8 @@
        where id = #{id}
     </update>
     <update id="updateAccount" parameterType="com.guanghe.management.entity.mallBo.AccountBo">
-        update mall_account set leavestatus = #{leavestatus}
+        update mall_account set leavestatus = #{leavestatus},counton=#{counton},collected=#{collected},cumulative=#{cumulative}
+        ,received=#{received},earn=#{earn}
         where user_id = #{userId}
     </update>
     <update id="updateAddIntegral" parameterType="com.guanghe.management.entity.mallBo.AccountBo">

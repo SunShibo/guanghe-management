@@ -16,6 +16,7 @@ public class MembershipActivitesBo {
     private Date updateTime;//修改时间
     private String synopsis;//简介
 
+
     public String getSynopsis() {
         return synopsis;
     }

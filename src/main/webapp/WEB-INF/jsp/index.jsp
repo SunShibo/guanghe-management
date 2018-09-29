@@ -130,11 +130,11 @@
                     <li><a href="/Goods/page"><i class="fa fa-circle-o"></i>修改</a></li>
                 </ul>
             </li>
-            <li class="treeview">
+         <%--   <li class="treeview">
                 <a href="/order/list">
                     <i class="fa fa-files-o"></i> <span class="home_span">订单管理</span>
                 </a>
-            </li>
+            </li>--%>
             <li class="treeview">
                 <a href="/Account/page">
                     <i class="fa fa-files-o"></i> <span class="home_span">积分管理</span>
@@ -153,6 +153,20 @@
                 <li><a href="/homeGoods/page"><i class="fa fa-circle-o"></i>首页推荐商品</a></li>
             </ul>
         </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
+                    <span class="home_span">系统消息</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu" style="display: none;">
+                    <li><a href="/ActivityReservation/page"><i class="fa fa-circle-o"></i>预约活动</a></li>
+<%--
+                    <li><a href="/Subscribe/page"><i class="fa fa-circle-o"></i>预约产品</a></li>
+--%>
+                    <li><a href="/binding/page"><i class="fa fa-circle-o"></i>私享顾问</a></li>
+                </ul>
+            </li>
         </ul>
     </section>
 </aside>

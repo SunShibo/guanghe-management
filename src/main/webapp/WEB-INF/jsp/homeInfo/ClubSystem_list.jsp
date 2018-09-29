@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8" />
-  <title>私享俱乐部列表</title>
+  <title>会员尊享</title>
   <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon"/>
   <link type="text/css" href="/static/css/main.css" rel="stylesheet"/>
   <link href="/static/css/bootstrap.min.css" rel="stylesheet">
@@ -47,8 +47,16 @@
 
 <jsp:include page="../index.jsp"></jsp:include>
 <div class="indexRight1">
-  <div class="title">首页 >私享俱乐部</div>
+  <div class="title">会员尊享 >首页</div>
   <div>
+    <div class="screen clear">
+      <div class="form">
+        <%--<input type="text" placeholder="请输入新闻标题" id="title">--%>
+        <%--<button type="button" style=" margin-left: 20px;" class="btn btn-primary" onclick="getdata(1,10);">搜索</button>--%>
+        <button type="button" style=" margin-left: 20px;" data-toggle="modal" data-target="#addOneModal" class="btn btn-primary" onclick="add();">新增</button>
+      </div>
+
+    </div>
     <table class="table table-bordered">
       <thead>
       <tr>
@@ -100,6 +108,9 @@
   function clubUpdate(id){
     window.location.href = '/ClubSystem/toupdate?id=' + id;
 
+  }
+  function add(){
+    window.location.href ='/ClubSystem/toAdd'
   }
 
   function deleteBanner(id){

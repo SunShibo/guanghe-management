@@ -107,6 +107,7 @@ public class ClubSystemController extends BaseCotroller {
             newsDetail.setWapUrl(news.getWapUrl());
             newsDetail.setContent(news.getContent());
             newsDetail.setImage(news.getImage());
+            newsDetail.setTitle(news.getTitle());
             clubSystemService.updateClubSystem(newsDetail);
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
             safeTextPrint(response, json);
