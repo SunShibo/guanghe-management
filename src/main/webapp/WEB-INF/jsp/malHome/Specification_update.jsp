@@ -78,7 +78,7 @@
             </tr>
             <tr>
               <td></td>
-              <td><button onclick="commit()">发布</button></td>
+              <td><button type="button" onclick="commit()">发布</button></td>
             </tr>
           </table>
         </form>
@@ -87,6 +87,10 @@
   </div>
 
 
+
+
+</body>
+</html>
 
 <script>
   function GetQueryString(name) {
@@ -97,25 +101,32 @@
   }
   function commit(){
     var  id = GetQueryString('sku');
+var pd ={
+  "sku":id,
+  "preferentialStartTime":new Date(document.getElementById("preferentialStartTime").value),
+  "preferentialEndTime":new Date(document.getElementById("preferentialEndTime").value),
+  "price":document.getElementById("price").value,
+  "specification":document.getElementById("specification").value,
+  "preferentialPrice":document.getElementById("preferentialPrice").value,
+  "stock":document.getElementById("stock").value
 
+};
+    console.log(pd.preferentialEndTime)
+    if(pd.preferentialEndTime == 'Invalid Date'){
+      delete pd.preferentialEndTime
+    }
+    if(pd.preferentialStartTime == 'Invalid Date'){
+     delete pd.preferentialStartTime
+    }
     $.ajax({
       type : "post",
       url : "/GoodsSpeciFication/update",
-      data :{
-        "sku":id,
-        "preferentialStartTime":new Date(document.getElementById("preferentialStartTime").value),
-        "preferentialEndTime":new Date(document.getElementById("preferentialEndTime").value),
-        "price":document.getElementById("price").value,
-        "specification":document.getElementById("specification").value,
-        "preferentialPrice":document.getElementById("preferentialPrice").value,
-        "stock":document.getElementById("stock").value
-
-      },
+      data :pd,
       dataType : "json",
       success: function(result, status) {
         if(result.success){
           alert("发布成功");
-          return ;
+          window.location.href="/Goods/page";
         }
       }
     })
@@ -129,30 +140,30 @@
       console.log(val);
     });
   });
- /* function GetQueryString(name) {
-    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if(r!=null)return  unescape(r[2]);
-    return null;
-  }
-  function getTime(){
-    var  id = GetQueryString('sku');
-    $.ajax({
-      type : "post",
-      url : "/GoodsSpeciFication/query",
-      data :{"sku":sku,},
-      dataType : "json",
-      success: function(result, status) {
-        if(result.success== false){
-          alert(result.errMsg);
-          return ;
-        }else {
-          $('.startTime').val(result.data.preferentialStartTime);
-          $('.endTime').val(result.data.preferentialEndTime);
-        }
-      }
-    })
-  }*/
+  /* function GetQueryString(name) {
+   var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+   var r = window.location.search.substr(1).match(reg);
+   if(r!=null)return  unescape(r[2]);
+   return null;
+   }
+   function getTime(){
+   var  id = GetQueryString('sku');
+   $.ajax({
+   type : "post",
+   url : "/GoodsSpeciFication/query",
+   data :{"sku":sku,},
+   dataType : "json",
+   success: function(result, status) {
+   if(result.success== false){
+   alert(result.errMsg);
+   return ;
+   }else {
+   $('.startTime').val(result.data.preferentialStartTime);
+   $('.endTime').val(result.data.preferentialEndTime);
+   }
+   }
+   })
+   }*/
   <%--alert(new Date('${module.preferentialStartTime}'))--%>
   <%--alert(DateToLStr(new Date('${module.preferentialStartTime}')))--%>
   function DateToLStr(dt) {
@@ -177,6 +188,3 @@
     }
   }
 </script>
-</body>
-</html>
-

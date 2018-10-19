@@ -10,8 +10,8 @@
 
     <select id="updateGoodsCount" parameterType="map" resultType="int">
        SELECT COUNT(id) FROM mall_goods WHERE 1=1
-        <if test="name != null">
-            AND name LIKE CONCAT('%',#{name},'%')
+        <if test="title != null">
+            AND name LIKE CONCAT('%','${title}','%')
         </if>
     </select>
     <select id="queryGoodsById"  resultType="com.guanghe.management.entity.mallBo.GoodsBo">
@@ -41,8 +41,8 @@
     </select>
     <select id="queryGoods" parameterType="map" resultType="com.guanghe.management.entity.mallBo.GoodsBo">
         SELECT * FROM mall_goods WHERE 1=1
-        <if test="sname!= null and sname!=''">
-            AND name LIKE CONCAT('%','${sname}','%')
+        <if test="title!= null and title!=''">
+            AND name LIKE CONCAT('%','${title}','%')
         </if>
         <include refid="limit"/>
     </select>

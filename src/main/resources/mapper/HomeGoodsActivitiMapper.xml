@@ -4,7 +4,7 @@
 <mapper namespace="com.guanghe.management.dao.homeGoodsActivitiDao">
     <update id="updateHomeGoods" parameterType="com.guanghe.management.entity.bo.HomeGoods">
         update gh_home_goods set image = #{image},wapUrl=#{wapUrl},url=#{url}
-        ,updateTime = now()
+        ,updateTime = now(),wapImage=#{wapImage}
         ,content=#{content} where id = #{id}
     </update>
     <select id="queryHomeGoods" parameterType="int" resultType="com.guanghe.management.entity.bo.HomeGoods">
@@ -15,7 +15,7 @@
     </select>
     <update id="updatehomeActivitesBo" parameterType="com.guanghe.management.entity.bo.HomeActivitesBo">
         update gh_home_activites set image = #{image},wapUrl=#{wapUrl},url=#{url}
-        ,updateTime = now()
+        ,updateTime = now(),wapImage=#{wapImage}
         ,content=#{content} where id = #{id}
     </update>
     <select id="queryhomeActivitesBo" parameterType="int" resultType="com.guanghe.management.entity.bo.HomeActivitesBo">

@@ -128,6 +128,7 @@ public class IndustryInformationController extends BaseCotroller {
      */
     @RequestMapping("/add")
     public void addIndustryInformation(HttpServletResponse response, IndustryInformationBO news){
+        String planItemJson = news.getContent().replaceAll("&quot;", "\"");
         if(news == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
@@ -141,6 +142,7 @@ public class IndustryInformationController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }
+        news.setContent(planItemJson);
         industryInformationService.addIndustryInformation(news);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
         safeTextPrint(response, json);
@@ -154,7 +156,7 @@ public class IndustryInformationController extends BaseCotroller {
     @RequestMapping("/update")
     public void updateIndustryInformation(HttpServletResponse response, IndustryInformationBO news){
         IndustryInformationBO newsDetail = industryInformationService.queryIndustryInformationById(news.getId());
-
+        String planItemJson = news.getContent().replaceAll("&quot;", "\"");
         if(news == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
@@ -177,8 +179,8 @@ public class IndustryInformationController extends BaseCotroller {
         newsDetail.setEnglishTitle(news.getEnglishTitle());
         newsDetail.setImgUrl(news.getImgUrl());
         newsDetail.setSource(news.getSource());
-        newsDetail.setContent(news.getContent());
-        newsDetail.setCreateNewsUser(news.getSynopsis());
+        newsDetail.setContent(planItemJson);
+        newsDetail.setSynopsis(news.getSynopsis());
 
         industryInformationService.updateIndustryInformationBO(newsDetail);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));

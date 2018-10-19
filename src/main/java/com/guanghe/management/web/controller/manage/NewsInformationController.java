@@ -135,6 +135,7 @@ public class NewsInformationController extends BaseCotroller {
      */
     @RequestMapping("/add")
     public void addNewsInformation(HttpServletResponse response, NewsInformationBO news){
+        String planItemJson = news.getContent().replaceAll("&quot;", "\"");
         if(news == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
@@ -147,6 +148,7 @@ public class NewsInformationController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }
+        news.setContent(planItemJson);
         newsInformationService.addNewsInformation(news);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
         safeTextPrint(response, json);
@@ -160,6 +162,7 @@ public class NewsInformationController extends BaseCotroller {
      */
     @RequestMapping("/update")
     public void updateNewsInformation(HttpServletResponse response, NewsInformationBO news){
+        String planItemJson = news.getContent().replaceAll("&quot;", "\"");
         NewsInformationBO newsDetail = newsInformationService.queryNewsInformationById(news.getId());
 
         if(news == null){
@@ -185,7 +188,7 @@ public class NewsInformationController extends BaseCotroller {
         newsDetail.setEnglishTitle(news.getEnglishTitle());
         newsDetail.setImgUrl(news.getImgUrl());
         newsDetail.setSource(news.getSource());
-        newsDetail.setContent(news.getContent());
+        newsDetail.setContent(planItemJson);
         newsDetail.setSynopsis(news.getSynopsis());
 
         newsInformationService.updateNewsInformationBO(newsDetail);

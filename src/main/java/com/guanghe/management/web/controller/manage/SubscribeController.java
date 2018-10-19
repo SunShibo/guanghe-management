@@ -34,30 +34,32 @@ public class SubscribeController extends BaseCotroller{
         view.setViewName("/info/subscribe");
         return view;
     }
-   @RequestMapping("/update1")
-    public ModelAndView update1(){
+   @RequestMapping("/updateSub")
+    public ModelAndView updateSub(){
         ModelAndView view = new ModelAndView();
-        view.setViewName("/info/subscribeUpdate1");
-        return view;
-    }
-    @RequestMapping("/update2")
-    public ModelAndView page2(){
-        ModelAndView view = new ModelAndView();
-        view.setViewName("/info/subscribeUpdate2");
-        return view;
-    }
-    @RequestMapping("/update3")
-    public ModelAndView page3(){
-        ModelAndView view = new ModelAndView();
-        view.setViewName("/info/subscribeUpdate3");
+        view.setViewName("/info/subscribeUpdate");
         return view;
     }
 
-    @RequestMapping("/update")
-    public void updateBanner (HttpServletResponse response,SubscribeBo news){
+
+    @RequestMapping("/AccountDetail")
+    public void detailInfo (HttpServletResponse response,Integer id){
+
+        SubscribeBo newsDetail = subscribeService.queryById(id);
+        AccountBo    accountBo =accountService.queryAccountByUserId(newsDetail.getUserId());
+
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("accountBo",accountBo);
+        resultMap.put("newsDetail",newsDetail);
+        String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(resultMap));
+
+        safeTextPrint(response, json);
+    }
+    @RequestMapping("/updateInfo")
+    public void updateInfo (HttpServletResponse response,SubscribeBo news){
 
         SubscribeBo newsDetail = subscribeService.queryById(news.getId());
-        AccountBo    accountBo =accountService.queryAccountByUserId(news.getUserId());
+        AccountBo    accountBo =accountService.queryAccountByUserId(newsDetail.getUserId());
 
         if(news == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
@@ -90,8 +92,8 @@ public class SubscribeController extends BaseCotroller{
         }
 
     }
-    @RequestMapping("/updatesci")
-    public void updatesubsci (HttpServletResponse response,SubscribeBo news){
+    @RequestMapping("/updateSci")
+    public void updatesubSci (HttpServletResponse response,SubscribeBo news){
 
         SubscribeBo newsDetail = subscribeService.queryById(news.getId());
 

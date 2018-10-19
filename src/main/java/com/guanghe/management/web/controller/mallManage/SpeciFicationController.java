@@ -85,12 +85,6 @@ public class SpeciFicationController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }
-        if (preferentialStartTime!=null&&preferentialEndTime!=null&&preferentialPrice==null&&preferentialPrice<0)
-           {
-            String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
-            safeTextPrint(response, json);
-            return;
-        }
         GoodsSpeciFication news=goodsSpecificationService.queryGoodsSpeciFicationById(sku);
         news.setStock(stock);
         news.setPreferentialEndTime(preferentialEndTime);

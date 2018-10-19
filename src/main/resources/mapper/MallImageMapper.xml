@@ -9,7 +9,7 @@
     </insert>
     <update id="updateMallImage" parameterType="com.guanghe.management.entity.mallBo.MallImageBo">
         UPDATE mall_image SET image = #{image},goods_type_id=#{goodsTypeId},
-        update_time = NOW(),level_id = #{levelId} where id = #{id}
+        update_time = NOW(),leave_id = #{levelId} where id = #{id}
     </update>
     <select id="queryMallImage" parameterType="int" resultType="com.guanghe.management.entity.mallBo.MallImageBo">
         select * from mall_image WHERE id=#{id}

@@ -128,7 +128,9 @@
             }
             if(rs.data.data[i].status==2) {
               html += '<td>' +
-                      '<button type="button" class="btn btn-info" onclick="updateState(' + "'" + rs.data.data[i].id+"'" + ')">处理</button>' +
+                      '<button type="button" class="btn btn-info" onclick="updateState(' + "'" + rs.data.data[i].id+"'" + ')">处理(已回款)</button>' +
+                      '<button type="button" class="btn btn-info" onclick="updateState1(' + "'" + rs.data.data[i].id+"\','" + rs.data.data[i].productType+"'"+')">修改投资明细</button>' +
+
                       '</td>'+
                       '</tr>';
             }
@@ -147,22 +149,14 @@
     })
   }
   function updateState1(id,productType){
-    var status=productType;
-    var  id =id;
-    if(status==1){
-      window.location.href="update1?id=" + id;
-    }
-    if(status==2){
-      window.location.href="update2?id=" + id;
-    }
-    if(status==3){
-      window.location.href="update3?id=" + id;
-    }
+  /*/Subscribe/updateSub*/
+    localStorage.modifySubscribe = id+","+productType;
+    location.href="/Subscribe/updateSub"
   }
   function updateState(id){
     $.ajax({
       type : "post",
-      url : "/Subscribe/updatesci",
+      url : "/Subscribe/updateSci",
       data : {"id":id},
       dataType : "json",
       async : false,

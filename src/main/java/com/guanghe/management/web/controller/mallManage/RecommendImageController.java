@@ -82,7 +82,7 @@ public class RecommendImageController extends BaseCotroller{
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000004"));
             safeTextPrint(response, json);
         }else{
-             newsDetail.setGoodsTypeId(news.getGoodsTypeId());
+            newsDetail.setGoodsTypeId(news.getGoodsTypeId());
             newsDetail.setImage(news.getImage());
             newsDetail.setLevelId(news.getLevelId());
             recommendImageService.updateRecommendImage(newsDetail);

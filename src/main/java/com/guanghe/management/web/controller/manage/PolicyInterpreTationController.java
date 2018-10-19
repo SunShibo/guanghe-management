@@ -8,6 +8,7 @@ import com.guanghe.management.service.PolicyInterpreTationService;
 import com.guanghe.management.util.*;
 import com.guanghe.management.web.controller.base.BaseCotroller;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -182,6 +183,7 @@ public class PolicyInterpreTationController extends BaseCotroller{
      */
     @RequestMapping("/add")
     public void addPolicyInterpreTation(HttpServletResponse response, PolicyInterpreTationBo news){
+        String planItemJson = news.getContent().replaceAll("&quot;", "\"");
         if(news == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
@@ -194,6 +196,7 @@ public class PolicyInterpreTationController extends BaseCotroller{
             safeTextPrint(response, json);
             return;
         }
+        news.setContent(planItemJson);
         policyInterpreTationService.addPolicyInterpreTation(news);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
         safeTextPrint(response, json);
@@ -208,7 +211,7 @@ public class PolicyInterpreTationController extends BaseCotroller{
     @RequestMapping("/update")
     public void updatePolicyInterpreTation(HttpServletResponse response, PolicyInterpreTationBo news){
         PolicyInterpreTationBo newsDetail = policyInterpreTationService.queryPolicyInterpreTationById(news.getId());
-
+        String planItemJson = news.getContent().replaceAll("&quot;", "\"");
         if(news == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
@@ -230,7 +233,7 @@ public class PolicyInterpreTationController extends BaseCotroller{
         newsDetail.setTitle(news.getTitle());
         newsDetail.setEnglishTitle(news.getEnglishTitle());
         newsDetail.setSource(news.getSource());
-        newsDetail.setContent(news.getContent());
+        newsDetail.setContent(planItemJson);
         newsDetail.setSynopsis(news.getSynopsis());
 
         policyInterpreTationService.updatePolicyInterpreTation(newsDetail);

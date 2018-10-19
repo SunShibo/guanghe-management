@@ -96,9 +96,10 @@ public class PrivateClubController extends BaseCotroller {
             return;
         }else{
             newsDetail.setUrl(news.getUrl());
-            newsDetail.setWapurl(news.getWapurl());
+            newsDetail.setWapUrl(news.getWapUrl());
             newsDetail.setContent(news.getContent());
             newsDetail.setImage(news.getImage());
+            newsDetail.setWapImage(news.getWapImage());
             privateClubService.updatePrivateClub(newsDetail);
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
             safeTextPrint(response, json);

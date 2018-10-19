@@ -161,9 +161,7 @@
                 </a>
                 <ul class="treeview-menu" style="display: none;">
                     <li><a href="/ActivityReservation/page"><i class="fa fa-circle-o"></i>预约活动</a></li>
-<%--
                     <li><a href="/Subscribe/page"><i class="fa fa-circle-o"></i>预约产品</a></li>
---%>
                     <li><a href="/binding/page"><i class="fa fa-circle-o"></i>私享顾问</a></li>
                 </ul>
             </li>

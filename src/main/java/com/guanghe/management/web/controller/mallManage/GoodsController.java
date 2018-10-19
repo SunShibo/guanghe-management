@@ -150,7 +150,7 @@ public class GoodsController extends BaseCotroller {
             map.put("pageOffset", queryInfo.getPageOffset());
             map.put("pageSize", queryInfo.getPageSize());
         }
-            map.put("sname",name);
+            map.put("title",name);
         Map<String, Object> resultMap = new HashMap<String, Object>();
         resultMap.put("data",goodsService.queryGoods(map));
         resultMap.put("count", goodsService.updateGoodsCount(map));

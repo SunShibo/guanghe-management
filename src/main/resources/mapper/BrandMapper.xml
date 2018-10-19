@@ -69,10 +69,8 @@
         mall_goods_type mgt1 ON mb.leave_id = mgt1.id
         LEFT JOIN
         mall_goods_type mgt2 ON mb.goods_type_id = mgt2.id
-
         WHERE
         1 = 1
-
         <if test="title != null">
             AND mb.name LIKE CONCAT('%','${title}','%')
         </if>

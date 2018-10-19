@@ -33,9 +33,9 @@
             </td>
           </tr>
           <tr>
-            <td class="td1">wapurl:</td>
+            <td class="td1">wapUrl:</td>
             <td class="td2">
-              <input type="text" name="wapurl" value="${club.wapurl}">
+              <input type="text" name="wapUrl" value="${club.wapUrl}">
             </td>
           </tr>
           <tr id="tdd">
@@ -45,6 +45,17 @@
                 <div class="uploadimg">
                   <img width="160px;" height="160px;" id="uploadImage" src="${Url}${club.image}"/>
                   <input type="hidden" name="imageUrl" value="${club.image}"><br/>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr id="td">
+            <td>wap图片：</td>
+            <td>
+              <div class="suolue">
+                <div class="uploadimg">
+                  <img width="160px;" height="160px;" id="uploadWapImage" src="${Url}${club.wapImage}"/>
+                  <input type="hidden" name="wapImageUrl" value="${club.wapImage}"><br/>
                 </div>
               </div>
             </td>

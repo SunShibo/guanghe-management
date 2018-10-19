@@ -39,12 +39,23 @@
             </td>
           </tr>
           <tr id="tdd">
-            <td>图&nbsp;&nbsp;&nbsp;&nbsp;片：</td>
+            <td>pc图片：</td>
             <td>
               <div class="suolue">
                 <div class="uploadimg">
                   <img width="160px;" height="160px;" id="uploadImage" src="${Url}${club.image}"/>
                   <input type="hidden" name="imageUrl" value="${club.image}"><br/>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr id="td">
+            <td>wap图片：</td>
+            <td>
+              <div class="suolue">
+                <div class="uploadimg">
+                  <img width="160px;" height="160px;" id="uploadWapImage" src="${Url}${club.wapImage}"/>
+                  <input type="hidden" name="wapImageUrl" value="${club.wapImage}"><br/>
                 </div>
               </div>
             </td>

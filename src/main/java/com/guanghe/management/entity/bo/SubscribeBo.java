@@ -30,7 +30,7 @@ public class SubscribeBo {
     private  Long earn;//已赚
    private String phoneNumber;
   private  String productType;
-    private String nowNet;
+    private String nowNet;//现单位净值
 
     public String getNowNet() {
         return nowNet;

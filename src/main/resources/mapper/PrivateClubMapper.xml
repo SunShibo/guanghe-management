@@ -5,11 +5,11 @@
     <insert id="addPrivateClub" parameterType="com.guanghe.management.entity.bo.PrivateClubBo"
             useGeneratedKeys="true" keyProperty="id">
         insert into gh_private_club SET  image = #{image},createTime = NOW()
-        ,createUser = #{createUser},content=#{content}
+        ,createUser = #{createUser},content=#{content},wapImage=#{wapImage}
     </insert>
     <update id="updatePrivateClub" parameterType="com.guanghe.management.entity.bo.PrivateClubBo">
-        update gh_private_club set image = #{image},wapurl=#{wapurl},url=#{url}
-        ,updateTime = now()
+        update gh_private_club set image = #{image},wapUrl=#{wapUrl},url=#{url}
+        ,updateTime = now(),wapImage=#{wapImage}
         ,content=#{content} where id = #{id}
     </update>
     <select id="queryPrivateClub" parameterType="int" resultType="com.guanghe.management.entity.bo.PrivateClubBo">

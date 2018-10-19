@@ -85,6 +85,7 @@ public class HomeGoodsActivitiController extends BaseCotroller{
             newsDetail.setWapUrl(news.getWapUrl());
             newsDetail.setContent(news.getContent());
             newsDetail.setImage(news.getImage());
+            newsDetail.setWapImage(news.getWapImage());
             homeGoodsActivitiService.updatehomeActivitesBo(newsDetail);
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
             safeTextPrint(response, json);
@@ -139,6 +140,7 @@ public class HomeGoodsActivitiController extends BaseCotroller{
             newsDetail.setWapUrl(news.getWapUrl());
             newsDetail.setContent(news.getContent());
             newsDetail.setImage(news.getImage());
+            newsDetail.setWapImage(news.getWapImage());
             homeGoodsActivitiService.updateHomeGoods(newsDetail);
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
             safeTextPrint(response, json);

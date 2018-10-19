@@ -5,9 +5,11 @@ $(function (){
 
     $("#B_submit").click(updateclub);
     uploadImageUrl();
+    uploadWapImage();
     var  id = GetQueryString('id');
     if(id==1){
         $("#tdd").css('display','none')
+        $("#td").css('display','none')
     }
 })
 function GetQueryString(name) {
@@ -24,12 +26,14 @@ function updateclub(){
     }
     var imageUrl = $("input[name='imageUrl']").val();
     var url=$("input[name='url']").val();
-    var wapurl=$("input[name='wapurl']").val();
+    var wapUrl=$("input[name='wapUrl']").val();
+    var wapImageUrl = $("input[name='wapImageUrl']").val();
+
     var  id = GetQueryString('id');
     $.ajax({
         type : "post",
         url : "update",
-        data :{"image" : imageUrl,"id":id,"content":content,"url":url,"wapurl":wapurl,},
+        data :{"image" : imageUrl,"id":id,"content":content,"url":url,"wapUrl":wapUrl,"wapImage":wapImageUrl},
         dataType : "json",
         success: function(result, status) {
             if(result.success== false){
@@ -55,6 +59,25 @@ function uploadImageUrl(){
                 console.log(resultData)
                 $("#uploadImage").attr("src", resultData.Url);
                 $("input[name='imageUrl']").val(resultData.imageUrl);
+            }else{
+                alert("上传失败");
+            }
+        }
+    });
+}
+function uploadWapImage(){
+    var button = $("#uploadWapImage"), interval;
+    new AjaxUpload(button, {
+        action: "/privateConsultant/uploadImage",
+        type:"post",
+        name: 'myFile',
+        responseType : 'json',
+        onComplete: function(file, response) {
+            if(response.success == true){
+                var resultData = response.data;
+                console.log(resultData)
+                $("#uploadWapImage").attr("src", resultData.Url);
+                $("input[name='wapImageUrl']").val(resultData.imageUrl);
             }else{
                 alert("上传失败");
             }

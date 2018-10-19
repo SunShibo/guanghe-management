@@ -8,14 +8,23 @@ public class PrivateClubBo {
     private  String content;
     private  String image;
     private String url;
-    private  String wapurl;
+    private  String wapUrl;
+    private  String wapImage;
 
-    public String getWapurl() {
-        return wapurl;
+    public String getWapImage() {
+        return wapImage;
     }
 
-    public void setWapurl(String wapurl) {
-        this.wapurl = wapurl;
+    public void setWapImage(String wapImage) {
+        this.wapImage = wapImage;
+    }
+
+    public String getWapUrl() {
+        return wapUrl;
+    }
+
+    public void setWapUrl(String wapUrl) {
+        this.wapUrl = wapUrl;
     }
 
     public String getUrl() {

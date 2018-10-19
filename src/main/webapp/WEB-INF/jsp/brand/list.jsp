@@ -44,7 +44,7 @@
         <div class="title">品牌列表 > 品牌列表</div>
         <div class="screen clear">
             <div class="form">
-                <input type="text" placeholder="请输入新闻标题" id="title">
+                <input type="text" placeholder="请输入品牌名称" id="title">
                 <button type="button" style=" margin-left: 20px;" class="btn btn-primary" onclick="getdata(1,10);">搜索</button>
                 <button type="button" style=" margin-left: 20px;" data-toggle="modal" data-target="#addModal" class="btn btn-primary" onclick="add();">新增品牌</button>
             </div>
@@ -109,12 +109,12 @@
                     <h4 class="modal-title" id="addmyModalLabel">修改</h4>
                 </div>
                 <div class="modal-body" style="margin-left:10px;">
-                    <p>一级：
+                    <p style="display: none;">一级：
                         <select  id="oneType" style="width: 174px;height: 24px;" onchange="show_sub(this.options[this.options.selectedIndex].value)">
 
                         </select>
                     </p>
-                    <p>二级：
+                    <p style="display: none;">二级：
                         <select  id="twoType" style="width: 174px;height: 24px;">
 
                         </select>

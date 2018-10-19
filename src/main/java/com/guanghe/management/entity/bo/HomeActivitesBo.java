@@ -15,6 +15,15 @@ public class HomeActivitesBo {
     private  Integer activitiId;
     private  String  url;
     private  String wapUrl;
+    private  String wapImage;
+
+    public String getWapImage() {
+        return wapImage;
+    }
+
+    public void setWapImage(String wapImage) {
+        this.wapImage = wapImage;
+    }
 
     public String getWapUrl() {
         return wapUrl;

@@ -71,21 +71,22 @@
   </div>
   <hr />
   <div class="layui-upload">
-    <button type="button" class="layui-btn" id="test2">上传商品介绍图</button>
-    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-      预览：
-      <div class="layui-upload-list" id="demo2">
-        <p id="demoText2"></p>
-      </div>
-    </blockquote>
-  </div>
-  <hr />
-  <div class="layui-upload">
-    <button type="button" class="layui-btn" id="test3">上传商品详情图</button>
+    <button type="button" class="layui-btn" id="test3">上传商品介绍图</button>
     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
       预览：
       <div class="layui-upload-list" id="demo3">
         <p id="demoText3"></p>
+      </div>
+    </blockquote>
+  </div>
+
+  <hr />
+  <div class="layui-upload">
+    <button type="button" class="layui-btn" id="test2">上传商品明细图</button>
+    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+      预览：
+      <div class="layui-upload-list" id="demo2">
+        <p id="demoText2"></p>
       </div>
     </blockquote>
   </div>

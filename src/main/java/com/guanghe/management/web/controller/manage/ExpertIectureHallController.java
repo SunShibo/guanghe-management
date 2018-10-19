@@ -180,6 +180,7 @@ public class ExpertIectureHallController extends BaseCotroller {
      */
     @RequestMapping("/add")
     public void addExpertIectureHalln(HttpServletResponse response, ExpertIectureHallBo news){
+        String planItemJson = news.getContent().replaceAll("&quot;", "\"");
         if(news == null){
             String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.failure("0000001"));
             safeTextPrint(response, json);
@@ -192,6 +193,7 @@ public class ExpertIectureHallController extends BaseCotroller {
             safeTextPrint(response, json);
             return;
         }
+        news.setContent(planItemJson);
         expertIectureHallService.addExpertIectureHall(news);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
         safeTextPrint(response, json);
@@ -205,6 +207,7 @@ public class ExpertIectureHallController extends BaseCotroller {
      */
     @RequestMapping("/update")
     public void updateExpertIectureHall(HttpServletResponse response, ExpertIectureHallBo news){
+        String planItemJson = news.getContent().replaceAll("&quot;", "\"");
         ExpertIectureHallBo newsDetail = expertIectureHallService.queryExpertIectureHallById(news.getId());
 
         if(news == null){
@@ -229,7 +232,7 @@ public class ExpertIectureHallController extends BaseCotroller {
         newsDetail.setTitle(news.getTitle());
         newsDetail.setEnglishTitle(news.getEnglishTitle());
         newsDetail.setSource(news.getSource());
-        newsDetail.setContent(news.getContent());
+        newsDetail.setContent(planItemJson);
         newsDetail.setSynopsis(news.getSynopsis());
 
         expertIectureHallService.updateExpertIectureHall(newsDetail);

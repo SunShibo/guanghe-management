@@ -209,7 +209,7 @@
       items : [
         'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
         'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-        'insertunorderedlist', '|', 'emoticons', 'image', 'media', 'link','code','source',
+        'insertunorderedlist', '|','lineheight', 'emoticons', 'image', 'media', 'link','code','source',
         'fullscreen'],
       uploadJson : '/static/js/kindeditor/kd_upload_image.jsp',
 //      allowFileManager : true,
