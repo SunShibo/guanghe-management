@@ -94,7 +94,7 @@ public class GoodsService {
 
         // 获取规格信息
         List<GoodsSpeciFication> lstSpeciFication = JsonUtils.getList4JsonArray(goods.getGoodsSpeciFication(),
-                GoodsSpeciFication.class);
+                GoodsSpeciFication.class,DateUtils.DATE_PATTERN);
         for (GoodsSpeciFication speciFication:lstSpeciFication){
             speciFication.setGoodsId(goodsId);
             speciFication.setState(1);

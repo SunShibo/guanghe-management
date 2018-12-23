@@ -79,8 +79,8 @@
     </select>
 
     <update id="updateById" parameterType="map">
-        UPDATE mall_brand SET name = #{name},produced = #{produced},update_time = NOW(),goods_type_id = #{goodsTypeId},
-        leave_id = #{levelId} WHERE id = #{id}
+        UPDATE mall_brand SET name = #{name},produced = #{produced},update_time = NOW()
+        WHERE id = #{id}
     </update>
 
     <insert id="insertBrand" parameterType="map">

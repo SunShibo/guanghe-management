@@ -166,8 +166,6 @@ public class BrandController extends BaseCotroller {
         map.put("id",id);
         map.put("name",name);
         map.put("produced",produced);
-        map.put("goodsTypeId",goodsTypeId);
-        map.put("levelId",levelId);
 
         brandService.updateById(map);
         String json = JsonUtils.getJsonString4JavaPOJO(ResultDTOBuilder.success(""));
